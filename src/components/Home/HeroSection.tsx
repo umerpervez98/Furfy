@@ -43,7 +43,7 @@ const HeroSection = () => {
             setCustomLocation('SYDNEY <br>WAREHOUSE<br>FAST DELIVERY<br>');
           }
         })
-        .catch((error) => console.error('Error fetching IP info:', error));
+        .catch((error) => console.log('Error fetching IP info:', error));
     }, 3000);
 
     return () => window.removeEventListener('resize', fixBannerHeight);

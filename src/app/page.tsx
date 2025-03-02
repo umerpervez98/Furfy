@@ -5,7 +5,7 @@ import HeroSection from '@/components/Home/HeroSection';
 import PetSection from '@/components/Home/PetSection';
 import EffectiveSection from '@/components/Home/EffectiveSection';
 import Description from '@/components/Home/Description';
-import ReviewSection from '@/components/Home/ReviewSection';
+import JudgemeReviews from '@/components/Home/JudgemeReviews';
 import '@/styles/home/index.css'
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
       <PetSection />
       <EffectiveSection />
       <Description />
-      <ReviewSection />
+      <JudgemeReviews />
       <Footer />
     </>
   );

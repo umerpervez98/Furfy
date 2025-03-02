@@ -25,6 +25,24 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
+        {/* Judge.me Script */}
+        <Script
+          id="judge-me-script"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              jdgm = window.jdgm || {};
+              jdgm.SHOP_DOMAIN = 'furfypet.myshopify.com';
+              jdgm.PLATFORM = 'shopify';
+              jdgm.PUBLIC_TOKEN = 'PL3qbMzIVkxDDkszGFgb082N6wY';
+            `,
+          }}
+        />
+        <Script
+          src="https://cdn.judge.me/widget_preloader.js"
+          strategy="lazyOnload"
+          data-cfasync="false"
+        />
         {children}
       </body>
     </html>

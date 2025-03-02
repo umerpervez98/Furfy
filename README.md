@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+Before running the project, create a `.env` file in the root directory and add the following environment variables:
+
+```ini
+NEXT_PUBLIC_BASE_URL=
+NEXT_PUBLIC_PRODUCT_ID=
+NEXT_PUBLIC_PRODUCT_NAME=
+NEXT_PUBLIC_JUDGE_ME_PRODUCT_ID=
+
 ## Getting Started
 
 First, run the development server:
