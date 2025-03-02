@@ -66,7 +66,7 @@ const Pricing = () => {
         <h5>
           <span className="line-through shadow-black-35">Rs.9,900.00$</span>{' '}
           <span className="font-semibold ms-3">
-            {totalPrice.toLocaleString()}$
+            ${totalPrice.toLocaleString()}
           </span>
         </h5>
       </div>
