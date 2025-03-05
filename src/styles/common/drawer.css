@@ -68,7 +68,6 @@ display: flex;
     border: none;
     font-size: 20px;
     font-weight: bold;
-    cursor: pointer;
     color: var(--black);
   }
 .cart-quantity-selector span {

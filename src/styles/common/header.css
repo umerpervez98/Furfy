@@ -90,3 +90,19 @@
 .open #bar3 {
   transform: translateY(-6px) rotate(-45deg) !important;
 }
+
+.circle-badge {
+  position: absolute;
+  top: 0px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}

@@ -1,62 +1,21 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Drawer from '@/components/common/Drawer';
-import { addToCart, getProduct,getCartDetails } from '@services/api';
-
-type Product = {
-  price: number;
-  name: string;
-  description: string;
-  accessToken : string
-};
+import {useCart} from '@services/CartContext';
 
 const Pricing = () => {
+  const {cart, addToCart} = useCart();
   const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [product, setProduct] = useState<Product | null>(null);
-
-  // Fetch product on mount
-  useEffect(() => {
-    const fetchProduct = async () => {
-      const { success, product, error } = await getProduct();
-      if (!success) {
-        console.error('Failed to fetch product:', error);
-      } else {
-        console.log('Fetched product:', product);
-        setProduct(product);
-      }
-    };
-    
-    const getCart = async ()=>{
-      await getCartDetails()
-    }
-
-    getCart()
-    fetchProduct();
-  }, []);
-
-  // Update total price when product price or quantity changes
-  useEffect(() => {
-    // @ts-ignore
-    if (product?.price) {
-      // @ts-ignore
-      setTotalPrice(product.price * quantity);
-    }
-  }, [product, quantity]);
 
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
 
   const handleBuyNow = async () => {
-    try {
-      await addToCart(quantity,product!.accessToken);
-      setIsDrawerOpen(true);
-    } catch (error) {
-      console.error('Failed to add to cart:', error);
-    }
+    await addToCart(quantity);
+    setIsDrawerOpen(true);
   };
 
   return (
@@ -66,7 +25,10 @@ const Pricing = () => {
         <h5>
           <span className="line-through shadow-black-35">Rs.9,900.00$</span>{' '}
           <span className="font-semibold ms-3">
-            ${totalPrice.toLocaleString()}
+            $
+            {cart.product
+              ? (cart.product.price * quantity).toLocaleString()
+              : '0.00'}
           </span>
         </h5>
       </div>
@@ -85,7 +47,12 @@ const Pricing = () => {
       <div className="py-3 d-flex justify-content-center align-items-center flex-column">
         {/* Quantity Selector */}
         <div className="quantity-selector">
-          <button onClick={handleDecrement}>-</button>
+          <button
+            onClick={handleDecrement}
+            disabled={quantity === 1}
+          >
+            -
+          </button>
           <span>{quantity}</span>
           <button onClick={handleIncrement}>+</button>
         </div>

@@ -31,38 +31,60 @@ export const getProduct = async ({ limit = 4, page = 1, sort = "id", order = "as
   }
 };
 
-
-
-export const incrementCartItem = async () => {
-    const res = await fetch(`${BASE_URL}api/cart/increment/${PRODUCT_ID}`, { method: "PATCH" });
-    return res.json();
-  };
+  export const addToCart = async (quantity, productId) => {
+    try {
+      // Step 1: Call getCartDetails to ensure the session is valid
+      const cartResponse = await getCartDetails();
   
-  export const decrementCartItem = async () => {
-    const res = await fetch(`${BASE_URL}api/cart/decrement/${PRODUCT_ID}`, { method: "PATCH" });
-    return res.json();
+      // Check if getCartDetails was successful
+      if (!cartResponse.success) {
+        throw new Error(cartResponse.error || "Failed to fetch cart details");
+      }
+
+      // If Cart Exist then update it 
+      if(cartResponse.data.cartItems.length > 0){
+        const updateCart = await updateCartQuantity(quantity,cartResponse.data.cartItems[0].accessToken)
+        if (!updateCart.success) {
+          throw new Error(updateCart.message || "Failed to add product to cart");
+        }
+        return { success: true, data: updateCart }; 
+      }else{
+        // Create new cart if it does not exist
+      const addToCartResponse = await fetch(`${BASE_URL}api/cart/add`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productToken: productId, qty: quantity }),
+        credentials: "include",
+      });
+  
+      const addToCartData = await addToCartResponse.json();
+  
+      // Check if addToCart was successful
+      if (!addToCartData.success) {
+        throw new Error(addToCartData.message || "Failed to add product to cart");
+      }
+  
+      return { success: true, data: addToCartData };
+      }
+    } catch (error) {
+      console.error("Error in addToCart process:", error);
+      return { success: false, error: error.message || "An unexpected error occurred" };
+    }
   };
 
-  export const addToCart = async (quantity,productId) => {
-    console.log("quantity===>",quantity,productId)
-    const res = await fetch(`${BASE_URL}api/cart/add`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ productToken:productId, qty: quantity }),
-    });
-    return res.json();
-  };
-
-  export const updateCartQuantity = async (quantity) => {
-    const res = await fetch(`${BASE_URL}api/cart/update/quantity/${PRODUCT_ID}`, {
+  export const updateCartQuantity = async (quantity,productId) => {
+    const res = await fetch(`${BASE_URL}api/cart/update/quantity/${productId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity }),
+      credentials: "include",
     });
     return res.json();
   };
   export const getCartDetails = async () => {
-    const res = await fetch(`${BASE_URL}api/cart`);
+    const res = await fetch(`${BASE_URL}api/cart`, {
+      credentials: "include",
+    });
     return res.json();
   };
 

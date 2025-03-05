@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { Work_Sans } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
+import { CartProvider } from "@services/CartContext";
 
 // Load Work Sans using Next.js font optimization
 const workSans = Work_Sans({
@@ -43,7 +44,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           strategy="lazyOnload"
           data-cfasync="false"
         />
-        {children}
+        {/* Wrap children with CartProvider */}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

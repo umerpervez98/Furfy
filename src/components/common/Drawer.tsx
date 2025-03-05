@@ -1,8 +1,8 @@
-'use client'
-import React, {useState,useEffect} from 'react';
-import { useRouter } from 'next/navigation'
+'use client';
+import React from 'react';
+import {useRouter} from 'next/navigation';
 import '@/styles/common/drawer.css';
-import { getCartDetails } from '@services/api';
+import {useCart} from '@services/CartContext';
 
 interface DrawerProps {
   isOpen: boolean;
@@ -10,27 +10,8 @@ interface DrawerProps {
 }
 
 const Drawer: React.FC<DrawerProps> = ({isOpen, onClose}) => {
-    
-    const router = useRouter();
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const product = {
-    image: '/images/furfy_australia.webp',
-    name: 'Furfy',
-    description: 'Planet friendly poo bags 60 bags per box Every 4 weeks',
-    price: 18.9,
-    shipping: 9.5,
-    total: 19.4,
-  };
-
-  useEffect(() => {
-    fetchCart();
-  }, [isOpen]);
-
-  const fetchCart = async () => {
-    // const data = await getCartDetails();
-    // console.log("data===>",data)
-  };
+  const router = useRouter();
+  const {cart, updateItem} = useCart();
 
   if (!isOpen) {
     return null;
@@ -49,19 +30,38 @@ const Drawer: React.FC<DrawerProps> = ({isOpen, onClose}) => {
           <div className="item-details">
             <img
               className="furfy-image"
-              src={product.image}
-              alt={product.name}
+              src={'/images/furfy_australia.webp'}
+              alt={'Furfy'}
             />
             <div className="item-info">
-              <h5>{product.name}</h5>
-              <p>{product.description}</p>
+              <h5>Furfy</h5>
+              <p>The world's best pet hair remover</p>
 
               {/* Cart Selector */}
               <div className="d-flex justify-content-between align-items-center">
                 <div className="cart-quantity-selector">
-                  <button>-</button>
-                  <span>1</span>
-                  <button>+</button>
+                  <button
+                    onClick={() =>
+                      updateItem(
+                        cart?.cartItems[0]?.accessToken,
+                        cart.cartItems[0].qty - 1
+                      )
+                    }
+                    disabled={cart?.cartItems[0]?.qty === 1}
+                  >
+                    -
+                  </button>
+                  <span>{cart?.cartItems[0]?.qty || 0}</span>
+                  <button
+                    onClick={() =>
+                      updateItem(
+                        cart?.cartItems[0]?.accessToken,
+                        cart.cartItems[0].qty + 1
+                      )
+                    }
+                  >
+                    +
+                  </button>
                 </div>
                 <div>
                   <img
@@ -71,7 +71,7 @@ const Drawer: React.FC<DrawerProps> = ({isOpen, onClose}) => {
                     src="/images/repeat.svg"
                     alt="repeat icons"
                   />
-                  <span className="item-price ms-2">${product.price}</span>
+                  <span className="item-price ms-2">${cart.price || 0}</span>
                 </div>
               </div>
             </div>
@@ -80,20 +80,27 @@ const Drawer: React.FC<DrawerProps> = ({isOpen, onClose}) => {
           <div className="checkout-details">
             <div className="d-flex justify-content-between align-items-center">
               <p className="text-md font-medium mb-1">SUBTOTAL:</p>
-              <p className="text-md font-medium mb-1">${product.price}</p>
+              <p className="text-md font-medium mb-1">${cart.subtotal || 0}</p>
             </div>
             <div className="d-flex justify-content-between align-items-center">
               <p className="text-md font-medium mb-1">SHIPPING:</p>
-              <p className="text-md font-medium mb-1">${product.shipping}</p>
+              <p className="text-md font-medium mb-1">
+                ${cart.shippingFee || 0}
+              </p>
             </div>
             <div className="d-flex justify-content-between align-items-center">
               <p className="text-lg font-bold mb-1">TOTAL:</p>
-              <p className="text-lg font-bold mb-1">${product.total}</p>
+              <p className="text-lg font-bold mb-1">${cart.total || 0}</p>
             </div>
           </div>
           {/* Checkout Button */}
-          <div className='pt-5'>
-          <button onClick={()=> router.push('/checkout')} className="primary-button w-full">CHECKOUT NOW</button>
+          <div className="pt-5">
+            <button
+              onClick={() => router.push('/checkout')}
+              className="primary-button w-full"
+            >
+              CHECKOUT NOW
+            </button>
           </div>
         </div>
       </div>
