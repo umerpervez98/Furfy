@@ -1,0 +1,21 @@
+.heading-secondary {
+  font-size: 2.6rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  word-break: break-word;
+
+  &--large {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 4rem;
+    text-transform: uppercase;
+  }
+
+  &--medium {
+    font-size: 3.3rem;
+    font-weight: 800;
+    line-height: 5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.0625rem;
+  }
+}

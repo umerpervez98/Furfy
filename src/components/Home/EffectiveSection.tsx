@@ -1,11 +1,13 @@
 import React from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Pricing from '../common/Pricing';
 import Table from '../common/Table';
 import Testimonial from './Testimonial';
-import {tableHeaders, tableData} from '../../../utils/tableData';
+import { tableHeaders, tableData } from '../../utils/tableData';
+
 
 const EffectiveSection = () => {
+
   return (
     <>
       <Container className="my-3 page-width">
@@ -25,16 +27,16 @@ const EffectiveSection = () => {
         <Row className="my-3">
           <Col lg={6}>
             <div className='p-3'>
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              controls
-              className="w-full"
-              style={{borderRadius: '39px', height: 'auto'}}
-              src="/images/simple-use.mp4"
-            />
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+                className="w-full"
+                style={{ borderRadius: '39px', height: 'auto' }}
+                src="/images/simple-use.mp4"
+              />
             </div>
           </Col>
           <Col lg={6}>
@@ -77,7 +79,6 @@ const EffectiveSection = () => {
                   height={70}
                 />
               </div>
-              {/* Pricing */}
               <Pricing />
             </div>
           </Col>
@@ -88,7 +89,7 @@ const EffectiveSection = () => {
             <div className="text-center">
               <img
                 className="w-full h-full object-contain"
-                style={{borderRadius: '19px'}}
+                style={{ borderRadius: '19px' }}
                 src="/images/furfyinbox_australia.webp"
                 alt="NO BATTERIES OR ADHESIVES REQUIRED"
               />
@@ -101,7 +102,7 @@ const EffectiveSection = () => {
             <div className="text-center">
               <img
                 className="w-full h-full object-contain"
-                style={{borderRadius: '19px'}}
+                style={{ borderRadius: '19px' }}
                 src="/images/furfy_australia.webp"
                 alt="ULTRA DURABLE ERGONOMIC DESIGN"
               />
@@ -114,7 +115,7 @@ const EffectiveSection = () => {
             <div className="text-center">
               <img
                 className="w-full h-full object-contain"
-                style={{borderRadius: '19px'}}
+                style={{ borderRadius: '19px' }}
                 src="/images/furfy_detail.webp"
                 alt="PATENTED ELECTROSTATIC BRUSH"
               />
@@ -127,7 +128,7 @@ const EffectiveSection = () => {
             <div className="text-center">
               <img
                 className="w-full h-full object-contain"
-                style={{borderRadius: '19px'}}
+                style={{ borderRadius: '19px' }}
                 src="/images/furfyinbox_australia.webp"
                 alt="NO FUSS NO MESS"
               />
@@ -157,7 +158,7 @@ const EffectiveSection = () => {
             <div className='py-4 py-lg-0'>
               <img
                 className="w-full h-full object-contain"
-                style={{borderRadius: '19px'}}
+                style={{ borderRadius: '19px' }}
                 src="/images/furfy-product.webp"
                 alt="Furfy"
               />

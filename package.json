@@ -9,15 +9,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.20.6",
+    "@tanstack/react-query": "^5.67.2",
+    "@tanstack/react-query-devtools": "^5.67.2",
+    "@types/js-cookie": "^3.0.6",
+    "axios": "^1.8.1",
     "bootstrap": "^5.3.3",
+    "braintree-web-drop-in": "^1.44.1",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
+    "libphonenumber-js": "^1.12.5",
     "next": "15.1.6",
     "react": "^18.2.0",
+    "react-addressfinder": "^0.4.3",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.2.0",
-    "react-flags-select": "^2.2.3"
+    "react-flags-select": "^2.2.3",
+    "react-icons": "^5.5.0",
+    "react-international-phone": "^4.5.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/braintree-web-drop-in": "^1.39.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

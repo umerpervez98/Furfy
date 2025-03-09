@@ -1,0 +1,27 @@
+@import "../../../styles/variables.scss";
+
+.p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+
+  &.over-limit {
+    color: $color-red;
+  }
+
+  &--sub-text {
+    font-weight: 300;
+    line-height: 28px;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+/* Media Styles */
+/* *************************************** */
+/* Small: 403px ~ 750px */
+@media only screen and (max-width: 750px) {
+  .p {
+    line-height: 1.3;
+  }
+}

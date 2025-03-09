@@ -1,0 +1,115 @@
+@import '../../../styles/variables.scss';
+
+.scatulator {
+  background-color: $color-primary;
+  border-radius: 15px;
+  z-index: 5;
+  width: 44rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .upper-container {
+    padding: 2rem 5rem;
+  }
+
+  .btn-container {
+    transition: 0.4s linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0 0 $radius $radius;
+    width: 100%;
+    padding: 2.5rem 5rem;
+
+    &--hidden {
+      opacity: 0;
+    }
+
+    button {
+      width: 30rem;
+    }
+  }
+
+  .calculation-display-box {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    span {
+      font-style: italic;
+      font-size: 2rem;
+      color: $color-grey-dark;
+    }
+  }
+}
+
+/* *************************************** */
+/* Media Styles */
+/* *************************************** */
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Default work done at 1704px */
+/* Large: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium-2: 1051px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Medium-1: 751px ~ 1050px */
+@media only screen and (max-width: 1050px) {
+}
+
+/* Small: 403px ~ 750px */
+@media only screen and (max-width: 750px) {
+}
+
+/* Extra Small: 0px ~ 402px */
+@media only screen and (max-width: 502px) {
+  .scatulator {
+    width: 95%;
+
+    .upper-container {
+      padding: 1.5rem 5rem;
+
+      button {
+        right: 1.5rem;
+        img {
+          transform: scale(0.7);
+        }
+      }
+    }
+
+    .btn-container {
+      padding: 1rem 0 2rem;
+    }
+
+    .calculation-display-box {
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+/* Extra Small: 0px ~ 402px */
+@media only screen and (max-width: 402px) {
+  .scatulator {
+    .btn-container {
+      button {
+        width: 26.5rem;
+      }
+    }
+  }
+}

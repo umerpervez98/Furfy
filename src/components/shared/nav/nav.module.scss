@@ -1,0 +1,266 @@
+@import '../../../styles/variables.scss';
+
+.promo-ad-heading {
+  background-color: $color-black;
+  color: $color-white;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 1.1rem 0;
+  font-size: 1.8rem;
+  min-width: 320px;
+
+  span {
+    font-weight: 400;
+  }
+}
+
+.header {
+  min-width: 320px;
+}
+
+.nav {
+  padding: 1.5rem 0.5rem 1.5rem 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+
+  .nav-btn-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    span.indicator {
+      position: absolute;
+      left: 50px;
+      font-weight: 700;
+      font-size: 2.2rem;
+      min-width: 15rem;
+      text-transform: uppercase;
+    }
+  }
+
+  .nav-logo-box {
+    display: flex;
+    gap: 0.5rem;
+    position: absolute;
+    top: 1.5rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 3rem);
+
+    .logo-icon {
+      width: 24rem;
+      height: auto;
+    }
+
+    h3 {
+      font-size: 1.9rem;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+
+  .btn-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    a,
+    .profile-icon {
+      position: relative;
+      top: 0;
+      cursor: pointer;
+
+      img {
+        width: 37px;
+        height: auto;
+      }
+
+      span {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        position: absolute;
+        top: 41px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 9.5rem;
+        height: 2.4rem;
+        word-break: break-word;
+        overflow: hidden;
+        border-radius: 4px;
+        background-color: $color-primary;
+        z-index: 1;
+        &:hover {
+          height: auto;
+        }
+      }
+    }
+
+    ul {
+      background-color: $color-white;
+      position: absolute;
+      bottom: -120px;
+      right: 0;
+      width: 180px;
+      padding: 2.2rem 2.7rem;
+      z-index: 2;
+
+      li {
+        text-transform: uppercase;
+        text-align: left;
+
+        &:not(:last-of-type) {
+          margin-bottom: 2rem;
+        }
+
+        &:hover {
+          button,
+          a {
+            border-bottom-color: $color-primary;
+          }
+        }
+
+        button,
+        a {
+          display: inline-block;
+          cursor: pointer;
+          text-transform: uppercase;
+          border-bottom: 2px solid transparent;
+          transition: 0.1s linear;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+
+  .cart-btn-box {
+    position: relative;
+
+    .cart-icon {
+      width: 37px;
+      height: auto;
+      margin-top: 4px;
+    }
+
+    .qty-icon {
+      background-color: $color-black;
+      color: $color-white;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: inline-block;
+      line-height: 25px;
+      border-radius: 50px;
+      text-align: center;
+      position: absolute;
+      right: -4px;
+      bottom: 7px;
+    }
+  }
+}
+
+/* *************************************** */
+/* Media Styles */
+/* *************************************** */
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Default work done at 1704px */
+/* Large: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium-2: 1051px ~ 1323px */
+@media only screen and (max-width: 1080px) {
+  .nav {
+    .nav-logo-box {
+      h3 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 110%;
+      }
+    }
+  }
+}
+
+/* Medium-1: 751px ~ 1050px */
+@media only screen and (max-width: 900px) {
+  .nav {
+    width: auto;
+    .nav-btn-box span.indicator {
+      display: none;
+    }
+  }
+}
+
+/* Small: 403px ~ 750px */
+@media only screen and (max-width: 810px) {
+  .nav {
+    .nav-logo-box {
+      .logo-icon {
+        width: 19rem;
+      }
+    }
+  }
+}
+
+/* Extra Small: 0px ~ 402px */
+@media only screen and (max-width: 502px) {
+  .nav {
+    .nav-logo-box {
+      left: -1.5rem;
+
+      .logo-icon {
+        width: 17rem;
+      }
+
+      h3 {
+        display: none;
+      }
+    }
+
+    .btn-icon-container {
+      gap: 1rem;
+
+      a {
+        img {
+          width: 2.8rem;
+        }
+      }
+
+      .profile-icon {
+        img {
+          width: 28px;
+        }
+        span {
+          display: none;
+        }
+      }
+    }
+
+    .cart-btn-box {
+      .cart-icon {
+        width: 28px;
+      }
+
+      .qty-icon {
+        background-color: $color-black;
+        color: $color-white;
+        width: 2rem;
+        height: 2rem;
+        display: inline-block;
+        line-height: 20px;
+        border-radius: 50px;
+        text-align: center;
+        position: absolute;
+        right: -4px;
+        bottom: 7px;
+      }
+    }
+  }
+}

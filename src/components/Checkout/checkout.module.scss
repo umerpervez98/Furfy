@@ -1,0 +1,56 @@
+.section {
+  padding: 4rem 0;
+  min-height: calc(100vh - 327px);
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr minmax(32rem, 35rem);
+    grid-template-rows: repeat(5, auto);
+    grid-template-areas:
+      "details cart"
+      "delivery cart"
+      "payment cart"
+      ". cart"
+      ". pay-terms"
+      "small-payment ."
+      "small-pay-terms .";
+    grid-column-gap: 3rem;
+
+    > *:not(:last-of-type) {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+  .section form {
+    grid-template-columns: minmax(100%, 320px) 0;
+    gap: 0;
+
+    > *:not(:last-of-type) {
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 402px) {
+}

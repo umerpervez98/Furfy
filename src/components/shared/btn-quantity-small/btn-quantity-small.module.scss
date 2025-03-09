@@ -1,0 +1,63 @@
+.div {
+  border: 1.3px solid #999;
+  border-radius: 7px;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+
+  .qty-button {
+    padding: 0.5rem 1rem;
+    &:last-child {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  input {
+    border: none;
+    width: 3rem;
+    text-align: center;
+    font-size: 1.7rem;
+    padding: 0;
+    background-color: #fff;
+    color: #666;
+  }
+
+  svg {
+    font-size: 1.5rem;
+    color: #666;
+  }
+
+  .label-quantity {
+    max-width: 0;
+    overflow: hidden;
+  }
+}
+
+/* *************************************** */
+/* Media Styles */
+/* *************************************** */
+/* To fix braintree alignment */
+
+/* Small: 341px ~ 350px */
+@media only screen and (max-width: 350px) {
+  .div {
+    .qty-button {
+      padding: 0.5rem 0.5rem 0.5rem 0.7rem;
+      &:last-child {
+        padding: 0.5rem 0.7rem 0.5rem 0.5rem;
+      }
+    }
+  }
+}
+
+/* Extra Small: 0px ~ 340px */
+@media only screen and (max-width: 340px) {
+  .div {
+    .qty-button {
+      padding: 0.4rem 0.4rem 0.4rem 0.5rem;
+      &:last-child {
+        padding: 0.4rem 0.5rem 0.4rem 0.4rem;
+      }
+    }
+  }
+}

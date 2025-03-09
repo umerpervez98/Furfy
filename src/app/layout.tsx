@@ -1,10 +1,11 @@
 import React from 'react';
 import Script from 'next/script';
-import Head from 'next/head';
 import { Work_Sans } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
-import { CartProvider } from "@services/CartContext";
+import { CartProvider } from "@/contexts/CartContext";
+import ReactQueryProvider from '@/contexts/react-query-context/react-query-context';
+import type { Metadata } from 'next';
 
 // Load Work Sans using Next.js font optimization
 const workSans = Work_Sans({
@@ -13,12 +14,15 @@ const workSans = Work_Sans({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
+export const metadata: Metadata = {
+  title: 'Furfy | Home',
+  description: 'Furfy Home',
+}
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
-      <Head>
-        {/* Other metadata or scripts if needed */}
-      </Head>
+
       <body className={workSans.className}>
         {/* Font Awesome Script */}
         <Script
@@ -45,9 +49,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           data-cfasync="false"
         />
         {/* Wrap children with CartProvider */}
-        <CartProvider>
-          {children}
-        </CartProvider>
+        <ReactQueryProvider>
+          <CartProvider>
+            {children}
+          </CartProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

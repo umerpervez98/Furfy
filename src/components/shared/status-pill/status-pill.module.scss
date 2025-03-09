@@ -1,0 +1,32 @@
+@import '../../../styles/variables.scss';
+
+.status-pill {
+  background-color: $color-green-light;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &--large {
+    font-weight: 600;
+    font-size: 2rem;
+    padding: 0.5rem 4rem;
+  }
+
+  &--blue {
+    background-color: $color-blue-light;
+  }
+
+  &--yellow {
+    background-color: $color-yellow-light;
+  }
+
+  &--green {
+    background-color: $color-green-light;
+  }
+
+  &--pink {
+    background-color: $color-pink-light;
+  }
+}

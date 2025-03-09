@@ -1,0 +1,15 @@
+.span {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid;
+  border-radius: 100%;
+  border-top-color: #aaa;
+  animation: spin 0.5s infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,17 +1,19 @@
 'use client';
 import React from 'react';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import '@/styles/common/drawer.css';
-import {useCart} from '@services/CartContext';
-
+import { useCart } from '@/contexts/CartContext';
+import Image from 'next/image';
+import FurfyAustralia from '../../../public/images/furfy_australia.webp';
+import { PriceContainer } from '../shared/index.shared';
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void; // Function that takes no arguments and returns void
 }
 
-const Drawer: React.FC<DrawerProps> = ({isOpen, onClose}) => {
+const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
-  const {cart, updateItem} = useCart();
+  const { cartItems, updateItem, price } = useCart();
 
   if (!isOpen) {
     return null;
@@ -28,35 +30,35 @@ const Drawer: React.FC<DrawerProps> = ({isOpen, onClose}) => {
           </div>
           {/* Product Details */}
           <div className="item-details">
-            <img
+            <Image
               className="furfy-image"
-              src={'/images/furfy_australia.webp'}
+              src={FurfyAustralia}
               alt={'Furfy'}
             />
             <div className="item-info">
               <h5>Furfy</h5>
-              <p>The world's best pet hair remover</p>
+              <p>The world&apos;s best pet hair remover</p>
 
               {/* Cart Selector */}
               <div className="d-flex justify-content-between align-items-center">
                 <div className="cart-quantity-selector">
                   <button
                     onClick={() =>
-                      updateItem(
-                        cart?.cartItems[0]?.accessToken,
-                        cart.cartItems[0].qty - 1
+                      cartItems?.[0]?.accessToken && updateItem?.(
+                        cartItems?.[0]?.accessToken,
+                        cartItems?.[0]?.qty - 1
                       )
                     }
-                    disabled={cart?.cartItems[0]?.qty === 1}
+                    disabled={cartItems?.[0]?.qty === 1}
                   >
                     -
                   </button>
-                  <span>{cart?.cartItems[0]?.qty || 0}</span>
+                  <span>{cartItems?.[0]?.qty || 0}</span>
                   <button
                     onClick={() =>
-                      updateItem(
-                        cart?.cartItems[0]?.accessToken,
-                        cart.cartItems[0].qty + 1
+                      cartItems?.[0]?.accessToken && updateItem?.(
+                        cartItems?.[0]?.accessToken,
+                        cartItems?.[0]?.qty + 1
                       )
                     }
                   >
@@ -64,35 +66,12 @@ const Drawer: React.FC<DrawerProps> = ({isOpen, onClose}) => {
                   </button>
                 </div>
                 <div>
-                  <img
-                    className="object-contain"
-                    width={20}
-                    height={20}
-                    src="/images/repeat.svg"
-                    alt="repeat icons"
-                  />
-                  <span className="item-price ms-2">${cart.price || 0}</span>
+                  <span className="item-price ms-2">${price || 0}</span>
                 </div>
               </div>
             </div>
           </div>
-          {/* Pricing Details */}
-          <div className="checkout-details">
-            <div className="d-flex justify-content-between align-items-center">
-              <p className="text-md font-medium mb-1">SUBTOTAL:</p>
-              <p className="text-md font-medium mb-1">${cart.subtotal || 0}</p>
-            </div>
-            <div className="d-flex justify-content-between align-items-center">
-              <p className="text-md font-medium mb-1">SHIPPING:</p>
-              <p className="text-md font-medium mb-1">
-                ${cart.shippingFee || 0}
-              </p>
-            </div>
-            <div className="d-flex justify-content-between align-items-center">
-              <p className="text-lg font-bold mb-1">TOTAL:</p>
-              <p className="text-lg font-bold mb-1">${cart.total || 0}</p>
-            </div>
-          </div>
+          <PriceContainer />
           {/* Checkout Button */}
           <div className="pt-5">
             <button

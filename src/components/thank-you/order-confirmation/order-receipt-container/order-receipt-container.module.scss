@@ -1,0 +1,163 @@
+@import "../../../../styles/variables.scss";
+
+.div {
+  min-width: 980px;
+  width: 100%;
+
+  .middle-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+
+    > div {
+      // width: 35rem;
+      flex: 1;
+    }
+
+    article {
+      flex: 1;
+
+      p:not(:last-of-type) {
+        margin-bottom: 0.3rem;
+      }
+
+      .name,
+      .address {
+        font-size: 2rem;
+      }
+
+      .contact,
+      .address:last-of-type {
+        font-size: 2rem;
+        color: $color-grey-dark;
+      }
+
+      > div {
+        padding: 3.5rem;
+
+        h2 {
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      > div:first-of-type {
+        margin-bottom: 2.5rem;
+      }
+    }
+  }
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+  .div {
+    min-width: 340px;
+
+    .top-container {
+      .heading {
+        font-size: 3.5rem;
+      }
+
+      h2 {
+        font-size: 2.2rem;
+      }
+
+      h3 {
+        font-size: 1.8rem;
+        font-weight: 400;
+      }
+
+      article:first-of-type {
+        ul {
+          flex-wrap: wrap;
+
+          li.order {
+            width: 100%;
+
+            > h2,
+            h3 {
+              text-align: center;
+            }
+          }
+
+          li:nth-of-type(2) {
+            > h2,
+            h3 {
+              text-align: left;
+            }
+          }
+        }
+      }
+
+      article:last-of-type {
+        p {
+          font-size: 1.4rem;
+        }
+      }
+    }
+
+    .middle-container {
+      flex-direction: column;
+
+      article:first-of-type {
+        width: 100%;
+      }
+
+      > div {
+        width: 100%;
+      }
+
+      + .btn-container {
+        flex-direction: column;
+        row-gap: 2rem;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 402px) {
+  .div .top-container {
+    article:first-of-type {
+      ul {
+        justify-content: center;
+        gap: 1rem;
+
+        li:nth-of-type(2) {
+          > h2,
+          h3 {
+            text-align: center;
+          }
+        }
+
+        li.total {
+          > h2,
+          h3 {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+@import "../../../styles/variables.scss";
+
+.mask-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  background-image: linear-gradient(
+    to right top,
+    $color-primary 0%,
+    $color-mask-yellow 50%,
+    $color-mask-yellow 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+
+  .mask-contents {
+    position: fixed;
+    top: 35vh;
+
+    img {
+      width: 299px;
+      height: 56px;
+      margin-bottom: 3rem;
+    }
+
+    p {
+      text-align: center;
+      font-size: 3.5rem;
+      line-height: 41px;
+      font-weight: 900;
+
+      span {
+        &::after {
+          content: "";
+          display: inline-block;
+          width: 1em;
+          text-align: left;
+          animation: ellipsis steps(4, end) 2s infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes ellipsis {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75% {
+    content: "...";
+  }
+  100% {
+    content: "";
+  }
+}

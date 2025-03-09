@@ -1,0 +1,115 @@
+@import "../../../styles/variables.scss";
+
+.div {
+  background-color: $color-primary;
+  padding-top: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  width: 45rem;
+  min-width: 300px;
+  max-width: 1000px;
+  position: relative;
+  justify-content: center;
+  gap: 2rem;
+  max-height: 97vh;
+  overflow: visible;
+
+  &.large {
+    align-items: flex-start;
+  }
+
+  &.flex {
+    display: flex;
+  }
+
+  &.animated {
+    display: none;
+  }
+
+  & > h2:first-of-type {
+    text-transform: uppercase;
+  }
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 840px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 720px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 670px) {
+  .div {
+    width: 45rem;
+    gap: 0;
+
+    &.large .popup-inner-container {
+      display: flex;
+      z-index: 5;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 500px) {
+  .div {
+    width: 96%;
+    max-height: none;
+
+    &.large {
+      display: none;
+    }
+
+    &.animated {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: flex;
+      z-index: 0;
+      width: 100%;
+      /* Use the --vh variable for calculations */
+      height: calc(var(--vh, 1vh) * 100);
+      border: none;
+      border-radius: 0;
+      transition: 0.3s linear transform;
+      align-items: center;
+      flex-direction: column;
+      justify-content: flex-start;
+      transform: translateY(100%);
+    }
+
+    &.show {
+      transform: translateY(0);
+      z-index: 5;
+    }
+  }
+}
+
+@media only screen and (max-width: 350px) {
+}

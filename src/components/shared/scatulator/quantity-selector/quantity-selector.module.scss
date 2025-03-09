@@ -1,0 +1,32 @@
+.quantity-box {
+
+  .info-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 25rem;
+    margin: 2.5rem auto 1.5rem;
+
+    p {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+  }
+
+  .image-box {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: 5.5rem;
+
+    img {
+      margin: 0 auto;
+    }
+  }
+
+  ul {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+}

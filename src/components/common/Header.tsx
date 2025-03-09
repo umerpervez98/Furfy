@@ -1,19 +1,20 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React, {useState} from 'react';
-import {useRouter} from 'next/navigation';
-import {Container, Row, Col} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Container, Row, Col } from 'react-bootstrap';
 import Drawer from '@/components/common/Drawer';
-import {useCart} from '@services/CartContext';
+import { useCart } from '@/contexts/CartContext';
 import '@/styles/common/header.css';
+import Image from 'next/image';
+import Logo from '../../../public/icons/logo.svg';
 
-// Dynamic Import
 const ReactFlagsSelect = dynamic(() => import('react-flags-select'), {
   ssr: false,
 });
 
 const Header = () => {
-  const {cart} = useCart();
+  const { cartItems } = useCart();
   const [selected, setSelected] = useState('PK');
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -46,9 +47,9 @@ const Header = () => {
           </Col>
           <Col xs={4} sm={2}>
             <div className="text-center">
-              <img
+              <Image
                 className="w-full h-full object-contain"
-                src="/icons/logo.svg"
+                src={Logo}
                 alt="Logo"
               />
             </div>
@@ -56,7 +57,7 @@ const Header = () => {
           <Col xs={4} sm={5}>
             <div className="d-flex justify-content-end align-items-center w-full h-full">
               {/* For Desktop Only */}
-              <div className="d-none d-md-block flag-select">
+              {/*    <div className="d-none d-md-block flag-select">
                 <ReactFlagsSelect
                   selected={selected}
                   onSelect={(code) => setSelected(code)}
@@ -64,11 +65,11 @@ const Header = () => {
                   fullWidth={true}
                   className="border-0"
                 />
-              </div>
+              </div> */}
               <div
-                className="d-inline-block position-relative"
+                className="d-inline-block cursor-pointer position-relative"
                 onClick={
-                  cart?.cartItems[0]?.qty
+                  cartItems?.[0]?.qty
                     ? () => setIsDrawerOpen(true)
                     : undefined
                 }
@@ -108,8 +109,8 @@ const Header = () => {
                 </svg>
 
                 {/* Show badge only if cart quantity exists */}
-                {cart?.cartItems[0]?.qty ? (
-                  <div className="circle-badge">{cart.cartItems[0].qty}</div>
+                {cartItems?.[0]?.qty ? (
+                  <div className="circle-badge">{cartItems?.[0].qty}</div>
                 ) : null}
               </div>
             </div>

@@ -1,0 +1,67 @@
+@import '../../../styles/variables.scss';
+
+.div {
+  width: 100%;
+  text-align: center;
+  
+  small {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: inherit;
+    text-transform: uppercase;
+  }
+}
+
+.apply-button {
+  text-transform: capitalize;
+  background-color: $color-black;
+  color: #fff;
+  width: 9rem;
+  font-size: 1.8rem;
+  border-radius: 0 $radius $radius 0;
+  transition: 0.1s linear;
+}
+
+.apply-button:hover {
+  opacity: 0.9;
+}
+
+.apply-button:disabled {
+  opacity: 0.5;
+  cursor: auto;
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+  .div {
+    width: auto;
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 750px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 460px) {
+  .div {
+    width: 100%;
+  }
+}

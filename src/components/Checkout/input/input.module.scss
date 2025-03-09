@@ -1,0 +1,77 @@
+@import "../../../styles//variables.scss";
+
+.input-textarea,
+.input-normal,
+.input-select {
+  border: 2px solid rgba(86, 106, 85, 0.5);
+  border-radius: $radius;
+  padding: 1.2rem 1.5rem;
+  flex: 1;
+  background-color: rgba($color-white, 0.5);
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  transition: 0.1s linear;
+  font-family: inherit;
+  outline: none;
+  color: $color-black;
+}
+
+.select,
+.option {
+  outline: none;
+  color: $color-black;
+}
+
+.option {
+  font-size: 2rem;
+  padding: 10px;
+}
+
+.input-select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 4.5rem;
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+}
+
+.input-textarea:invalid,
+.input-normal:invalid,
+.input-select:invalid {
+  background-color: #fff;
+}
+
+.input-textarea:focus,
+.input-normal:focus,
+.input-select:focus {
+  border-color: $color-black;
+  box-shadow: inset 3px 3px 12px rgba(0, 0, 0, 0.15);
+
+  + label,
+  ~ label {
+    position: absolute;
+    top: -2.5rem;
+    font-size: 1.3rem;
+    color: inherit;
+  }
+}
+
+.input[name="promo"] {
+  text-transform: none;
+  border-right: none;
+  background-color: #fff;
+  width: calc(100% - 8rem);
+  border-radius: $radius 0 0 $radius;
+}
+
+.input[name="promo"].input-promo--validated {
+  background-color: rgba($color-white, 0.5);
+}
+
+.input:disabled {
+  background-color: $color-white;
+  opacity: 0.7;
+}

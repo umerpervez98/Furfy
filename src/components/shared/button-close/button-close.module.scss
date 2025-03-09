@@ -1,0 +1,60 @@
+.button {
+  position: absolute;
+  color: inherit;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 4rem;
+
+  &--special {
+    top: -2.5rem;
+    right: 0.8rem;
+    width: 2rem;
+    height: auto;
+    font-size: inherit;
+    background: transparent;
+    border: none;
+  }
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 840px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 720px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 670px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 502px) {
+  .button {
+    right: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+}
