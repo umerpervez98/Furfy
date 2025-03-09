@@ -1,11 +1,11 @@
 'use client';
 
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import Drawer from '@/components/common/Drawer';
-import {useCart} from '@services/CartContext';
+import { useCart } from '@/contexts/CartContext';
 
 const Pricing = () => {
-  const {cart, addToCart} = useCart();
+  const { product, addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -14,7 +14,7 @@ const Pricing = () => {
     setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
 
   const handleBuyNow = async () => {
-    await addToCart(quantity);
+    await addToCart?.(quantity);
     setIsDrawerOpen(true);
   };
 
@@ -26,8 +26,8 @@ const Pricing = () => {
           <span className="line-through shadow-black-35">Rs.9,900.00$</span>{' '}
           <span className="font-semibold ms-3">
             $
-            {cart.product
-              ? (cart.product.price * quantity).toLocaleString()
+            {product
+              ? (product.price * quantity).toLocaleString()
               : '0.00'}
           </span>
         </h5>

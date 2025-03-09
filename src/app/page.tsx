@@ -8,7 +8,7 @@ import Description from '@/components/Home/Description';
 import JudgemeReviews from '@/components/Home/JudgemeReviews';
 import '@/styles/home/index.css'
 
-const Home = () => {
+const Home = async () => {
   return (
     <>
       <Header />

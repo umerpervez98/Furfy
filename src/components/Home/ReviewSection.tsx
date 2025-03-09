@@ -1,6 +1,6 @@
 import React from 'react';
-import {Container, Row, Col, ProgressBar} from 'react-bootstrap';
-import { reviews,reviewsData } from '../../../utils/reviewData';
+import { Container, Row, Col, ProgressBar } from 'react-bootstrap';
+import { reviews, reviewsData } from '../../utils/reviewData';
 
 const ReviewSection = () => {
   return (
@@ -31,7 +31,7 @@ const ReviewSection = () => {
                 borderColor: '#0000001a',
               }}
             >
-              {reviewsData.map(({rating, frequency, percentage}) => (
+              {reviewsData.map(({ rating, frequency, percentage }) => (
                 <div
                   key={rating}
                   className="d-flex justify-content-evenly align-items-baseline"

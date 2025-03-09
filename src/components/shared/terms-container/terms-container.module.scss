@@ -1,0 +1,91 @@
+.div {
+  grid-area: pay-terms;
+
+  h4 {
+    font-size: 1.7rem;
+    text-transform: capitalize;
+
+    + p {
+      font-weight: 700;
+    }
+  }
+
+  h4,
+  p {
+    text-align: center;
+  }
+
+  ul {
+    margin: 1rem 0 2rem;
+    padding: 0 1rem;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+
+    svg {
+      flex-shrink: 0;
+      font-size: 1.8rem;
+    }
+  }
+
+  .agreement {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    img {
+      width: 6rem;
+      height: auto;
+    }
+
+    img:first-of-type {
+      width: 4rem;
+    }
+
+    + p {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+  }
+}
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+  .div {
+    max-width: 40rem;
+    margin: auto;
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 402px) {
+}

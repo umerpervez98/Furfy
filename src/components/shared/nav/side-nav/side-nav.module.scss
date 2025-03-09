@@ -1,0 +1,51 @@
+@import "../../../../styles/variables.scss";
+
+.aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  overflow: hidden;
+  transform: translateX(-100%);
+  will-change: transform;
+  transition: transform 0.2s linear;
+  background-color: #fff;
+  width: 40rem;
+  padding: 5rem;
+  height: 100vh;
+
+  &.show {
+    transform: translateX(0);
+  }
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (min-width: 1920px) {
+}
+
+/* Default work done at 1687px */
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 750px) {
+  .aside {
+    width: 100%;
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 402px) {
+}

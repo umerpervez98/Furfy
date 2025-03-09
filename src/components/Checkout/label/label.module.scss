@@ -1,0 +1,25 @@
+@import '../../../styles/variables.scss';
+
+.label {
+  text-transform: capitalize;
+  display: inline-block;
+  position: absolute;
+  top: 1.3rem;
+  left: 1rem;
+  font-size: 1.8rem;
+  transition: 0.3s linear;
+  pointer-events: none;
+  color: #777;
+
+  &[for="phone"] {
+    opacity: 0;
+  }
+
+  &.label--animated {
+    position: absolute;
+    top: -2rem;
+    font-size: 1.3rem;
+    color: inherit;
+    opacity: 1;
+  }
+}

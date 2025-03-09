@@ -1,0 +1,45 @@
+@import "../../../styles/variables.scss";
+
+.input-display {
+  border: 2px solid rgba(86, 106, 85, 0.5);
+  border-radius: 7px;
+  padding: 1.2rem 3rem 1.2rem 1.2rem;
+  flex: 1 1 100%;
+  width: 100%;
+  word-wrap: break-word;
+  background-color: rgba($color-white, 0.5);
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  transition: all 0.1s linear 0s;
+}
+
+.background-error {
+  background-color: $color-red-light;
+}
+
+.formRow-container {
+  position: relative;
+
+  > div:first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    .flag-select {
+      padding-bottom: 0;
+
+      > button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px !important;
+      }
+    }
+  }
+
+  > p {
+    padding: 1.2rem 1.5rem 1.2rem 6.8rem;
+  }
+}

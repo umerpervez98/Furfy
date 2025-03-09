@@ -1,0 +1,64 @@
+@import "../../../styles/variables.scss";
+
+.span {
+  background-color: $color-red;
+  color: $color-primary;
+  border-radius: 100%;
+  width: 2.7rem;
+  height: 2.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 2.3rem;
+
+  &.phone-verification-tick {
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(250%, -50%);
+  }
+}
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 750px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 460px) {
+  .span.phone-verification-tick {
+    width: 3.5rem;
+    height: 3.5rem;
+    transform: translate(390%, -50%);
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 416px) {
+  .span.address-verification-tick {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,83 @@
+@import "../../../styles/variables.scss";
+
+.div {
+  margin: 3rem auto 0;
+  background-color: $color-primary;
+  padding-bottom: 10rem;
+
+  .container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .nav-logo-box {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    margin-bottom: 7rem;
+
+    .logo-icon {
+      width: 24rem;
+      height: auto;
+    }
+
+    h3 {
+      font-size: 1.9rem;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1530px) {
+  .div {
+    margin: 5rem auto 0;
+  }
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 525px) {
+  .div {
+    .nav-logo-box {
+      margin-bottom: 10rem;
+
+      h3 {
+        position: absolute;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* Extra small phone to Phone: 0px ~ 402px */
+@media only screen and (max-width: 502px) {
+  .div {
+    margin: 2rem auto 0;
+  }
+}

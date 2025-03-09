@@ -1,0 +1,83 @@
+.div {
+  grid-area: details;
+
+  .name-container {
+    position: relative;
+    flex: 1 1 0%;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .phone-input-outer {
+    position: relative;
+    flex: 1;
+    max-width: calc((100% - 1rem) / 2);
+  }
+
+  .inner-phone-container {
+    position: relative;
+    flex-basis: calc((100% - 1rem) / 2);
+
+    .form-row {
+      margin-top: 0;
+    }
+  }
+
+  .phone-info {
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding-left: 1rem;
+    flex-basis: calc((100% - 1rem) / 2);
+    &--checked {
+      margin-top: -2.8rem;
+    }
+  }
+}
+
+/* *************************************** */
+/* Media Style */
+/* *************************************** */
+/* Default work done at 2560px */
+
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Large laptop to Desktop: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium Tablet to Laptop: 848px ~ 1323px */
+@media only screen and (max-width: 1323px) {
+  .div {
+    div:nth-of-type(2),
+    div:nth-of-type(3) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    div:nth-of-type(2) {
+      gap: 2.8rem;
+    }
+
+    div:nth-of-type(3) {
+      gap: 1rem;
+    }
+
+    .phone-input-outer {
+      max-width: none;
+    }
+
+    .phone-info {
+      &--checked {
+        padding-right: 110px;
+      }
+    }
+  }
+}
+
+/* Small Phone to Tablet: 403px ~ 847px */
+@media only screen and (max-width: 1050px) {
+}

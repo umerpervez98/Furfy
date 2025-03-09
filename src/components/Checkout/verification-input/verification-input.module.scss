@@ -1,0 +1,35 @@
+.div {
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  .placeholder-container {
+    display: flex;
+    width: 17rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: space-around;
+    pointer-events: none;
+
+    span {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: #a9a9a9;
+    }
+  }
+
+  input:focus {
+    background-color: #fff;
+  }
+
+  input:focus + .placeholder-container {
+    display: none;
+  }
+
+  .placeholder-container-hidden {
+    display: none;
+  }
+}

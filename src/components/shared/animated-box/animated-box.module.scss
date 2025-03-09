@@ -1,0 +1,100 @@
+div.animated-box {
+  &--home {
+    width: 45% !important;
+    height: 330px;
+  }
+
+  &--shop {
+    width: 100% !important;
+    height: 300px;
+    scale: 0.7;
+  }
+
+  &--account {
+    width: 50% !important;
+    height: 230px;
+    margin-top: 2rem;
+  }
+}
+
+/* *************************************** */
+/* Media Styles */
+/* *************************************** */
+/* Extra Large 1729px ~ 1920px */
+@media only screen and (max-width: 1920px) {
+}
+
+/* Default work done at 1704px */
+/* Large: 1324px ~ 1728px */
+@media only screen and (max-width: 1728px) {
+}
+
+/* Medium-2: 1051px ~ 1323px */
+@media only screen and (max-width: 1440px) {
+}
+
+/* Medium-1: 751px ~ 1050px */
+@media only screen and (max-width: 1050px) {
+  div.animated-box {
+    &--shop {
+      width: 240px !important;
+      height: 200px;
+      margin-left: -2%;
+      margin-top: 10px;
+      scale: 1.1;
+      translate: 0 20px;
+    }
+
+    &--account {
+      height: 20vw;
+    }
+  }
+}
+
+/* Small: 403px ~ 750px */
+@media only screen and (max-width: 750px) {
+  div.animated-box {
+    &--home {
+      width: 100% !important;
+      height: 38vw;
+      margin-top: 0;
+    }
+
+    &--account {
+      width: 100% !important;
+      height: 38vw;
+      margin-top: 0;
+    }
+  }
+}
+
+/* Extra Small: 0px ~ 402px */
+@media only screen and (max-width: 602px) {
+}
+
+/* Extra Small: 0px ~ 402px */
+@media only screen and (max-width: 502px) {
+  div.animated-box {
+    &--shop {
+      width: 220px !important;
+    }
+  }
+}
+
+/* Extra Small: 0px ~ 402px */
+@media only screen and (max-width: 400px) {
+  div.animated-box {
+    &--shop {
+      flex-shrink: 0;
+      width: 120px !important;
+      height: 80px;
+      scale: 2.5;
+      margin-left: 9%;
+    }
+
+    &--account {
+      scale: 1.5;
+      margin: 3rem 0;
+    }
+  }
+}

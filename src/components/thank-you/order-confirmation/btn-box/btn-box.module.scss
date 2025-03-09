@@ -1,0 +1,26 @@
+@import '../../../../styles/variables.scss';
+
+.btn-box {
+  background-color: #fff0b2;
+  padding: 3rem 4.5rem;
+  text-align: center;
+  border-radius: 0 0 $radius $radius;
+
+  p {
+    font-style: italic;
+    color: $color-grey-dark;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 117.6%;
+  }
+
+  button {
+    width: auto;
+    margin: 0 auto;
+
+    a {
+      margin: 0 2.5rem;
+    }
+  }
+}

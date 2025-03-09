@@ -1,0 +1,85 @@
+@import '../../../../styles/variables.scss';
+
+.price-container {
+  padding-top: 1.5rem;
+  border-top: 1.5px solid $color-grey-dark;
+  list-style: none;
+  &--dashboard {
+    color: $color-grey-dark;
+  }
+
+  p {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 1.8rem;
+
+    span,
+    .discount-heading {
+      display: flex;
+      gap: 0.4rem;
+
+      span {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        .discount-icon {
+          width: 1.8rem;
+          height: 1.8rem;
+          margin-bottom: -0.2rem;
+        }
+      }
+    }
+
+    .qty-total {
+      text-transform: lowercase;
+    }
+
+    .discount-code {
+      text-transform: uppercase;
+    }
+  }
+
+  p:not(:last-of-type) {
+    margin-bottom: 0.5rem;
+  }
+
+  .code {
+    text-transform: uppercase;
+  }
+
+  .manual {
+    min-width: 140px;
+  }
+
+  .reason {
+    font-weight: 500;
+    text-transform: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+    max-width: 150px;
+    margin-right: auto;
+  }
+
+  .shipping {
+    text-transform: uppercase;
+  }
+
+  .total-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+/* *************************************** */
+/* Media Styles */
+/* *************************************** */
+
+/* Extra Small: 0px ~ 502px */
+@media only screen and (max-width: 502px) {
+  .discount-heading {
+    flex-direction: column;
+  }
+}
