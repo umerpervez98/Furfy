@@ -9,7 +9,6 @@ type CartItemDescProps = {
 };
 
 const CartItemDesc = ({
-  confirmation = false,
   cartLine1,
   cartLine2,
   subscriptionPlan,

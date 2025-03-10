@@ -1,4 +1,4 @@
-import {Container, Row, Col} from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
 
@@ -14,7 +14,7 @@ const About = () => {
               <h5 className="font-bold text-center">About Us</h5>
               <img
                 className="my-3 w-full h-full object-contain"
-                style={{borderRadius: '25px'}}
+                style={{ borderRadius: '25px' }}
                 src="/images/about.webp"
                 alt="About Us Images"
               />
@@ -46,11 +46,11 @@ const About = () => {
                 Five years later - Barney inspired another product to be
                 launched - a new super supportive, easy to clean, premium
                 quality, insta-worthy dog bed range. Barney Bed has now become
-                Australia & USA's favourite dog bed. We’re proud to hold a
+                Australia & USA&apos;s favourite dog bed. We&apos;re proud to hold a
                 five-star rating on Google.
               </p>
               <p className="text-lg line-height-md">
-              We can’t wait for you to try our next product, furfy. We know you will love it, as pet fur becomes a thing of the past.
+                We can&apos;t wait for you to try our next product, furfy. We know you will love it, as pet fur becomes a thing of the past.
               </p>
             </div>
           </Col>

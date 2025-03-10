@@ -22,14 +22,16 @@
 
   li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 
     svg {
       flex-shrink: 0;
       font-size: 1.8rem;
+      top: .2rem;
+      position: relative;
     }
   }
 

@@ -1,17 +1,15 @@
 import React from 'react';
 import Script from 'next/script';
-import { Work_Sans } from 'next/font/google';
+import { Public_Sans } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
 import { CartProvider } from "@/contexts/CartContext";
 import ReactQueryProvider from '@/contexts/react-query-context/react-query-context';
 import type { Metadata } from 'next';
 
-// Load Work Sans using Next.js font optimization
-const workSans = Work_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+const workSans = Public_Sans({
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

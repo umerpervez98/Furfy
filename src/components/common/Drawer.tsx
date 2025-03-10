@@ -1,11 +1,10 @@
 'use client';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 import '@/styles/common/drawer.css';
 import { useCart } from '@/contexts/CartContext';
-import Image from 'next/image';
 import FurfyAustralia from '../../../public/images/furfy_australia.webp';
-import { PriceContainer } from '../shared/index.shared';
+import { CartItem, PriceContainer } from '../shared/index.shared';
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void; // Function that takes no arguments and returns void
@@ -13,7 +12,7 @@ interface DrawerProps {
 
 const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
-  const { cartItems, updateItem, price } = useCart();
+  const { cartItems } = useCart();
 
   if (!isOpen) {
     return null;
@@ -28,51 +27,23 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
             <h3 className="font-bold">Your Items</h3>
             <i className="fa-solid fa-xmark fa-2x" onClick={onClose}></i>
           </div>
-          {/* Product Details */}
-          <div className="item-details">
-            <Image
-              className="furfy-image"
-              src={FurfyAustralia}
-              alt={'Furfy'}
-            />
-            <div className="item-info">
-              <h5>Furfy</h5>
-              <p>The world&apos;s best pet hair remover</p>
+          <ul>
+            {(cartItems && cartItems?.length > 0) ? (
+              cartItems?.map((product) => {
+                return (
+                  <Fragment key={`cart-item-${product.id}`}>
+                    <CartItem {...product} imgUrl={FurfyAustralia} />
+                  </Fragment>
+                );
+              })
+            ) : (
+              <li key="cart-item-empty" >
+                your cart is empty
+              </li>
+            )}
 
-              {/* Cart Selector */}
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="cart-quantity-selector">
-                  <button
-                    onClick={() =>
-                      cartItems?.[0]?.accessToken && updateItem?.(
-                        cartItems?.[0]?.accessToken,
-                        cartItems?.[0]?.qty - 1
-                      )
-                    }
-                    disabled={cartItems?.[0]?.qty === 1}
-                  >
-                    -
-                  </button>
-                  <span>{cartItems?.[0]?.qty || 0}</span>
-                  <button
-                    onClick={() =>
-                      cartItems?.[0]?.accessToken && updateItem?.(
-                        cartItems?.[0]?.accessToken,
-                        cartItems?.[0]?.qty + 1
-                      )
-                    }
-                  >
-                    +
-                  </button>
-                </div>
-                <div>
-                  <span className="item-price ms-2">${price || 0}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <PriceContainer />
-          {/* Checkout Button */}
+            <PriceContainer />
+          </ul>
           <div className="pt-5">
             <button
               onClick={() => router.push('/checkout')}

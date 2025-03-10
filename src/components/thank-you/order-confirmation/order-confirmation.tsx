@@ -7,7 +7,7 @@ import { useGetOrdersQuery } from '@/utils/react-query-custom-hooks';
 import ProcessingStepsContainer from './processing-steps-container/processing-steps-container';
 import OrderReceiptContainer from './order-receipt-container/order-receipt-container';
 import styles from './order-confirmation.module.scss';
-import { SubmitState } from '@/types/index.types';
+import { SubmitState, TOrderConfirmation } from '@/types/index.types';
 
 type OrderConfirmationProps = {
   pastOrderId?: string;
@@ -111,7 +111,7 @@ const OrderConfirmation = ({ pastOrderId }: OrderConfirmationProps) => {
               <OrderReceiptContainer
                 pastOrderId={pastOrderId}
                 orderConfirmation={
-                  pastOrderId ? currentOrder : orderConfirmation
+                  (pastOrderId ? currentOrder : orderConfirmation) as TOrderConfirmation
                 }
               />
             </>

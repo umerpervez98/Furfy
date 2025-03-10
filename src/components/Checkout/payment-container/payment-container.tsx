@@ -9,7 +9,7 @@ import {
 } from '@/components/Checkout/index.checkout';
 import { HeadingSecondary } from '@/components/shared/index.shared';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { getPaymentToken } from '@services/api';
+import { getPaymentToken } from '@/services/cart-functions';
 import { type PaymentMethod } from '@/types/index.types';
 import styles from './payment-container.module.scss';
 

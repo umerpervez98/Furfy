@@ -12,7 +12,7 @@ const HeroSection = () => {
     const fixBannerHeight = () => {
       const container = document.getElementById('furfy-banner-container');
       if (container) {
-        let properties = container.getBoundingClientRect();
+        const properties = container.getBoundingClientRect();
         container.style.height = `${properties.width * 0.5625}px`;
       }
     };
@@ -51,27 +51,27 @@ const HeroSection = () => {
 
   return (
     <>
-    <Container className='py-3 page-width'>
-    <h5 className='text-center font-bold'>THE WORLD'S BEST PET HAIR REMOVER</h5>
-    <div id="furfy-banner-container" className="furfybanner" style={{zIndex:1,height:'690.75px'}}>
-      <div id="furfybanner6_hype_container" className="HYPE_document">
-        <Script src="/furfybanner.js" strategy="afterInteractive" />
-      </div>
+      <Container className='py-3 page-width'>
+        <h5 className='text-center font-bold'>THE WORLD&apos;S BEST PET HAIR REMOVER</h5>
+        <div id="furfy-banner-container" className="furfybanner" style={{ zIndex: 1, height: '690.75px' }}>
+          <div id="furfybanner6_hype_container" className="HYPE_document">
+            <Script src="/furfybanner.js" strategy="afterInteractive" />
+          </div>
 
-      {/* Hidden SEO Content */}
-      <div style={{ display: 'none' }} aria-hidden="true">
-        <div>ORIGINAL PATENTED JAPANESE DESIGN</div>
-        <div>FREE DELIVERY IN AUSTRALIA</div>
-        <div>SYDNEY WAREHOUSE FAST DELIVERY</div>
-        <div>NO HAIR ANYWHERE</div>
-        <div>BE FUR-FREE WITH FURFY</div>
-      </div>
+          {/* Hidden SEO Content */}
+          <div style={{ display: 'none' }} aria-hidden="true">
+            <div>ORIGINAL PATENTED JAPANESE DESIGN</div>
+            <div>FREE DELIVERY IN AUSTRALIA</div>
+            <div>SYDNEY WAREHOUSE FAST DELIVERY</div>
+            <div>NO HAIR ANYWHERE</div>
+            <div>BE FUR-FREE WITH FURFY</div>
+          </div>
 
-      {/* Dynamic Content */}
-      <div id="customTxt" dangerouslySetInnerHTML={{ __html: customText }} />
-      <div id="customLoc" dangerouslySetInnerHTML={{ __html: customLocation }} />
-    </div>
-    </Container>
+          {/* Dynamic Content */}
+          <div id="customTxt" dangerouslySetInnerHTML={{ __html: customText }} />
+          <div id="customLoc" dangerouslySetInnerHTML={{ __html: customLocation }} />
+        </div>
+      </Container>
     </>
   );
 };
