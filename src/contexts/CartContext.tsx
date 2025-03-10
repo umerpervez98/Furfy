@@ -507,7 +507,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         request: null,
         show: false,
       };
-
+    alert();
     await dispatch(
       actionCreator(CART_CONTEXT_ACTIONS.UPDATE_CART, {
         ...cart,
@@ -598,12 +598,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchProduct = async () => {
     const { success, product } = await getProduct();
+    console.log('product', product);
+    console.log('success', success);
     if (success) {
       dispatch(actionCreator(CART_CONTEXT_ACTIONS.SET_PRODUCT, product));
     }
   };
 
   const addToCart = async (quantity: number) => {
+    console.log('cartState.product', cartState.product);
+    console.log('quantity', quantity);
     if (!cartState.product) return;
 
     const response = await apiAddToCart(quantity, cartState.product.accessToken);
