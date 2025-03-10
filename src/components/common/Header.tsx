@@ -1,21 +1,21 @@
-'use client';
-import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Container, Row, Col } from 'react-bootstrap';
-import Drawer from '@/components/common/Drawer';
-import { useCart } from '@/contexts/CartContext';
-import '@/styles/common/header.css';
-import Image from 'next/image';
-import Logo from '../../../public/icons/logo.svg';
+"use client";
+import dynamic from "next/dynamic";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Container, Row, Col } from "react-bootstrap";
+import Drawer from "@/components/common/Drawer";
+import { useCart } from "@/contexts/CartContext";
+import "@/styles/common/header.css";
+import Image from "next/image";
+import Logo from "../../../public/icons/logo.svg";
 
-const ReactFlagsSelect = dynamic(() => import('react-flags-select'), {
+const ReactFlagsSelect = dynamic(() => import("react-flags-select"), {
   ssr: false,
 });
 
 const Header = () => {
   const { cartItems } = useCart();
-  const [selected, setSelected] = useState('PK');
+  const [selected, setSelected] = useState("PK");
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter(); // Initialize router
@@ -28,13 +28,13 @@ const Header = () => {
 
   return (
     <>
-      <Container className="py-3">
+      <Container className="py-5">
         <Row>
           <Col xs={4} sm={5}>
             <div className="d-flex flex-column justify-content-center h-full">
               <div
                 id="hamburger"
-                className={menuOpen ? 'open' : ''}
+                className={menuOpen ? "open" : ""}
                 onClick={() => setMenuOpen(!menuOpen)}
               >
                 <div className="bars">
@@ -69,16 +69,14 @@ const Header = () => {
               <div
                 className="d-inline-block cursor-pointer position-relative"
                 onClick={
-                  cartItems?.[0]?.qty
-                    ? () => setIsDrawerOpen(true)
-                    : undefined
+                  cartItems?.[0]?.qty ? () => setIsDrawerOpen(true) : undefined
                 }
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 249.03 326.31"
-                  width={50}
-                  height={50}
+                  width={60}
+                  height={60}
                 >
                   <defs>
                     <style>
@@ -133,36 +131,36 @@ const Header = () => {
       <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
 
       {/* Animated Menu */}
-      <nav className={`main-menu ${menuOpen ? 'open' : ''}`}>
+      <nav className={`main-menu ${menuOpen ? "open" : ""}`}>
         <ul className="menu-items">
-          <li className="cursor-pointer" onClick={() => handleNavigation('/')}>
+          <li className="cursor-pointer" onClick={() => handleNavigation("/")}>
             HOME
           </li>
           <li
             className="cursor-pointer"
-            onClick={() => handleNavigation('/faq')}
+            onClick={() => handleNavigation("/faq")}
           >
             FAQ
           </li>
           <li
             className="cursor-pointer"
-            onClick={() => handleNavigation('/about')}
+            onClick={() => handleNavigation("/about")}
           >
             ABOUT
           </li>
           <li
             className="cursor-pointer"
-            onClick={() => handleNavigation('/contact')}
+            onClick={() => handleNavigation("/contact")}
           >
             CONTACT
           </li>
         </ul>
       </nav>
-      <div id="drop-in-menu" className={`${menuOpen ? 'open' : ''}`}></div>
+      <div id="drop-in-menu" className={`${menuOpen ? "open" : ""}`}></div>
       {/* Background Overlay */}
       <div
         id="background-overlay"
-        className={`${menuOpen ? 'background-overlay' : ''}`}
+        className={`${menuOpen ? "background-overlay" : ""}`}
       ></div>
     </>
   );

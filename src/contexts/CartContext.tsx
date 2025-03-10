@@ -507,7 +507,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         request: null,
         show: false,
       };
-
+    alert();
     await dispatch(
       actionCreator(CART_CONTEXT_ACTIONS.UPDATE_CART, {
         ...cart,
@@ -515,7 +515,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           cart?.cartItems === null
             ? []
             : cart?.cartItems?.sort((a: { id: string }, b: { id: string }) => {
-              return +a.id - +b.id;
+              return +a?.id - +b?.id;
             }),
         deliveryNote: initialDeliveryNote,
       })
