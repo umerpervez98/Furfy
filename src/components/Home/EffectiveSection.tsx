@@ -4,6 +4,12 @@ import Pricing from '../common/Pricing';
 import Table from '../common/Table';
 import Testimonial from './Testimonial';
 import { tableHeaders, tableData } from '../../utils/tableData';
+import Image from 'next/image';
+
+import FurfyInboxAustralia from '../../../public/images/furfyinbox_australia.webp';
+import FurfyAustralia from '../../../public/images/furfy_australia.webp';
+import FurfyDetail from '../../../public/images/furfy_detail.webp';
+import FurfyProduct from '../../../public/images/furfy-product.webp';
 
 
 const EffectiveSection = () => {
@@ -87,10 +93,10 @@ const EffectiveSection = () => {
         <Row className="my-3">
           <Col sm={6}>
             <div className="text-center">
-              <img
+              <Image
                 className="w-full h-full object-contain"
                 style={{ borderRadius: '19px' }}
-                src="/images/furfyinbox_australia.webp"
+                src={FurfyInboxAustralia}
                 alt="NO BATTERIES OR ADHESIVES REQUIRED"
               />
               <p className="text-md font-bold py-4">
@@ -100,10 +106,10 @@ const EffectiveSection = () => {
           </Col>
           <Col sm={6}>
             <div className="text-center">
-              <img
+              <Image
                 className="w-full h-full object-contain"
                 style={{ borderRadius: '19px' }}
-                src="/images/furfy_australia.webp"
+                src={FurfyAustralia}
                 alt="ULTRA DURABLE ERGONOMIC DESIGN"
               />
               <p className="text-md font-bold py-4">
@@ -113,10 +119,10 @@ const EffectiveSection = () => {
           </Col>
           <Col sm={6}>
             <div className="text-center">
-              <img
+              <Image
                 className="w-full h-full object-contain"
                 style={{ borderRadius: '19px' }}
-                src="/images/furfy_detail.webp"
+                src={FurfyDetail}
                 alt="PATENTED ELECTROSTATIC BRUSH"
               />
               <p className="text-md font-bold py-4">
@@ -126,10 +132,10 @@ const EffectiveSection = () => {
           </Col>
           <Col sm={6}>
             <div className="text-center">
-              <img
+              <Image
                 className="w-full h-full object-contain"
                 style={{ borderRadius: '19px' }}
-                src="/images/furfyinbox_australia.webp"
+                src={FurfyInboxAustralia}
                 alt="NO FUSS NO MESS"
               />
               <p className="text-md font-bold py-4">NO FUSS NO MESS</p>
@@ -156,10 +162,10 @@ const EffectiveSection = () => {
         <Row className="my-3">
           <Col sm={6}>
             <div className='py-4 py-lg-0'>
-              <img
+              <Image
                 className="w-full h-full object-contain"
                 style={{ borderRadius: '19px' }}
-                src="/images/furfy-product.webp"
+                src={FurfyProduct}
                 alt="Furfy"
               />
             </div>

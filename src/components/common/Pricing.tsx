@@ -23,8 +23,7 @@ const Pricing = () => {
       {/* Pricing */}
       <div className="py-4 text-center">
         <h5>
-          <span className="line-through shadow-black-35">Rs.9,900.00$</span>{' '}
-          <span className="font-semibold ms-3">
+          <span className="font-semibold ms-3 price-text">
             $
             {product
               ? (product.price * quantity).toLocaleString()
@@ -34,13 +33,13 @@ const Pricing = () => {
       </div>
 
       {/* Review */}
-      <div className="text-center">
+      <div className="text-center review-container">
         <i className="fa fa-star"></i>
         <i className="fa fa-star"></i>
         <i className="fa fa-star"></i>
         <i className="fa fa-star"></i>
         <i className="fa fa-star"></i>
-        <span className="font-normal ms-2 text-gray">36 reviews</span>
+        <span className="font-normal ms-2 text-gray review-text">36 reviews</span>
       </div>
 
       {/* Buy Now */}

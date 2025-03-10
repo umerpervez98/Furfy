@@ -515,7 +515,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           cart?.cartItems === null
             ? []
             : cart?.cartItems?.sort((a: { id: string }, b: { id: string }) => {
-              return +a.id - +b.id;
+              return +a?.id - +b?.id;
             }),
         deliveryNote: initialDeliveryNote,
       })
@@ -598,16 +598,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchProduct = async () => {
     const { success, product } = await getProduct();
-    console.log('product', product);
-    console.log('success', success);
     if (success) {
       dispatch(actionCreator(CART_CONTEXT_ACTIONS.SET_PRODUCT, product));
     }
   };
 
   const addToCart = async (quantity: number) => {
-    console.log('cartState.product', cartState.product);
-    console.log('quantity', quantity);
     if (!cartState.product) return;
 
     const response = await apiAddToCart(quantity, cartState.product.accessToken);

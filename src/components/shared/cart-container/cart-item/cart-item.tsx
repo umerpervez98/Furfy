@@ -2,6 +2,9 @@
 import Image from "next/image";
 import { useCart, CartItem as CartItemType } from "@/contexts/CartContext";
 import styles from "./cart-item.module.scss";
+import DeleteIcon from '../../../../../public/icons/icon-delete.svg';
+import PlusIcon from '../../../../../public/icons/icon-plus.svg';
+import MinusIcon from '../../../../../public/icons/icon-minus.svg';
 
 const CartItem = ({ accessToken, qty, price, name, imgUrl }: CartItemType) => {
   const { updateItem } = useCart();
@@ -18,15 +21,22 @@ const CartItem = ({ accessToken, qty, price, name, imgUrl }: CartItemType) => {
 
           <div className={styles.cartItemBtnContainer}>
             <div className="cart-quantity-selector">
-              <button
+              {qty == 1 && <button
                 onClick={() => updateItem?.(accessToken, qty - 1)}
                 disabled={qty === 1}
               >
-                -
-              </button>
+                <Image src={DeleteIcon} alt="Delete" />
+              </button>}
+
+              {qty > 1 && <button
+                onClick={() => updateItem?.(accessToken, qty - 1)}
+                disabled={qty === 1}
+              >
+                <Image src={MinusIcon} alt="Minus" />
+              </button>}
               <span>{qty || 0}</span>
               <button onClick={() => updateItem?.(accessToken, qty + 1)}>
-                +
+                <Image src={PlusIcon} alt="Plus" />
               </button>
             </div>
             <div>
