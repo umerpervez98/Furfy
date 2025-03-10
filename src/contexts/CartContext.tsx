@@ -6,9 +6,8 @@ import {
   addToCart as apiAddToCart,
   updateCartQuantity,
   getProduct
-} from "@services/api";
+} from "@/services/cart-functions";
 import { usePathname } from 'next/navigation';
-import Cookies from 'js-cookie';
 import { cartContextReducer, CART_CONTEXT_ACTIONS } from './CartContextReducer';
 import { Dropin } from 'braintree-web-drop-in';
 import type {
@@ -18,20 +17,21 @@ import type {
   PromoApplied,
   UpdateCustomerProps,
   Method,
-  PurchaseType,
   CurrentTab,
   LocalAddressProps,
 } from '@/types/index.types';
 import { actionCreator } from "@/utils/action-creator";
 import { v4 as uuidv4 } from 'uuid';
 import { StaticImageData } from "next/image";
+import { getUserProfile } from "@/services/checkout-functions";
 
 export interface CartItem extends Product {
+
   qty: number;
   productId: string;
 }
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   price: number;
@@ -68,7 +68,6 @@ export interface CartState {
   currentExtra: number;
   currentPage: string;
   currentTab: CurrentTab;
-  purchaseType: PurchaseType | null;
   showScatulator: boolean;
   paymentToken: string | null;
   braintreeInstance: Dropin | undefined;
@@ -108,7 +107,6 @@ const initialState: CartState = {
   currentExtra: 1,
   currentPage: '1',
   currentTab: 'dashboard',
-  purchaseType: null,
   showScatulator: false,
   paymentToken: null,
   braintreeInstance: undefined,
@@ -158,7 +156,6 @@ type CartContextValue = CartState & {
   resetItems: () => void;
   addItemToCart: (newProduct: object) => void;
   addOrderItems: (newProps: object) => void;
-  updatePurchaseType: (type: PurchaseType) => void;
   setShowScatulator: (bool: boolean) => void;
   logoutUser: () => void;
   setCurrentTab: (newTab: string) => void;
@@ -314,17 +311,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     dispatch(actionCreator(CART_CONTEXT_ACTIONS.SET_SHOW_PAY_NOW, bool));
   };
 
-  const setInitialCartAndCookie = (data: {
-    sessionStorageID: string;
-    cartItems: { id: string }[];
-    [key: string]: unknown;
-  }) => {
-    createCart(data);
-
-    if (!document.cookie.includes('sc_session_id')) {
-      Cookies.set('sc_session_id', data.sessionStorageID);
-    }
-  };
+  /*   const setInitialCartAndCookie = (data: {
+      sessionStorageID: string;
+      cartItems: { id: string }[];
+      [key: string]: unknown;
+    }) => {
+      createCart(data);
+  
+      if (!document.cookie.includes('sc_session_id')) {
+        Cookies.set('sc_session_id', data.sessionStorageID);
+      }
+    }; */
 
   const logoutUser = () => {
     createCart({
@@ -381,16 +378,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     addItemToCart({});
     dispatch(
-      actionCreator(CART_CONTEXT_ACTIONS.UPDATE_ITEMS, initialState.items)
+      actionCreator(CART_CONTEXT_ACTIONS.UPDATE_ITEMS, initialState.cartItems)
     );
   };
 
-  const updatePurchaseType = (type: PurchaseType) => {
-    dispatch(actionCreator(CART_CONTEXT_ACTIONS.UPDATE_PURCHASE_TYPE, type));
-  };
 
   const addOrderItems = (newProps: object) => {
-    const newItems = { ...items, ...newProps };
+    const newItems = { ...(currentCart?.orderItems as CartItem), ...newProps };
     dispatch(actionCreator(CART_CONTEXT_ACTIONS.UPDATE_ITEMS, newItems));
   };
 
@@ -577,7 +571,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const setUserProfile = async (id: string, newAddress?: object | boolean) => {
-    const user = await setUserProfile(id);
+    const user = await getUserProfile(id);
 
     if (user?.success) {
       updateUser(user.data);
@@ -664,7 +658,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     updateAddress,
     updateCurrentPage,
     addItemToCart,
-    updatePurchaseType,
     logoutUser,
     setGlobalError,
     setGlobalMessage,

@@ -38,12 +38,12 @@ enum CART_CONTEXT_ACTIONS {
     SET_PHONE_CHECKED = "SET_PHONE_CHECKED",
     SET_EMAIL_CHECKED = "SET_EMAIL_CHECKED",
 }
-
+/* eslint-disable */
 type CartAction = {
     type: CART_CONTEXT_ACTIONS;
     payload?: any;
 };
-
+/* eslint-enable */
 const cartContextReducer = (state: CartState, action: CartAction): CartState => {
     const { type, payload } = action;
 
@@ -100,14 +100,10 @@ const cartContextReducer = (state: CartState, action: CartAction): CartState => 
             return { ...state, isScrollActivated: payload };
         case CART_CONTEXT_ACTIONS.UPDATE_PRODUCT:
             return { ...state, product: payload };
-        case CART_CONTEXT_ACTIONS.UPDATE_ITEMS:
-            return { ...state, items: payload };
         case CART_CONTEXT_ACTIONS.UPDATE_CURRENT_EXTRA:
             return { ...state, currentExtra: payload };
         case CART_CONTEXT_ACTIONS.UPDATE_CURRENT_PAGE:
             return { ...state, currentPage: payload };
-        case CART_CONTEXT_ACTIONS.UPDATE_PURCHASE_TYPE:
-            return { ...state, purchaseType: payload };
         case CART_CONTEXT_ACTIONS.SET_SHOW_SCATULATOR:
             return { ...state, showScatulator: payload };
         case CART_CONTEXT_ACTIONS.UPDATE_ANONYMOUS_ID:

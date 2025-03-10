@@ -22,8 +22,8 @@ import innerContainerStyles from '../order-inner-container/order-inner-container
 import { type TOrderConfirmation } from '@/types/index.types';
 
 type OrderReceiptContainerProps = {
-  orderConfirmation: TOrderConfirmation;
   pastOrderId?: string;
+  orderConfirmation: TOrderConfirmation;
 };
 
 const OrderReceiptContainer = ({
@@ -35,9 +35,7 @@ const OrderReceiptContainer = ({
   const {
     id,
     dateCreated,
-    amountBeforeDiscount,
     price,
-    couponCode,
     firstName,
     lastName,
     phone,
@@ -47,14 +45,10 @@ const OrderReceiptContainer = ({
     city,
     state,
     country,
-    orderItems,
     paymentMethod,
     shippingFee,
     orderStatus,
     orderPaymentStatus,
-    manualDiscounts,
-    discountAmount,
-    couponRedemption,
   } = orderConfirmation;
 
   const { orderPlaced, updateOrderPlaced } = useCart();
@@ -76,14 +70,6 @@ const OrderReceiptContainer = ({
   const localAddress = `${addressLine1} ${addressLine2} ${city} ${state} ${country}`;
 
 
-  const orderQtyTotal = orderItems.reduce(
-    (acc, item) => acc + item.qty,
-    0
-  );
-  const orderPrice = orderItems.reduce(
-    (acc, item) => acc + item.price,
-    0
-  );
 
   let heading = 'Thank you for your order!';
   let subHeading: string | ReactNode = (
@@ -194,28 +180,10 @@ const OrderReceiptContainer = ({
               }}
             >
               <CartContainer
-                price={amountBeforeDiscount}
-                totalFromConfirmation={amountBeforeDiscount}
-                couponCode={couponCode}
-                orderReceiptCouponRedemption={couponRedemption}
-                manualDiscounts={manualDiscounts}
                 visible={false}
-                aside={true}
-                items={orderItems}
                 confirmation={true}
                 processingPayment={false}
                 evaluatePayVisible={false}
-                shippingFeeProp={shippingFee}
-                isNewOrder={false}
-                orderQtyTotal={orderQtyTotal}
-                orderPrice={orderPrice}
-                style={{
-                  border: 'none',
-                  padding: '0',
-                  marginTop: '0',
-                  marginBottom: '3rem',
-                }}
-                discountAmount={discountAmount || 0}
               />
               <StatusBox statusArr={statusArr} />
               <PaymentInfoBox {...paymentMethod} />

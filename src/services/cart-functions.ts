@@ -1,3 +1,6 @@
+import { PaymentMethod, Product } from "@/types/index.types";
+import { validateTokenAndRefresh } from "./auth-functions";
+
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 export const PRODUCT_ID = process.env.NEXT_PUBLIC_PRODUCT_ID
 export const PRODUCT_NAME = process.env.NEXT_PUBLIC_PRODUCT_NAME
@@ -21,13 +24,17 @@ export const getProduct = async ({ limit = 4, page = 1, sort = "id", order = "as
 
     // Filter only Furfy products based on product name or product ID
     const filteredProduct = data.data.rows.find(
-      (product) => product.name === PRODUCT_NAME || product.accessToken === PRODUCT_ID
+      (product: Product) => product.name === PRODUCT_NAME || product.accessToken === PRODUCT_ID
     );
 
     return { success: true, product: filteredProduct };
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error fetching Furfy products:", error);
-    return { success: false, error: error.message || "An unexpected error occurred", products: [] };
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "An unexpected error occurred",
+      products: []
+    };
   }
 };
 
@@ -44,7 +51,6 @@ export const addToCart = async (quantity: number, productId: string) => {
     // If Cart Exist then update it 
     if (cartResponse.data.cartItems.length > 0) {
       const updateCart = await updateCartQuantity(quantity, cartResponse.data.cartItems[0].accessToken)
-      console.log('updateCart', updateCart);
       if (!updateCart.success) {
         throw new Error(updateCart.message || "Failed to add product to cart");
       }
@@ -67,9 +73,12 @@ export const addToCart = async (quantity: number, productId: string) => {
 
       return { success: true, data: addToCartData };
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error in addToCart process:", error);
-    return { success: false, error: error.message || "An unexpected error occurred" };
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "An unexpected error occurred"
+    };
   }
 };
 
@@ -82,6 +91,7 @@ export const updateCartQuantity = async (quantity: number, productId: string) =>
   });
   return res.json();
 };
+
 export const getCartDetails = async () => {
   const res = await fetch(`${BASE_URL}api/cart`, {
     credentials: "include",
@@ -127,4 +137,64 @@ export const getPaymentToken = async (): Promise<{ data: string }> => {
   } catch {
     throw new Error();
   }
+};
+
+export const getPaymentMethods = async (
+  userID: string
+): Promise<{
+  data: PaymentMethod[];
+  message: string;
+  [key: string]: unknown;
+}> => {
+  const URL = `${BASE_URL}api/customers/payment-method`;
+
+  const res = await fetch(URL, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${userID}`,
+    },
+  });
+
+  if (res.status === 500) {
+    throw new Error('Failed to fetch payment methods');
+  }
+
+  const data = await res.json();
+  validateTokenAndRefresh(data);
+
+  return data;
+};
+
+export const submitCartWithPayment = async (
+  paymentData: object,
+  userId: string | null
+) => {
+  const URL = `${BASE_URL}api/cart/submit`;
+
+  const response = await fetch(URL, {
+    method: 'POST',
+    credentials: 'include',
+    headers: userId
+      ? {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${userId}`,
+      }
+      : {
+        'content-type': 'application/json',
+      },
+    body: JSON.stringify(paymentData),
+  });
+
+  if (response.status === 200) {
+    if (localStorage.getItem('scCode')) {
+      localStorage.removeItem('scCode');
+    }
+    if (localStorage.getItem('scEmail')) {
+      localStorage.removeItem('scEmail');
+    }
+  } else if (response.status === 500) {
+    throw new Error('Failed to submit your order');
+  }
+
+  return await response.json();
 };

@@ -5,17 +5,17 @@ import styles from "./terms-container.module.scss";
 import BadgeCertificate from '../../../../public/images/shared/badge-certificate.svg';
 
 const featureArr = [
-  "The most planet-friendly poo bags on earth",
-  "Durable & thick, ready to bag scats!",
-  "Made from 100% plastic-free cornstarch",
-  "Fully compostable & Biodegradable",
-  "Australia's highest-rated dog poo bags",
+  "Patented Japanese technology that will last forever",
+  "No batteries required, simply roll back and forth really fast",
+  "Long lasting design, sustainably produced, with high quality materials",
+  "BPA-free plastic, making it a safer option for our pets and their humans",
+  "Money-back guarantee after 30 days of delivery",
 ];
 
 const TermsContainer = () => {
   return (
     <div className={styles.div}>
-      <h4>join Thousands of aussie customers</h4>
+      <h4>join Thousands of AU & US customers</h4>
       <p>You&rsquo;re one click away from...</p>
       <ul>
         {featureArr.map((feature) => {

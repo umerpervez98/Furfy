@@ -105,7 +105,7 @@ const AllInputContainer = ({
   };
 
   const addressChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocalAddress({ address: e.target.value, fullAddress: '' });
+    setLocalAddress({ address: e.target.value, fullAddress: {} as Partial<AddressObject> });
   };
 
   const setAddress = (address: string, fullAddress: Partial<AddressObject>) => {
@@ -113,7 +113,7 @@ const AllInputContainer = ({
     updateLocalAddress({
       localAddress: {
         address,
-        fullAddress,
+        fullAddress: fullAddress as string,
       },
       isAddressValidated: true,
     });

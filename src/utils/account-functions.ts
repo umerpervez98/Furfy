@@ -4,9 +4,8 @@ import type {
   TLocalPaymentMethodData,
 } from '@/types/index.types';
 import { validateTokenAndRefresh } from '../services/auth-functions';
-import { getOrigin } from './getOrigin';
 
-const ORIGIN = getOrigin();
+const ORIGIN = process.env.NEXT_PUBLIC_BASE_URL;
 
 const editSubscriptionStatus = async (
   userId: string,
@@ -14,7 +13,7 @@ const editSubscriptionStatus = async (
   status: number,
   weekToken: string
 ): Promise<unknown> => {
-  const URL = `${ORIGIN}/api/customers/subscription/update/status/${subscriptionToken}`;
+  const URL = `${ORIGIN}api/customers/subscription/update/status/${subscriptionToken}`;
 
   const response = await fetch(URL, {
     method: 'PUT',
@@ -48,7 +47,7 @@ const editSubscriptionQuantity = async (
   subscriptionToken: string,
   qty: number
 ): Promise<unknown> => {
-  const URL = `${ORIGIN}/api/customers/subscription/update/qty/${subscriptionToken}`;
+  const URL = `${ORIGIN}api/customers/subscription/update/qty/${subscriptionToken}`;
 
   const response = await fetch(URL, {
     method: 'PUT',
@@ -81,7 +80,7 @@ const editSubscriptionAddress = async (
   success: boolean;
   message?: string;
 }> => {
-  const URL = `${ORIGIN}/api/customers/subscription/address/change/${subscriptionToken}`;
+  const URL = `${ORIGIN}api/customers/subscription/address/change/${subscriptionToken}`;
 
   const response = await fetch(URL, {
     method: 'POST',
@@ -123,7 +122,7 @@ const updateUserProfile = async (
   userId: string,
   newDetails: object
 ): Promise<User> => {
-  const URL = `${ORIGIN}/api/customers/profile`;
+  const URL = `${ORIGIN}api/customers/profile`;
 
   const response = await fetch(URL, {
     method: 'PUT',
@@ -153,7 +152,7 @@ const sendAuthCodeToUser = async (
   userId: string,
   methodObject: object
 ): Promise<boolean> => {
-  const URL = `${ORIGIN}/api/customers/auth`;
+  const URL = `${ORIGIN}api/customers/auth`;
 
   const response = await fetch(URL, {
     method: 'POST',
@@ -179,7 +178,7 @@ const setPaymentMethodDefaultForProfile = async (
   userId: string,
   paymentMethodToken: string
 ): Promise<unknown> => {
-  const URL = `${ORIGIN}/api/customers/payment-method/set-default/${paymentMethodToken}`;
+  const URL = `${ORIGIN}api/customers/payment-method/set-default/${paymentMethodToken}`;
 
   const response = await fetch(URL, {
     method: 'PUT',
@@ -205,7 +204,7 @@ const setPaymentMethodDefaultForSubscription = async (
   subscriptionToken: string,
   paymentMethodToken: string
 ): Promise<unknown> => {
-  const URL = `${ORIGIN}/api/customers/subscription/update/payment-method/${subscriptionToken}`;
+  const URL = `${ORIGIN}api/customers/subscription/update/payment-method/${subscriptionToken}`;
 
   const response = await fetch(URL, {
     method: 'PUT',
@@ -234,7 +233,7 @@ const deletePaymentMethod = async (
   userId: string,
   paymentMethodToken: string
 ): Promise<{ success: boolean; message: string }> => {
-  const URL = `${ORIGIN}/api/customers/payment-method/${paymentMethodToken}`;
+  const URL = `${ORIGIN}api/customers/payment-method/${paymentMethodToken}`;
 
   const response = await fetch(URL, {
     method: 'DELETE',
@@ -260,7 +259,7 @@ const addPaymentMethod = async (
   paymentMethodObject: object,
   subscriptionToken: string
 ): Promise<unknown> => {
-  const URL = `${ORIGIN}/api/customers/subscription/payment-method/create/${subscriptionToken}`;
+  const URL = `${ORIGIN}api/customers/subscription/payment-method/create/${subscriptionToken}`;
 
   const response = await fetch(URL, {
     method: 'POST',
@@ -290,7 +289,7 @@ export type ReactivationDates = {
 const getReactivationDates = async (
   userId: string
 ): Promise<{ foundStartDates: ReactivationDates }> => {
-  const URL = `${ORIGIN}/api/customers/subscription/start-dates`;
+  const URL = `${ORIGIN}api/customers/subscription/start-dates`;
 
   const response = await fetch(URL, {
     method: 'POST',
@@ -327,10 +326,19 @@ const validateName = (name: string): string => {
 };
 
 // ----- my detail, when users do the one-off purchase, they should be able to update details ----
+interface AddressResponse {
+  token: string;
+  line1: string;
+  line2?: string;
+  suburb: string;
+  state: string;
+  postcode: string;
+}
+
 const createDefaultAddress = async (
   userToken: string,
   newAddress: Partial<AddressObject>
-): Promise<{ success: boolean; message?: string; data?: any }> => {
+): Promise<{ success: boolean; message?: string; data?: AddressResponse }> => {
   const URL = `${process.env.NEXT_PUBLIC_HOST_SERVER_URL}/api/customers/address`;
 
   const response = await fetch(URL, {
@@ -358,7 +366,7 @@ const createDefaultAddress = async (
 const changeDefaultAddress = async (
   userToken: string,
   addressToken: string
-): Promise<{ success: boolean; message?: string; data?: any }> => {
+): Promise<{ success: boolean; message?: string; data?: AddressResponse }> => {
   const URL = `${process.env.NEXT_PUBLIC_HOST_SERVER_URL}/api/customers/address/default/${addressToken}`;
 
   const response = await fetch(URL, {
@@ -382,10 +390,18 @@ const changeDefaultAddress = async (
   };
 };
 
+interface PaymentMethodResponse {
+  token: string;
+  cardType?: string;
+  cardNumber?: string;
+  cardExpiry?: string;
+  isDefault: boolean;
+}
+
 const addUserPaymentMethod = async (
   userToken: string,
   paymentObject: TLocalPaymentMethodData
-): Promise<{ success: boolean; message?: string; data?: any }> => {
+): Promise<{ success: boolean; message?: string; data?: PaymentMethodResponse }> => {
   const URL = `${process.env.NEXT_PUBLIC_HOST_SERVER_URL}/api/customers/payment-method`;
 
   const response = await fetch(URL, {

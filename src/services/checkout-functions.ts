@@ -1,5 +1,5 @@
-import type { AddressObject, Order, Subscription } from '@/types/index.types';
-import { validateTokenAndRefresh } from '../services/auth-functions';
+import type { AddressObject, Order } from '@/types/index.types';
+import { validateTokenAndRefresh } from './auth-functions';
 
 const ORIGIN = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -80,7 +80,7 @@ const addUserAddress = async (
 const updateUserAddress = async (
   authToken: string,
   addressToken: string,
-  propsToUpdate: {}
+  propsToUpdate: object
 ) => {
   const URL = `${ORIGIN}api/customers/address/update/${addressToken}`;
 
@@ -132,30 +132,6 @@ const getAllOrders = async (
   return data;
 };
 
-const getAllSubscriptions = async (
-  userId: string
-): Promise<{ data: { rows: Subscription[] } }> => {
-  const URL = `${ORIGIN}api/customers/subscription/all/paginated?limit=10&sort=id&order=desc`;
-
-  const res = await fetch(URL, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${userId}`,
-    },
-    body: JSON.stringify({ criteria: [] }),
-  });
-
-  if (res.status === 500) {
-    throw new Error('Failed to fetch subscriptions.');
-  }
-
-  const data = await res.json();
-  validateTokenAndRefresh(data);
-
-  return data;
-};
 
 export {
   updateDefaultAddress,
@@ -163,5 +139,4 @@ export {
   addUserAddress,
   updateUserAddress,
   getAllOrders,
-  getAllSubscriptions,
 };

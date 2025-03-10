@@ -25,8 +25,9 @@ const GoogleMapContainer = ({ address }: GoogleMapContainerProps) => {
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY!,
   });
-
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+  /* eslint-disable */
+  const [_map, setMap] = useState<google.maps.Map | null>(null);
+  /* eslint-enable */
   const [center, setCenter] = useState<{ lat: number; lng: number } | null>(
     null
   );
@@ -63,7 +64,7 @@ const GoogleMapContainer = ({ address }: GoogleMapContainerProps) => {
   }, []);
 
   const onUnmount = useCallback(function callback(map: google.maps.Map) {
-    setMap(null);
+    setMap(map);
   }, []);
 
   return isLoaded ? (

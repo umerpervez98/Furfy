@@ -11,10 +11,12 @@ const CartItem = ({ accessToken, qty, price, name, imgUrl }: CartItemType) => {
       <div className="item-details">
         <Image className="furfy-image" src={imgUrl} alt={name} />
         <div className="item-info">
-          <h5>{name}</h5>
-          <p>The world&apos;s best pet hair remover</p>
+          <h3>{name}</h3>
+          <article className={styles.article}>
+            <p>The world&apos;s best pet hair remover</p>
+          </article>
 
-          <div className="d-flex justify-content-between align-items-center">
+          <div className={styles.cartItemBtnContainer}>
             <div className="cart-quantity-selector">
               <button
                 onClick={() => updateItem?.(accessToken, qty - 1)}

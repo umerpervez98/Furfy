@@ -6,8 +6,7 @@ import type {
 import styles from "./grey-overlay.module.scss";
 
 type GreyOverlayProps = {
-  onClick?:
-  Function
+  onClick?: (value: boolean) => void;
   children?: ReactNode;
   style?: CSSProperties;
 };

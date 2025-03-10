@@ -87,6 +87,7 @@ const Nav = ({ logoImg, altText }: NavProps) => {
                     {popOverItems.map((item) => {
                       return (
                         <li
+                          key={item.title}
                           onClick={() => {
                             setShowPopOver(false);
                           }}
@@ -166,7 +167,7 @@ const Nav = ({ logoImg, altText }: NavProps) => {
             alert={true}
             heading={"sorry about this"}
             paragraph={[" ", globalError]}
-            setShowVerification={setGlobalError}
+            setShowVerification={(value: boolean) => setGlobalError(value.toString())}
             btn1="ok"
             btn1Handler={() => {
               setGlobalError(null);

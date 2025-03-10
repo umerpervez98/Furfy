@@ -25,7 +25,8 @@ export type CurrentCart = {
   address: null | string | AddressObject;
   priceBeforeCoupon: number;
   cartItems: CartItem[];
-  [key: string]: any;
+  couponCode: string;
+  [key: string]: unknown;
 };
 
 export type DeliveryNote = {
@@ -57,8 +58,6 @@ export type AddressObject = {
   isActive?: boolean;
 };
 
-
-
 export type User = {
   email: string;
   firstName: string;
@@ -87,7 +86,7 @@ export type User = {
   };
   emailVerified: boolean;
   phoneVerified: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 export type UpdateOrderProps = {
@@ -110,7 +109,6 @@ export type TManualDiscount = {
   deletedAt?: string;
   adminID: number;
   customerOrderID: number;
-  subscriptionID: number;
   valueType: 'AMOUNT' | 'PERCENTAGE';
   [key: string]: unknown;
 };
@@ -122,6 +120,13 @@ export type TCouponRedemption = {
   };
   valueFixed: number;
   [key: string]: unknown;
+};
+
+export type TOrderReceiptCouponRedemption = {
+  coupon: {
+    valueType: 'AMOUNT' | 'PERCENTAGE';
+    valueFixed: number;
+  };
 };
 
 export type TOrderConfirmation = {
@@ -168,24 +173,19 @@ export type PromoApplied = {
 } | null;
 
 export type LocalAddressProps = {
-  localAddress: string | { address: any; fullAddress: any };
+  localAddress: string | { address: string; fullAddress: string };
   isAddressValidated: boolean;
+}
+export type LocalAddress = string | {
+  address: string;
+  fullAddress: Partial<AddressObject>;
 };
 
 export type Method = 'phone' | 'email';
 
-export type LocalAddress = { address: string; fullAddress: string | object };
-
 export type Order = {
   id: string;
   orderItems: object[];
-  dateCreated: string;
-  [key: string]: unknown;
-};
-
-export type Subscription = {
-  id: string;
-  subscriptionStatus: { name: string };
   dateCreated: string;
   [key: string]: unknown;
 };
@@ -206,15 +206,6 @@ export type Product = {
   price: number;
   sku: string;
   accessToken: string;
-  subscriptionPlans: {
-    accessToken: string;
-    name: string;
-    freq: number;
-    price: number;
-    qtyRules: { minQty: number; maxQty: number; price: number }[];
-    qtyPricingRulesEnabled: boolean;
-    [key: string]: unknown;
-  }[];
   description: string;
   shortDescription: string;
   cartLine1: string;
@@ -224,8 +215,6 @@ export type Product = {
   [key: string]: unknown;
 };
 
-export type PurchaseType = 'subscription' | 'one-off';
-
 export type Testimonial = {
   text: string;
   author: string;
@@ -234,7 +223,6 @@ export type Testimonial = {
 
 export type CurrentTab =
   | 'dashboard'
-  | 'my subscription'
   | 'my orders'
   | 'contact us'
   | 'my details';
@@ -245,7 +233,6 @@ export type CurrentTab =
 
 export type ContactFormSubject =
   | 'my order'
-  | 'my subscription'
   | 'shipping'
   | 'something else';
 
@@ -283,6 +270,5 @@ export type TLocalPaymentMethodData = {
 };
 
 export enum EUserProfile {
-  SUBSCRIPTION = 'subscription',
   MYDETAIL = 'my detail',
 }

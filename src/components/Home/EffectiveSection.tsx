@@ -16,7 +16,7 @@ const EffectiveSection = () => {
           <div className="text-center py-3">
             <h4 className="font-bold">FAST & EFFECTIVE</h4>
             <h5 className='font-normal line-height-lg'>
-              You've probably tried all types of pet hair and lint removal
+              You&apos;ve probably tried all types of pet hair and lint removal
               products from sticky roller tapes, to products that cannot be used
               time and time again. The furfy is the only pet hair removal device
               you will ever need, we guarantee it!

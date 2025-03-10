@@ -25,7 +25,6 @@ const CartAside = ({ showCart, setShowCart }: CartAsideProps) => {
       />
       <CartContainer
         visible={false}
-        aside={true}
         processingPayment={false}
         evaluatePayVisible={false}
         style={{

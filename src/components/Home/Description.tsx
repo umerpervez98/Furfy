@@ -40,7 +40,7 @@ const Description = () => {
                 </h5>
                 <h6 className="mt-3 line-height-lg font-normal">
                   A lot of the time you buy something online, it either takes a
-                  lot longer than expected or worse, it doesn't show up at all.
+                  lot longer than expected or worse, it doesn&apos;t show up at all.
                   We have our own, dedicated warehouse in Sydney, Australia and
                   Atlanta, USA and we are fully stocked with furfys! Your order
                   is processed immediately and dispatched either the same or

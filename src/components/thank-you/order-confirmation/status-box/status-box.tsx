@@ -1,9 +1,8 @@
 import { StatusPill } from "@/components/shared/index.shared";
 import styles from "./status-box.module.scss";
-import type { StatusPillProps } from "@/components/shared/status-pill/status-pill";
 
 type StatusBoxProps = {
-  statusArr: { name: string; [key: string]: unknown }[];
+  statusArr: { name: string;[key: string]: unknown }[];
 };
 
 const StatusBox = ({ statusArr }: StatusBoxProps) => {

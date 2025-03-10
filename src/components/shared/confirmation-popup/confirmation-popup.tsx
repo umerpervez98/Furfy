@@ -2,8 +2,8 @@ import { Button } from '@/components/Checkout/index.checkout';
 import styles from './confirmation-popup.module.scss';
 
 type ConfirmationPopupProps = {
-  noHandler: Function;
-  yesHandler: Function;
+  noHandler: () => void;
+  yesHandler: () => void;
   text: string;
 };
 

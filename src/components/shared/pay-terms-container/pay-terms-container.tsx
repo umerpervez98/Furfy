@@ -22,8 +22,9 @@ const PayTermsContainer = ({
           gridArea: "button-small",
           marginBottom: "1.5rem",
           justifyContent: "center",
-          padding: "1.5rem 0",
+          padding: "1.2rem 0",
           width: "100%",
+          color: "#000"
         }}
         className="btn-pay"
       >

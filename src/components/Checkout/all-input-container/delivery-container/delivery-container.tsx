@@ -13,7 +13,7 @@ import { HeadingSecondary } from "@/components/shared/index.shared";
 import {
   addUserAddress,
   updateDefaultAddress,
-} from "@/utils/checkout-functions";
+} from "@/services/checkout-functions";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import type { DeliveryNote, AddressObject } from "@/types/index.types";
 import { Country } from "react-addressfinder";
@@ -36,7 +36,6 @@ const DeliveryContainer = ({
   addressChangeHandler,
   setAddress,
   updateDeliveryNote,
-  deliveryNote,
   isAddressValidated,
   address,
   email,
@@ -177,9 +176,8 @@ const DeliveryContainer = ({
                   const address = `${addressLine1} ${addressLine2} ${city} ${state} ${postcode} ${country}`;
                   setAddress(address, fullAddress);
 
-                  let deliveryNote: string;
                   if (user) {
-                    deliveryNote = user.addresses?.find(
+                    return user.addresses?.find(
                       (address: {
                         addressLine1: string;
                         [key: string]: unknown;
@@ -230,7 +228,7 @@ const DeliveryContainer = ({
             resetAddress={resetAddress}
             onSelectedHandler={async (address, fullAddress) => {
               if (newAddress && userId) {
-                let addressObject: Partial<AddressObject> = {
+                const addressObject: Partial<AddressObject> = {
                   ...fullAddress,
                   city: fullAddress.suburb,
                   addressLine1:

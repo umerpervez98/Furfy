@@ -1,31 +1,36 @@
-'use client';
+"use client";
 
-import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
-import { useCart } from '@/contexts/CartContext';
+import { useState, useEffect, type ChangeEvent, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
 import {
   AllInputContainer,
   PhoneVerificationContainer,
-} from './index.checkout';
+} from "./index.checkout";
 import {
   CartContainer,
   PayTermsContainer,
-} from '@/components/shared/index.shared';
+} from "@/components/shared/index.shared";
 import {
   getPaymentMethods,
   submitCartWithPayment,
-} from '@/utils/cart-functions';
-import { authWithMethod } from '@/services/auth-functions';
+} from "@/services/cart-functions";
+import { authWithMethod } from "@/services/auth-functions";
 import type {
   PaymentMethod,
   UpdateCustomerProps,
   SubmitState,
   LocalAddress,
-} from '@/types/index.types';
-import styles from './checkout.module.scss';
-import { validateName } from '@/utils/account-functions';
-import PaymentContainer from '../Checkout/payment-container/payment-container';
+} from "@/types/index.types";
+import styles from "./checkout.module.scss";
+import { validateName } from "@/utils/account-functions";
+import PaymentContainer from "../Checkout/payment-container/payment-container";
 
+declare global {
+  interface Window {
+    fbq: (type: string, eventName: string, params?: object) => void;
+  }
+}
 
 const Checkout = () => {
   // Braintree Payment
@@ -34,17 +39,16 @@ const Checkout = () => {
     type?: string;
   } | null>(null);
   const [newPayment, setNewPayment] = useState(false);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('');
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[] | null>(
     null
   );
   const [processingPayment, setProcessingPayment] = useState(false);
   const [emailHasChanged, setEmailHasChanged] = useState(false);
-  const [currentEmail, setCurrentEmail] = useState('');
+  const [currentEmail, setCurrentEmail] = useState("");
 
   const {
     cartItems,
-    updateItem,
     fetchCart,
     updateSendingCodeToNewUser,
     updateCustomer,
@@ -55,7 +59,6 @@ const Checkout = () => {
     updateOrderPlaced,
     updateLocalAddress,
     updateOrder,
-    createCart,
     updateCustomerDetails,
     updateCustomerDetailsAtOnce,
     updateUserAuthToken,
@@ -68,7 +71,6 @@ const Checkout = () => {
     user,
     userId,
     currentCart,
-    anonymousId,
     phoneChecked,
     emailChecked,
     setPhoneChecked,
@@ -76,26 +78,18 @@ const Checkout = () => {
   } = useCart();
 
   const { orderConfirmation, submitState } = order ?? {};
-  const { accessToken } = cartItems?.find(
-    (item) => item.accessToken
-  ) || { accessToken: '' };
 
-  const {
-    email,
-    phone,
-    firstName,
-    lastName,
-    address,
-    deliveryNote,
-  } = currentCart
+
+  const { email, phone, firstName, lastName, address, deliveryNote } =
+    currentCart
       ? currentCart
       : {
-        email: '',
-        phone: '',
-        firstName: '',
-        lastName: '',
-        address: '',
-        deliveryNote: '',
+        email: "",
+        phone: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        deliveryNote: "",
       };
   const { isAddressValidated, localAddress } = localAddressObj ?? {};
 
@@ -109,7 +103,6 @@ const Checkout = () => {
     }
   }, [userId, user]);
 
-
   useEffect(() => {
     if (!newPayment) {
       setShowPayNow?.(true);
@@ -117,11 +110,15 @@ const Checkout = () => {
   }, [newPayment]);
 
   const setSubmitState = (newState: SubmitState) => {
-    updateOrder?.({ orderConfirmation: orderConfirmation ?? null, submitState: newState, error: null });
+    updateOrder?.({
+      orderConfirmation: orderConfirmation ?? null,
+      submitState: newState,
+      error: null,
+    });
   };
 
   useEffect(() => {
-    if (submitState === 'fail') {
+    if (submitState === "fail") {
       setSubmitState(null);
     }
   }, []);
@@ -130,22 +127,25 @@ const Checkout = () => {
     updateLocalAddress?.({
       ...localAddressObj,
       isAddressValidated: newIsAddressValidated,
-      localAddress: localAddressObj?.localAddress || '',
+      localAddress: typeof localAddressObj?.localAddress === 'string'
+        ? ''
+        : {
+          address: '',
+          fullAddress: ""
+        },
     });
   };
 
-  const setLocalAddress = (
-    newLocalAddress: LocalAddress
-  ) => {
+  const setLocalAddress = (newLocalAddress: LocalAddress) => {
     updateLocalAddress?.({
       ...localAddressObj,
-      localAddress: newLocalAddress,
-      isAddressValidated: localAddressObj?.isAddressValidated ?? false
+      localAddress: newLocalAddress as string | { address: string; fullAddress: string; },
+      isAddressValidated: localAddressObj?.isAddressValidated ?? false,
     });
   };
 
   const setPhone = (newPhone: string | undefined) =>
-    updateCustomerDetails?.('phone', newPhone);
+    updateCustomerDetails?.("phone", newPhone);
 
   const initPaymentMethods = async (userId: string) => {
     const methods = await getPaymentMethods(userId);
@@ -164,11 +164,11 @@ const Checkout = () => {
   >(
     e: ChangeEvent<T>
   ) => {
-    if (e.target.name === 'firstName' || e.target.name === 'lastName') {
+    if (e.target.name === "firstName" || e.target.name === "lastName") {
       let newValue;
 
       if (!e.target.value) {
-        newValue = '';
+        newValue = "";
       } else {
         newValue = validateName(
           e.target.value[0].toUpperCase() +
@@ -177,52 +177,36 @@ const Checkout = () => {
       }
 
       updateCustomerDetails?.(e.target.name, newValue);
-    } else if (e.target.name === 'email') {
+    } else if (e.target.name === "email") {
       if (!emailHasChanged) {
         setEmailHasChanged(true);
       }
       setCurrentEmail(e.target.value.toLowerCase());
-      updateCustomerDetails?.('email', e.target.value.toLowerCase());
+      updateCustomerDetails?.("email", e.target.value.toLowerCase());
     } else {
       updateCustomerDetails?.(e.target.name, e.target.value);
     }
   };
 
   const updateDeliveryNote = async (newDeliveryNote: string | object) => {
-    await updateCustomerDetails?.('deliveryNote', newDeliveryNote);
+    await updateCustomerDetails?.("deliveryNote", newDeliveryNote);
   };
 
   const submitOrderObject = async (orderObject: object) => {
     setProcessingPayment(true);
     updateOrderPlaced?.(false);
-    updateOrder?.({ ...order, orderConfirmation: order?.orderConfirmation ?? null, submitState: 'processing', error: null });
-    router.push('/thank-you');
+    updateOrder?.({
+      ...order,
+      orderConfirmation: order?.orderConfirmation ?? null,
+      submitState: "processing",
+      error: null,
+    });
+    router.push("/thank-you");
     try {
       const response = await submitCartWithPayment(orderObject, userId ?? null);
 
       if (response.success) {
-        const newCart = await fetchCart?.();
-
-        await createCart?.({
-          ...newCart,
-          email,
-          firstName,
-          lastName,
-          phone,
-          address,
-          deliveryNote,
-        });
-        await updateCustomerDetailsAtOnce?.(
-          {
-            email,
-            firstName,
-            lastName,
-            phone,
-            address,
-            deliveryNote,
-          },
-          newCart
-        );
+        fetchCart?.();
 
         // Store the userId in local storage if it's a first time user
         if (!userId) {
@@ -238,20 +222,20 @@ const Checkout = () => {
         // You can add a delay to show the order confirmation
         setTimeout(() => {
           updateOrder?.({
-            submitState: 'success',
+            submitState: "success",
             orderConfirmation: response.data,
             error: null,
           });
           if (!user) {
-            setLocalAddress({ address: '', fullAddress: '' });
+            setLocalAddress("");
           }
           if (
-            typeof window !== 'undefined' &&
-            typeof window.fbq !== 'undefined'
+            typeof window !== "undefined" &&
+            typeof window.fbq !== "undefined"
           ) {
-            window.fbq('track', 'Purchase', {
+            window.fbq("track", "Purchase", {
               value: response.data.price,
-              currency: 'AUD',
+              currency: "AUD",
             });
           }
         }, 500);
@@ -261,21 +245,21 @@ const Checkout = () => {
         setTimeout(() => {
           updateOrder?.({
             ...order,
-            submitState: 'fail',
+            submitState: "fail",
             error:
               response.details?.length > 0
-                ? response.details?.join(' ')
+                ? response.details?.join(" ")
                 : response.message,
           });
         }, 2000);
       }
     } catch (error) {
-      console.log('failed to submit order', error);
+      console.log("failed to submit order", error);
       if (error instanceof Error) {
         setTimeout(() => {
           updateOrder({
             ...order,
-            submitState: 'fail',
+            submitState: "fail",
             error: error.message,
           });
         }, 2000);
@@ -283,8 +267,8 @@ const Checkout = () => {
         setTimeout(() => {
           updateOrder({
             ...order,
-            submitState: 'fail',
-            error: 'An error occurred while processing your payment.',
+            submitState: "fail",
+            error: "An error occurred while processing your payment.",
           });
         }, 2000);
       }
@@ -297,7 +281,7 @@ const Checkout = () => {
     if (!phoneChecked && !userId) {
       setPaymentError({
         error:
-          'You need to first verify your phone number to proceed with the payment processing.',
+          "You need to first verify your phone number to proceed with the payment processing.",
       });
       return;
     }
@@ -306,7 +290,7 @@ const Checkout = () => {
 
     if (userId && !newPayment && paymentMethods && paymentMethods?.length > 0) {
       const addressToken = user?.addresses.find((serverAddress) => {
-        if (typeof address === 'object') {
+        if (typeof address === "object") {
           return serverAddress.addressLine1 === address?.addressLine1;
         }
       })?.accessToken;
@@ -321,8 +305,8 @@ const Checkout = () => {
         braintreeInstance.requestPaymentMethod(async (error, payload) => {
           if (
             error &&
-            'message' in error &&
-            typeof error.message === 'string'
+            "message" in error &&
+            typeof error.message === "string"
           ) {
             setPaymentError({ error: error.message });
           } else if (currentCart) {
@@ -336,35 +320,35 @@ const Checkout = () => {
             };
 
             const localPaymentMethodData: LocalPaymentMethodData = {
-              method: '',
-              lastFour: '',
-              cardType: '',
-              expiry: '',
-              email: '',
+              method: "",
+              lastFour: "",
+              cardType: "",
+              expiry: "",
+              email: "",
             };
 
             localPaymentMethodData.method =
-              payload.type.toLowerCase() === 'creditcard'
-                ? 'creditcard'
-                : payload.type.toLowerCase() == 'paypalaccount'
-                  ? 'paypal'
-                  : '';
+              payload.type.toLowerCase() === "creditcard"
+                ? "creditcard"
+                : payload.type.toLowerCase() == "paypalaccount"
+                  ? "paypal"
+                  : "";
 
             if (
-              localPaymentMethodData.method == 'creditcard' &&
-              'lastFour' in payload.details &&
-              'expirationMonth' in payload.details
+              localPaymentMethodData.method == "creditcard" &&
+              "lastFour" in payload.details &&
+              "expirationMonth" in payload.details
             ) {
               localPaymentMethodData.lastFour = payload.details.lastFour;
               localPaymentMethodData.cardType =
                 payload.details.cardType.toLowerCase();
               localPaymentMethodData.expiry =
                 payload.details.expirationMonth +
-                '/' +
+                "/" +
                 payload.details.expirationYear;
             } else if (
-              localPaymentMethodData.method == 'paypal' &&
-              'email' in payload.details
+              localPaymentMethodData.method == "paypal" &&
+              "email" in payload.details
             ) {
               localPaymentMethodData.email = payload.details.email;
             }
@@ -381,7 +365,7 @@ const Checkout = () => {
               (userId && paymentMethods && paymentMethods?.length <= 0)
             ) {
               const addressToken = user?.addresses.find((serverAddress) => {
-                if (address && typeof address === 'object') {
+                if (address && typeof address === "object") {
                   return serverAddress.addressLine1 === address.addressLine1;
                 }
               })!.accessToken;
@@ -392,8 +376,8 @@ const Checkout = () => {
               };
             } else if (
               address &&
-              typeof address === 'object' &&
-              typeof deliveryNote === 'object'
+              typeof address === "object" &&
+              typeof deliveryNote === "object"
             ) {
               orderObject = {
                 ...paymentObject,
@@ -409,21 +393,21 @@ const Checkout = () => {
                   ? deliveryNote.request
                   : deliveryNote.value,
                 postcode:
-                  typeof address.postcode === 'string'
+                  typeof address.postcode === "string"
                     ? parseInt(address.postcode)
                     : address.postcode,
               };
 
-              if ('line1' in orderObject) {
+              if ("line1" in orderObject) {
                 delete orderObject.line1;
               }
-              if ('line2' in orderObject) {
+              if ("line2" in orderObject) {
                 delete orderObject.line2;
               }
-              if ('suburb' in orderObject) {
+              if ("suburb" in orderObject) {
                 delete orderObject.suburb;
               }
-              if ('postCode' in orderObject) {
+              if ("postCode" in orderObject) {
                 delete orderObject.postCode;
               }
             }
@@ -440,11 +424,11 @@ const Checkout = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('currentCart', currentCart);
+    console.log("currentCart", currentCart);
     if (currentCart && cartItems && cartItems?.length > 0) {
       await handlePayment();
     } else {
-      alert('Please add products to the cart first');
+      alert("Please add products to the cart first");
     }
   };
 
@@ -453,12 +437,12 @@ const Checkout = () => {
       updateSendingCodeToNewUser?.(true);
 
       try {
-        const res = await authWithMethod('phone', phone);
-        if (res.exists && 'data' in res) {
+        const res = await authWithMethod("phone", phone);
+        if (res.exists && "data" in res) {
           updateCustomer?.(res.data as UpdateCustomerProps);
           updateShowPhoneLogin?.(true);
         } else if (res.success) {
-          updateMethod?.('phone');
+          updateMethod?.("phone");
           updateShowVerification?.(true);
         } else {
           updateShowPhoneError?.(res.message);
@@ -481,29 +465,21 @@ const Checkout = () => {
   );
 
   useEffect(() => {
-    if (localStorage.getItem('scEmail') && !emailHasChanged) {
+    if (localStorage.getItem("scEmail") && !emailHasChanged) {
       if (!userId) {
         updateCustomerDetailsAtOnce?.({
-          email: localStorage.getItem('scEmail'),
+          email: localStorage.getItem("scEmail"),
         });
       }
     }
   }, [currentCart?.email]);
 
   useEffect(() => {
-    /*    if (cartItems && cartItems?.length <= 0) {
-         router.push('/shop');
-         return;
-       } */
-  }, [cartItems && cartItems?.length]);
-
-  useEffect(() => {
-    const scEmail = localStorage.getItem('scEmail');
+    const scEmail = localStorage.getItem("scEmail");
     if (!emailHasChanged && scEmail !== null && scEmail.length > 0) {
       setCurrentEmail(scEmail);
     }
   }, []);
-
 
   return (
     <>
@@ -515,7 +491,7 @@ const Checkout = () => {
             setPhone={setPhone}
             isAddressValidated={!!isAddressValidated}
             setIsAddressValidated={setIsAddressValidated}
-            localAddress={localAddress ?? ''}
+            localAddress={(localAddress ?? "") as LocalAddress}
             setLocalAddress={setLocalAddress}
             emailHasChanged={emailHasChanged}
             currentEmail={currentEmail}
@@ -532,11 +508,11 @@ const Checkout = () => {
             paymentMethods={
               paymentMethods || [
                 {
-                  accessToken: '',
-                  cardType: 'string',
-                  cardExpiry: 'string',
-                  cardNumber: 'string',
-                  paypalEmail: 'string',
+                  accessToken: "",
+                  cardType: "string",
+                  cardExpiry: "string",
+                  cardNumber: "string",
+                  paypalEmail: "string",
                   isDefault: true,
                 },
               ]
@@ -555,25 +531,16 @@ const Checkout = () => {
         <PhoneVerificationContainer
           alert={true}
           heading={
-            paymentError.error === 'No payment method is available.'
-              ? 'add a payment method'
-              : paymentError.type === 'subscription'
-                ? 'sorry about this'
-                : 'verify phone number'
+            paymentError.error === "No payment method is available."
+              ? "add a payment method"
+              : "verify phone number"
           }
-          paragraph={[paymentError.error, ' ']}
+          paragraph={[paymentError.error, " "]}
           setShowVerification={() => setPaymentError(null)}
-          btn1={
-            paymentError.error === 'No payment method is available.' ||
-              paymentError.type === 'subscription'
-              ? 'ok'
-              : 'verify'
-          }
+          btn1={"verify"}
           btn1Handler={() => {
             setPaymentError(null);
-            if (
-              paymentError.error !== 'No payment method is available.'
-            ) {
+            if (paymentError.error !== "No payment method is available.") {
               authWithPhoneHandler();
             }
           }}
