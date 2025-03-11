@@ -218,7 +218,6 @@ export type Product = {
 export type Testimonial = {
   text: string;
   author: string;
-  position: string;
 };
 
 export type CurrentTab =
