@@ -7,7 +7,7 @@ const JudgemeReviews = () => {
 
   return (
     <>
-      <Container className="py-4 page-width">
+      <Container className="py-4 page-width review-section">
         <div
           className="jdgm-widget jdgm-review-widget jdgm-outside-widget"
           data-id={productId}

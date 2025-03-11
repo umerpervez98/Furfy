@@ -1,6 +1,5 @@
 "use client";
-import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Container, Row, Col } from "react-bootstrap";
 import Drawer from "@/components/common/Drawer";
@@ -8,14 +7,32 @@ import { useCart } from "@/contexts/CartContext";
 import "@/styles/common/header.css";
 import Image from "next/image";
 import Logo from "../../../public/icons/logo.svg";
+import Link from "next/link";
 
-const ReactFlagsSelect = dynamic(() => import("react-flags-select"), {
-  ssr: false,
-});
+
+const useOutsideAlerter = (
+  ref: React.RefObject<HTMLDivElement | null>,
+  onClose: () => void
+) => {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */ const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+};
 
 const Header = () => {
   const { cartItems } = useCart();
-  const [selected, setSelected] = useState("PK");
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const router = useRouter(); // Initialize router
@@ -26,32 +43,36 @@ const Header = () => {
     setMenuOpen(false);
   };
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  useOutsideAlerter(wrapperRef, () => setMenuOpen(false));
+
   return (
     <>
       <Container className="py-5">
         <Row>
           <Col xs={4} sm={5}>
             <div className="d-flex flex-column justify-content-center h-full">
-              <div
-                id="hamburger"
-                className={menuOpen ? "open" : ""}
-                onClick={() => setMenuOpen(!menuOpen)}
-              >
-                <div className="bars">
-                  <div className="bar" id="bar1"></div>
-                  <div className="bar" id="bar2"></div>
-                  <div className="bar" id="bar3"></div>
+              {!menuOpen && (
+                <div id="hamburger1" onClick={() => setMenuOpen(!menuOpen)}>
+                  <div className="bars">
+                    <div className="bar" id="bar1"></div>
+                    <div className="bar" id="bar2"></div>
+                    <div className="bar" id="bar3"></div>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </Col>
           <Col xs={4} sm={2}>
             <div className="text-center">
-              <Image
-                className="w-full h-full object-contain"
-                src={Logo}
-                alt="Logo"
-              />
+              <Link href="/">
+                <Image
+                  width={200}
+                  className="w-full h-full object-contain"
+                  src={Logo}
+                  alt="Logo"
+                />
+              </Link>
             </div>
           </Col>
           <Col xs={4} sm={5}>
@@ -69,7 +90,12 @@ const Header = () => {
               <div
                 className="d-inline-block cursor-pointer position-relative"
                 onClick={
-                  cartItems?.[0]?.qty ? () => setIsDrawerOpen(true) : undefined
+                  cartItems?.[0]?.qty
+                    ? (e) => {
+                      e.preventDefault();
+                      setIsDrawerOpen(true);
+                    }
+                    : undefined
                 }
               >
                 <svg
@@ -114,7 +140,7 @@ const Header = () => {
             </div>
           </Col>
           {/* For Mobile */}
-          <Col xs={12}>
+          {/*  <Col xs={12}>
             <div className="d-block d-md-none my-3">
               <ReactFlagsSelect
                 selected={selected}
@@ -123,15 +149,27 @@ const Header = () => {
                 fullWidth={true}
               />
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
 
       {/* Drawer */}
       <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
-
+      {menuOpen && (
+        <div
+          id="hamburger2"
+          className={menuOpen ? "open drawer-hamburger" : ""}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <div className="bars">
+            <div className="bar" id="bar1"></div>
+            <div className="bar" id="bar2"></div>
+            <div className="bar" id="bar3"></div>
+          </div>
+        </div>
+      )}
       {/* Animated Menu */}
-      <nav className={`main-menu ${menuOpen ? "open" : ""}`}>
+      <nav ref={wrapperRef} className={`main-menu ${menuOpen ? "open" : ""}`}>
         <ul className="menu-items">
           <li className="cursor-pointer" onClick={() => handleNavigation("/")}>
             HOME

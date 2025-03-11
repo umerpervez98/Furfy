@@ -18,6 +18,7 @@
   height: 700px;
   transform: translate(-375px) translateY(-180px);
   -webkit-transform: translateX(-375px) translateY(-180px);
+  top: 140px;
 }
 
 .background-overlay {
@@ -59,11 +60,16 @@
   padding: 12px 0;
   font-size: 20px;
 }
-
+.drawer-hamburger {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  z-index: 2222;
+}
 /* Hamburger Button */
-#hamburger {
+#hamburger1,
+#hamburger2 {
   display: inline-block;
-  position: relative;
   cursor: pointer;
   z-index: 1000;
   width: 40px;
