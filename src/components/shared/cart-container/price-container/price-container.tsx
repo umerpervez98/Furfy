@@ -38,7 +38,7 @@ const PriceContainer = () => {
   return (
     <li className={styles["price-container"]}>
       <p>
-        <span>subtotal</span>
+        <span>SUBTOTAL</span>
         <span>{formatPrice(price)}</span>
       </p>
 

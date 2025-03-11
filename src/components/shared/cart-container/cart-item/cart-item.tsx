@@ -41,7 +41,7 @@ const CartItem = ({ accessToken, qty, price, name, imgUrl }: CartItemType) => {
             </div>
             <div>
 
-              <span className="item-price ms-2">${price || 0}</span>
+              <span className="item-price ms-2">${(price / 100).toFixed(2) || 0}</span>
             </div>
           </div>
         </div>

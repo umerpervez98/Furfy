@@ -10,7 +10,14 @@ import FurfyInboxAustralia from '../../../public/images/furfyinbox_australia.web
 import FurfyAustralia from '../../../public/images/furfy_australia.webp';
 import FurfyDetail from '../../../public/images/furfy_detail.webp';
 import FurfyProduct from '../../../public/images/furfy-product.webp';
-
+import IconBed from '../../../public/icons/bed.svg';
+import IconShirt from '../../../public/icons/shirt.svg';
+import IconSofa from '../../../public/icons/sofa.svg';
+import IconCarpet from '../../../public/icons/carpet.svg';
+import IconFastDelivery from '../../../public/icons/fast_delivery.svg';
+import IconMoneyBack from '../../../public/icons/moneyback.svg';
+import IconTrophy from '../../../public/icons/trophy.svg';
+import IconAustralia from '../../../public/icons/australia.svg';
 
 const EffectiveSection = () => {
 
@@ -19,7 +26,7 @@ const EffectiveSection = () => {
       <Container className="my-3 page-width">
         {/* Effective Section */}
         <Row>
-          <div className="text-center py-3">
+          <div className="text-center pt-3 pb-4">
             <h4 className="font-bold">FAST & EFFECTIVE</h4>
             <h5 className='font-normal line-height-lg'>
               You&apos;ve probably tried all types of pet hair and lint removal
@@ -30,7 +37,7 @@ const EffectiveSection = () => {
           </div>
         </Row>
         {/* Simple to Use Section */}
-        <Row className="my-3">
+        <Row className="my-5">
           <Col lg={6}>
             <div className='p-3'>
               <video
@@ -48,38 +55,38 @@ const EffectiveSection = () => {
           <Col lg={6}>
             <div className="p-3">
               <h4 className="font-bold">SIMPLE TO USE</h4>
-              <h6 className="font-normal line-height-lg text-gray">
-                By simply moving the pet hair roller back and forth, you
-                immediately track and pick up cat and dog hair embedded deeply
-                in all of your household furniture and fabric such as couches,
-                beds, carpets, blankets, clothes and more.
+              <h6 className="font-normal line-height-lg text-gray simple-use-text">
+                By simply moving the pet hair roller back<br />and forth, you
+                immediately track and<br />pick up cat and dog hair embedded<br />deeply
+                in all of your household furniture<br />and fabric such as couches,
+                beds,<br />carpets, blankets, clothes and more.
               </h6>
               {/* Icons */}
-              <div className="d-flex justify-content-around aligns-items-center py-3">
-                <img
+              <div className="d-flex justify-content-around align-items-center py-3">
+                <Image
                   className="pe-3"
-                  src="/icons/bed.svg"
+                  src={IconBed}
                   alt="Bed"
                   width={70}
                   height={70}
                 />
-                <img
+                <Image
                   className="pe-3"
-                  src="/icons/shirt.svg"
+                  src={IconShirt}
                   alt="Shirt"
-                  width={70}
-                  height={70}
+                  width={60}
+                  height={40}
                 />
-                <img
+                <Image
                   className="pe-3"
-                  src="/icons/sofa.svg"
+                  src={IconSofa}
                   alt="Sofa"
                   width={70}
                   height={70}
                 />
-                <img
+                <Image
                   className="pe-3"
-                  src="/icons/carpet.svg"
+                  src={IconCarpet}
                   alt="Carpet"
                   width={70}
                   height={70}
@@ -90,7 +97,7 @@ const EffectiveSection = () => {
           </Col>
         </Row>
         {/* Product Images */}
-        <Row className="my-3">
+        <Row className="my-5">
           <Col sm={6}>
             <div className="text-center">
               <Image
@@ -179,9 +186,9 @@ const EffectiveSection = () => {
         <Row className="my-3 my-sm-5">
           <Col xs={3} sm={3}>
             <div className="text-center">
-              <img
+              <Image
                 className="icon-image"
-                src="/icons/fast_delivery.svg"
+                src={IconFastDelivery}
                 alt="Bed"
               />
               <p className="icon-text my-3">
@@ -191,9 +198,9 @@ const EffectiveSection = () => {
           </Col>
           <Col xs={3} sm={3}>
             <div className="text-center">
-              <img
+              <Image
                 className="icon-image"
-                src="/icons/moneyback.svg"
+                src={IconMoneyBack}
                 alt="Shirt"
               />
               <p className="icon-text my-3">NO RISK, MONEY BACK GUARANTEE</p>
@@ -201,7 +208,7 @@ const EffectiveSection = () => {
           </Col>
           <Col xs={3} sm={3}>
             <div className="text-center">
-              <img className="icon-image" src="/icons/trophy.svg" alt="Sofa" />
+              <Image className="icon-image" src={IconTrophy} alt="Sofa" />
               <p className="icon-text my-3">
                 THE CHAMPION OF PET HAIR REMOVERS
               </p>
@@ -209,9 +216,9 @@ const EffectiveSection = () => {
           </Col>
           <Col xs={3} sm={3}>
             <div className="text-center">
-              <img
+              <Image
                 className="icon-image"
-                src="/icons/australia.svg"
+                src={IconAustralia}
                 alt="Carpet"
               />
               <p className="icon-text my-3">AUSTRALIAN OWNED COMPANY</p>

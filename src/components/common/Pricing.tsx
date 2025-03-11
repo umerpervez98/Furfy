@@ -26,7 +26,7 @@ const Pricing = () => {
           <span className="font-semibold ms-3 price-text">
             $
             {product
-              ? (product.price * quantity).toLocaleString()
+              ? (product.price / 100 * quantity).toFixed(2)
               : '0.00'}
           </span>
         </h5>
@@ -62,7 +62,7 @@ const Pricing = () => {
         </button>
 
         <p className="text-center px-sm-5 py-sm-3 text-sm mb-0 font-normal uppercase">
-          Free Shipping in Australia & USA LOW RATE SHIPPING TO OTHER COUNTRIES
+          Free Shipping in Australia & USA<br /> LOW RATE SHIPPING TO OTHER COUNTRIES<br />
           30-DAY MONEY-BACK GUARANTEE
         </p>
       </div>

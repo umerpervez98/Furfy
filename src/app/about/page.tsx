@@ -1,6 +1,14 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Header from '@/components/common/Header';
 import Footer from '@/components/common/Footer';
+import Image from 'next/image';
+import { Metadata } from 'next';
+import AboutImage from '../../../public/images/about.webp';
+
+export const metadata: Metadata = {
+  title: 'Furfy | About',
+  description: 'Furfy About',
+}
 
 const About = () => {
   return (
@@ -12,10 +20,10 @@ const About = () => {
           <Col lg={8}>
             <div>
               <h5 className="font-bold text-center">About Us</h5>
-              <img
+              <Image
                 className="my-3 w-full h-full object-contain"
                 style={{ borderRadius: '25px' }}
-                src="/images/about.webp"
+                src={AboutImage}
                 alt="About Us Images"
               />
               <h5 className="font-meduim uppercase mt-3">About Us</h5>
@@ -33,10 +41,10 @@ const About = () => {
                 apartment environment.
               </p>
               <p className="text-lg line-height-md">
-                Puppy pads and fake grass simply didn’t work. We then tried
+                Puppy pads and fake grass simply didn&apos;t work. We then tried
                 using real grass on the balcony and realised we were on to
                 something. However, we needed a setup which was secure, mess
-                free and easy to change for fresh grass. Then came, Australia’s
+                free and easy to change for fresh grass. Then came, Australia&apos;s
                 first real grass dog toilet and grass subscription service.
                 Potty Plant has helped tens of thousands of dogs since then,
                 young and old, become toilet trained and adapt to apartment
