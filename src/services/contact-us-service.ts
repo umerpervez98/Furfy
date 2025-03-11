@@ -1,0 +1,80 @@
+import { ContactFormPayload } from "@/types/index.types";
+
+type contactDetails = {
+    fullName: string;
+    email: string;
+    phone: string;
+    order: string;
+    message: string;
+};
+
+export const submitContactForm = async (
+    userDetails: contactDetails,
+) => {
+    const { fullName, email, phone, order, message } = userDetails;
+
+    const URL = `https://api.helpdesk.com/v1/tickets`;
+    const authHeader = `Basic ${Buffer.from(
+        `bac2852a-58ae-4a7e-8ac1-03e3bcc9d61d:dal:ZVYSYO_miMChjp5k5NI_gHkJfhI`
+    ).toString('base64')}`;
+
+    if (message.length <= 0)
+        return {
+            message: 'Please fill out all fields.',
+        };
+
+    const text = `
+      Thank you for contacting Furfy. One of our customer service agents will reply to you as soon as possible! Our aim is to reach out with a personal response within 24 hours. If your enquiry is urgent, you can call us on +1 (888) 664-3124.
+      
+      Name: ${fullName}
+      Email: ${email}
+      Phone: ${phone}
+      Message: ${message}
+      Order: ${order}
+      `;
+
+    const payload: ContactFormPayload = {
+        subject: 'Furfy Contact Us Request',
+        message: {
+            text,
+        },
+        priority: 0,
+        status: 'open',
+        requester: {
+            name: fullName,
+            email: email,
+        },
+        teamIDs: ['2f5d0e7a-e95f-44c1-bde7-0feb8c5e23fc'],
+        assignment: {
+            team: {
+                ID: '2f5d0e7a-e95f-44c1-bde7-0feb8c5e23fc',
+            },
+            agent: null,
+        },
+    };
+
+    const requestConfig = {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            Authorization: authHeader,
+        }),
+        body: JSON.stringify(payload),
+    };
+
+    try {
+        const response = await fetch(URL, requestConfig);
+        if (!response.ok) {
+            throw new Error(`Failed to submit contact form`);
+        }
+        await response.json();
+    } catch (error) {
+        if (error instanceof Error) {
+            return { message: error.message };
+        } else {
+            return { message: 'Something went wrong...' };
+        }
+    }
+
+    return { message: 'success' };
+};

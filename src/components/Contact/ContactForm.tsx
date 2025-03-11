@@ -1,7 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-
+import Input from '../shared/input/input';
+import Label from '../shared/label/label';
+import FormRow from '../Checkout/form-row/form-row';
 const ContactForm = () => {
   // Single state object to manage all form fields
   const [formData, setFormData] = useState({
@@ -13,7 +15,9 @@ const ContactForm = () => {
   });
 
   // Handle form field changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = <T extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(
+    e: React.ChangeEvent<T>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -26,19 +30,23 @@ const ContactForm = () => {
 
   return (
     <Form onSubmit={handleSubmit} className="">
-      <Form.Group className="mb-3">
-        <Form.Control
-          className='input-background p-3 border border-dark text-lg font-medium'
-          type="text"
-          name="name"
+      <FormRow className=''>
+        <Input
           value={formData.name}
-          onChange={handleChange}
-          placeholder="Your Name"
+          type="text"
+          name="firstName"
+          className='full-width'
+          id="name"
           required
+          onChange={handleChange}
+          onBlur={async () => { }}
         />
-      </Form.Group>
+        <Label htmlFor="name" value={formData.name}>
+          your name
+        </Label>
+      </FormRow>
 
-      <Form.Group className="mb-3">
+      <FormRow>
         <Form.Control
           className='input-background p-3 border border-dark text-lg font-medium'
           type="email"
@@ -48,7 +56,18 @@ const ContactForm = () => {
           placeholder="Your Email"
           required
         />
-      </Form.Group>
+        <Input
+          value={formData.email}
+          id="email"
+          type="email"
+          name="email"
+          required
+          onChange={handleChange}
+        />
+        <Label htmlFor="email" value={formData.email}>
+          your email
+        </Label>
+      </FormRow>
 
       <Form.Group className="mb-3">
         <Form.Control

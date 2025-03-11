@@ -45,7 +45,6 @@ const EffectiveSection = () => {
                 loop
                 muted
                 playsInline
-                controls
                 className="w-full"
                 style={{ borderRadius: '39px', height: 'auto' }}
                 src="/images/simple-use.mp4"
