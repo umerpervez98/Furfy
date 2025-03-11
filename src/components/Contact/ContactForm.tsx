@@ -40,7 +40,7 @@ const ContactForm = () => {
 
       <Form.Group className="mb-3">
         <Form.Control
-        className='input-background p-3 border border-dark text-lg font-medium'
+          className='input-background p-3 border border-dark text-lg font-medium'
           type="email"
           name="email"
           value={formData.email}
@@ -52,7 +52,7 @@ const ContactForm = () => {
 
       <Form.Group className="mb-3">
         <Form.Control
-        className='input-background p-3 border border-dark text-lg font-medium'
+          className='input-background p-3 border border-dark text-lg font-medium'
           type="tel"
           name="phone"
           value={formData.phone}
@@ -64,7 +64,7 @@ const ContactForm = () => {
 
       <Form.Group className="mb-3">
         <Form.Control
-        className='input-background p-3 border border-dark text-lg font-medium'
+          className='input-background p-3 border border-dark text-lg font-medium'
           type="text"
           name="orderNumber"
           value={formData.orderNumber}
@@ -75,7 +75,7 @@ const ContactForm = () => {
 
       <Form.Group className="mb-3">
         <Form.Control
-        className='input-background p-3 border border-dark text-lg font-medium'
+          className='input-background p-3 border border-dark text-lg font-medium'
           as="textarea"
           name="message"
           value={formData.message}
@@ -86,7 +86,7 @@ const ContactForm = () => {
         />
       </Form.Group>
 
-      <Button  type="submit" className="primary-button uppercase">
+      <Button type="submit" className="primary-button uppercase mt-5 mb-5">
         Submit Enquiry
       </Button>
     </Form>
