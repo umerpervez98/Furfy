@@ -42,7 +42,6 @@ const Input = ({
           placeholder={placeholder}
           id={id}
           value={value}
-          maxLength={100}
           className={styles["input-textarea"]}
           onChange={onChange<HTMLTextAreaElement>}
           style={style}

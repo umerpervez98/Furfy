@@ -348,3 +348,9 @@ button:disabled {
     padding: 2px 15px;
   }
 }
+
+.primary-button:hover {
+  color: inherit;
+  background-color: #fff;
+  border-color: inherit;
+}
