@@ -132,7 +132,7 @@ const ContactForm = () => {
           Provide a detailed description here
         </Label>
       </FormRow>
-      {!showSuccessMessage && (
+      {showSuccessMessage && (
         <div className={styles['success-message']}>
           <GreenTick style={{ backgroundColor: '#000' }} />
           <HeadingSecondary>
