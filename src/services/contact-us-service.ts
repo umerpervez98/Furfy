@@ -1,17 +1,18 @@
 import { ContactFormPayload } from "@/types/index.types";
 
 type contactDetails = {
-    fullName: string;
+    name: string;
     email: string;
     phone: string;
     order: string;
     message: string;
+
 };
 
 export const submitContactForm = async (
-    userDetails: contactDetails,
+    contactBody: contactDetails,
 ) => {
-    const { fullName, email, phone, order, message } = userDetails;
+    const { name, email, phone, order, message } = contactBody;
 
     const URL = `https://api.helpdesk.com/v1/tickets`;
     const authHeader = `Basic ${Buffer.from(
@@ -26,7 +27,7 @@ export const submitContactForm = async (
     const text = `
       Thank you for contacting Furfy. One of our customer service agents will reply to you as soon as possible! Our aim is to reach out with a personal response within 24 hours. If your enquiry is urgent, you can call us on +1 (888) 664-3124.
       
-      Name: ${fullName}
+      Name: ${name}
       Email: ${email}
       Phone: ${phone}
       Message: ${message}
@@ -41,8 +42,8 @@ export const submitContactForm = async (
         priority: 0,
         status: 'open',
         requester: {
-            name: fullName,
-            email: email,
+            name,
+            email,
         },
         teamIDs: ['2f5d0e7a-e95f-44c1-bde7-0feb8c5e23fc'],
         assignment: {
@@ -70,9 +71,9 @@ export const submitContactForm = async (
         await response.json();
     } catch (error) {
         if (error instanceof Error) {
-            return { message: error.message };
+            return { message: error.message, error: true };
         } else {
-            return { message: 'Something went wrong...' };
+            return { message: 'Something went wrong...', error: true };
         }
     }
 

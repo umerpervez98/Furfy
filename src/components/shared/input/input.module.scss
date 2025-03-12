@@ -15,7 +15,10 @@
   outline: none;
   color: $color-black;
 }
-
+.input-textarea{
+  min-height: 20rem;
+  resize: none;
+}
 .select,
 .option {
   outline: none;

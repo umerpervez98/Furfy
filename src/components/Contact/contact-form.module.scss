@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.contact-form {
+  border-radius: $radius;
+  background-color: $color-primary-light;
+  padding: 3rem 2.5rem;
+  position: relative;
+
+  select,
+  option {
+    text-transform: capitalize;
+  }
+
+  .grecaptcha-branding-visibility {
+    margin: 1rem 0 -1rem;
+  }
+}
+
+.error-message {
+  background-color: $color-error-red;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 1px 4px 10px 0px rgba(0, 0, 0, 0.17);
+  z-index: 1;
+}
+
+.success-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff0b2;
+  border-radius: $radius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  span {
+    color: #fff0b2;
+    width: 5rem;
+    height: 5rem;
+    font-size: 5rem;
+  }
+
+  p {
+    font-style: italic;
+    color: $color-grey-dark;
+  }
+}
