@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import Drawer from '@/components/common/Drawer';
 import { useCart } from '@/contexts/CartContext';
+import Minus from '../../../public/icons/icon-minus.svg';
+import Plus from '../../../public/icons/icon-plus.svg';
+import Image from 'next/image';
 
 const Pricing = () => {
   const { product, addToCart } = useCart();
@@ -50,10 +53,12 @@ const Pricing = () => {
             onClick={handleDecrement}
             disabled={quantity === 1}
           >
-            -
+            <Image src={Minus} alt="Minus" />
           </button>
           <span>{quantity}</span>
-          <button onClick={handleIncrement}>+</button>
+          <button onClick={handleIncrement}>
+            <Image src={Plus} alt="Plus" />
+          </button>
         </div>
 
         {/* Buy Now Button */}

@@ -1,14 +1,13 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 
- const PetSection = () => {
+const PetSection = () => {
   return (
-    <Container className="page-width">
-      <div className="d-flex justify-content-evenly align-items-end flex-row w-full">
+    <div className="page-width position-relative z-2">
+      <div className="animals d-flex justify-content-evenly align-items-end flex-row page-width">
         <img
           src="/images/rabit.avif"
           alt="Rabbit"
-          style={{ width: "17%", marginBottom: "7%", paddingRight: "2%" }}
+          style={{ width: "17%", marginBottom: "7%" }}
         />
         <img
           src="/images/cat.webp"
@@ -18,10 +17,10 @@ import { Container } from "react-bootstrap";
         <img
           src="/images/dog.webp"
           alt="Dog"
-          style={{ width: "40%" }}
+          style={{ width: "50%" }}
         />
       </div>
-    </Container>
+    </div>
   );
 };
 
