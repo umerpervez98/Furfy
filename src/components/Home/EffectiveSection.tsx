@@ -23,42 +23,42 @@ const EffectiveSection = () => {
 
   return (
     <>
-      <Container className="my-3 page-width">
+      <Container className="my-3 page-width" >
         {/* Effective Section */}
         <Row>
-          <div className="text-center pt-3 pb-4">
-            <h4 className="font-bold">FAST & EFFECTIVE</h4>
-            <h5 className='font-normal line-height-lg'>
+          <div className="text-center pt-3 pb-5">
+            <h4 className="rich-text__heading">FAST & EFFECTIVE</h4>
+            <p className='rich-text'>
               You&apos;ve probably tried all types of pet hair and lint removal
               products from sticky roller tapes, to products that cannot be used
               time and time again. The furfy is the only pet hair removal device
               you will ever need, we guarantee it!
-            </h5>
+            </p>
           </div>
         </Row>
         {/* Simple to Use Section */}
         <Row className="my-5">
-          <Col lg={6}>
-            <div className='p-3'>
+          <Col md={6}>
+            <div className='p-3 video-container'>
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
                 className="w-full"
-                style={{ borderRadius: '39px', height: 'auto' }}
+                style={{ borderRadius: '39px', height: 'auto', marginRight: '20px' }}
                 src="/images/simple-use.mp4"
               />
             </div>
           </Col>
-          <Col lg={6}>
-            <div className="p-3">
-              <h4 className="font-bold">SIMPLE TO USE</h4>
+          <Col md={6}>
+            <div className="p-3 rich-text__container">
+              <h4 className="rich-text__heading text-left">SIMPLE TO USE</h4>
               <h6 className="font-normal line-height-lg text-gray simple-use-text">
-                By simply moving the pet hair roller back<br />and forth, you
-                immediately track and<br />pick up cat and dog hair embedded<br />deeply
-                in all of your household furniture<br />and fabric such as couches,
-                beds,<br />carpets, blankets, clothes and more.
+                By simply moving the pet hair roller back and forth, you
+                immediately track and pick up cat and dog hair embedded deeply
+                in all of your household furniture and fabric such as couches,
+                beds, carpets, blankets, clothes and more.
               </h6>
               {/* Icons */}
               <div className="d-flex justify-content-around align-items-center py-3">
@@ -97,7 +97,7 @@ const EffectiveSection = () => {
         </Row>
         {/* Product Images */}
         <Row className="my-5">
-          <Col sm={6}>
+          <Col sm={12} md={6}>
             <div className="text-center">
               <Image
                 className="w-full h-full object-contain"
@@ -105,12 +105,12 @@ const EffectiveSection = () => {
                 src={FurfyInboxAustralia}
                 alt="NO BATTERIES OR ADHESIVES REQUIRED"
               />
-              <p className="text-md font-bold py-4">
+              <h3 className="text-lg font-bold py-5 mb-0">
                 NO BATTERIES OR ADHESIVES REQUIRED
-              </p>
+              </h3>
             </div>
           </Col>
-          <Col sm={6}>
+          <Col sm={12} md={6}>
             <div className="text-center">
               <Image
                 className="w-full h-full object-contain"
@@ -118,12 +118,12 @@ const EffectiveSection = () => {
                 src={FurfyAustralia}
                 alt="ULTRA DURABLE ERGONOMIC DESIGN"
               />
-              <p className="text-md font-bold py-4">
+              <h3 className="text-lg font-bold py-5 mb-0">
                 ULTRA DURABLE ERGONOMIC DESIGN
-              </p>
+              </h3>
             </div>
           </Col>
-          <Col sm={6}>
+          <Col sm={12} md={6}>
             <div className="text-center">
               <Image
                 className="w-full h-full object-contain"
@@ -131,12 +131,12 @@ const EffectiveSection = () => {
                 src={FurfyDetail}
                 alt="PATENTED ELECTROSTATIC BRUSH"
               />
-              <p className="text-md font-bold py-4">
+              <h3 className="text-lg font-bold py-5 mb-0">
                 PATENTED ELECTROSTATIC BRUSH
-              </p>
+              </h3>
             </div>
           </Col>
-          <Col sm={6}>
+          <Col sm={12} md={6}>
             <div className="text-center">
               <Image
                 className="w-full h-full object-contain"
@@ -144,7 +144,7 @@ const EffectiveSection = () => {
                 src={FurfyInboxAustralia}
                 alt="NO FUSS NO MESS"
               />
-              <p className="text-md font-bold py-4">NO FUSS NO MESS</p>
+              <h3 className="text-lg font-bold py-5 mb-0">NO FUSS NO MESS</h3>
             </div>
           </Col>
         </Row>
@@ -165,7 +165,7 @@ const EffectiveSection = () => {
         {/* Testimonial */}
         <Testimonial />
         {/* Products Section */}
-        <Row className="my-3">
+        <Row className="my-5">
           <Col sm={6}>
             <div className='py-4 py-lg-0'>
               <Image
@@ -182,48 +182,61 @@ const EffectiveSection = () => {
         </Row>
         {/* Products Feature */}
         {/* Icons */}
-        <Row className="my-3 my-sm-5">
-          <Col xs={3} sm={3}>
-            <div className="text-center">
-              <Image
-                className="icon-image"
-                src={IconFastDelivery}
-                alt="Bed"
-              />
-              <p className="icon-text my-3">
-                FAST, FREE DELIVERY IN AUSTRALIA & USA
-              </p>
-            </div>
-          </Col>
-          <Col xs={3} sm={3}>
-            <div className="text-center">
-              <Image
-                className="icon-image"
-                src={IconMoneyBack}
-                alt="Shirt"
-              />
-              <p className="icon-text my-3">NO RISK, MONEY BACK GUARANTEE</p>
-            </div>
-          </Col>
-          <Col xs={3} sm={3}>
-            <div className="text-center">
-              <Image className="icon-image" src={IconTrophy} alt="Sofa" />
-              <p className="icon-text my-3">
-                THE CHAMPION OF PET HAIR REMOVERS
-              </p>
-            </div>
-          </Col>
-          <Col xs={3} sm={3}>
-            <div className="text-center">
-              <Image
-                className="icon-image"
-                src={IconAustralia}
-                alt="Carpet"
-              />
-              <p className="icon-text my-3">AUSTRALIAN OWNED COMPANY</p>
-            </div>
-          </Col>
-        </Row>
+        <div className='page-width' style={{ marginBlock: '7rem!important', display: 'block' }}>
+          <Row className="my-5 my-sm-5 icons-row">
+            <Col xs={6} sm={6} md={3}>
+              <div className="text-center icon-container">
+                <p className="icon-text">
+                  FAST, FREE DELIVERY IN AUSTRALIA & USA
+                </p>
+                <Image
+                  className="icon-image"
+                  src={IconFastDelivery}
+                  alt="Bed"
+                  style={{ marginBottom: '15px', height: '58px' }}
+                />
+
+              </div>
+            </Col>
+            <Col xs={6} sm={6} md={3}>
+              <div className="text-center icon-container">
+                <p className="icon-text">NO RISK, MONEY BACK GUARANTEE</p>
+                <Image
+                  className="icon-image"
+                  src={IconMoneyBack}
+                  alt="Shirt"
+                  style={{ height: 100 }}
+                />
+
+              </div>
+            </Col>
+            <Col xs={6} sm={6} md={3}>
+              <div className="text-center icon-container">
+                <p className="icon-text">
+                  THE CHAMPION OF PET HAIR REMOVERS
+                </p>
+                <Image
+                  style={{ height: 98 }}
+                  className="icon-image"
+                  src={IconTrophy}
+                  alt="Sofa"
+                />
+
+              </div>
+            </Col>
+            <Col xs={6} sm={6} md={3}>
+              <div className="text-center icon-container">
+                <p className="icon-text">AUSTRALIAN OWNED COMPANY</p>
+                <Image
+                  style={{ height: 88 }}
+                  className="icon-image"
+                  src={IconAustralia}
+                  alt="Carpet"
+                />
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Container>
     </>
   );

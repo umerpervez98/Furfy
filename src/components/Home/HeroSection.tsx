@@ -51,8 +51,8 @@ const HeroSection = () => {
 
   return (
     <>
-      <Container className='py-3 page-width'>
-        <h5 className='text-center font-bold'>THE WORLD&apos;S BEST PET HAIR REMOVER</h5>
+      <Container className='py-1 page-width'>
+        <h2 className='text-center font-bold hero-title'>THE WORLD&apos;S BEST PET HAIR REMOVER</h2>
         <div id="furfy-banner-container" className="furfybanner" style={{ zIndex: 1, height: '690.75px' }}>
           <div id="furfybanner6_hype_container" className="HYPE_document">
             <Script src="/furfybanner.js" strategy="afterInteractive" />

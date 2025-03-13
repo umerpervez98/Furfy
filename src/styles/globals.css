@@ -168,10 +168,10 @@ h6 {
   text-align: center;
   background-color: var(--white);
   color: var(--black);
-  border: 3px black solid;
+  border: 4px black solid;
   border-radius: 5px;
   font-size: 25px;
-  padding: 2px 30px;
+  padding: 2px 35px;
   font-weight: 700;
 }
 .seconday-button {
@@ -196,6 +196,7 @@ h6 {
   font-size: 25px;
   padding: 0 23px;
   width: fit-content;
+  margin-bottom: 6px;
 }
 
 .quantity-selector button {
@@ -204,12 +205,15 @@ h6 {
   font-size: 30px;
   font-weight: bold;
   color: var(--black);
+  display: flex;
+  padding-block: 1.2rem;
 }
 
 .quantity-selector span {
   min-width: 40px;
   text-align: center;
   font-weight: bold;
+  margin-inline: 8px;
 }
 
 /* Some Common Classes */
@@ -281,10 +285,6 @@ button:disabled {
     font-size: 12px;
   }
 
-  .primary-button {
-    font-size: 22px;
-    padding: 4px 25px;
-  }
   .seconday-button {
     font-size: 16px;
     padding: 2px 35px;
@@ -321,9 +321,6 @@ button:disabled {
     line-height: 30px;
   }
 
-  .text-lg {
-    font-size: 14px;
-  }
   .text-md {
     font-size: 13px;
   }
@@ -334,10 +331,6 @@ button:disabled {
     font-size: 10px;
   }
 
-  .primary-button {
-    font-size: 18px;
-    padding: 3px 20px;
-  }
   .seconday-button {
     font-size: 14px;
     padding: 2px 30px;
