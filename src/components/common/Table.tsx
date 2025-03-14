@@ -2,9 +2,9 @@ import React from "react";
 import '@/styles/common/table.css'
 
 interface TableProps {
-    tableHeaders: { key: string; label: string; width?: string }[];
-    tableData: { [key: string]: string | boolean }[];
-  }
+  tableHeaders: { key: string; label: string; width?: string }[];
+  tableData: { [key: string]: string | boolean }[];
+}
 
 const Table: React.FC<TableProps> = ({ tableHeaders, tableData }) => {
   return (
@@ -23,7 +23,7 @@ const Table: React.FC<TableProps> = ({ tableHeaders, tableData }) => {
           {tableData.map((row, rowIndex) => (
             <tr key={rowIndex}>
               {tableHeaders.map(({ key }, colIndex) => (
-                <td key={colIndex} className="px-4 py-2">
+                <td key={colIndex} className="px-4 py-4">
                   {typeof row[key] === "boolean" ? (
                     <img src={row[key] ? "/icons/tick.svg" : "/icons/cross.svg"} alt="icon" width={20} height={20} />
                   ) : (

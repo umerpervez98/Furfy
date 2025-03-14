@@ -198,3 +198,21 @@ body * {
   font-size: 1.4rem;
   font-family: inherit;
 }
+
+.menu-items li a:hover {
+  font-weight: 700;
+}
+
+.link-underline {
+  width: 0px;
+  height: 4px !important;
+  opacity: 0;
+  border-bottom: 2px solid rgb(70, 70, 70, 0);
+  transition: width .4s ease-in-out;
+}
+.menu-items li a:hover+.link-underline {
+  opacity: 1;
+  width: 100%;
+  border-bottom: 2px solid rgb(70, 70, 70);
+}
+

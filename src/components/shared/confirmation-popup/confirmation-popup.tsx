@@ -14,7 +14,7 @@ const ConfirmationPopup = ({
 }: ConfirmationPopupProps) => {
   return (
     <div className={styles.div}>
-      <p className="confirmation">{text}</p>
+      <p className={styles.confirmation}>{text}</p>
       <div>
         <Button
           extraStyles={{
