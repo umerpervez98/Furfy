@@ -1,13 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import Drawer from "@/components/common/Drawer";
 import { useCart } from "@/contexts/CartContext";
 import "@/styles/common/header.scss";
 import Image from "next/image";
 import Logo from "../../../public/icons/logo.svg";
 import Link from "next/link";
-
 
 const useOutsideAlerter = (
   ref: React.RefObject<HTMLDivElement | null>,
@@ -19,7 +17,12 @@ const useOutsideAlerter = (
     /**
      * Alert if clicked on outside of element
      */ const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node) && !hamburgerRef.current?.contains(event.target as Node) && !dropRef.current?.contains(event.target as Node)) {
+      if (
+        ref.current &&
+        !ref.current.contains(event.target as Node) &&
+        !hamburgerRef.current?.contains(event.target as Node) &&
+        !dropRef.current?.contains(event.target as Node)
+      ) {
         onClose();
       }
     };
@@ -36,11 +39,9 @@ const Header = () => {
   const { cartItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const router = useRouter(); // Initialize router
 
   // Function to navigate and close menu
-  const handleNavigation = (path: string) => {
-    router.push(path);
+  const handleNavigation = () => {
     setMenuOpen(false);
   };
 
@@ -48,25 +49,37 @@ const Header = () => {
   const hamburgerRef = useRef<HTMLDivElement>(null);
   const dropRef = useRef<HTMLDivElement>(null);
 
-  useOutsideAlerter(wrapperRef, hamburgerRef, dropRef, () => setMenuOpen(false));
+  useOutsideAlerter(wrapperRef, hamburgerRef, dropRef, () =>
+    setMenuOpen(false)
+  );
   return (
     <div className="header-wrapper color-background-1 gradient">
       <header className="header header--middle-center header--mobile-center page-width drawer-menu header--has-menu header--has-localizations">
-        <div >
+        <div>
           <div className="d-flex flex-column justify-content-center h-full">
-            <div ref={hamburgerRef} className={menuOpen ? "open" : ""} id="hamburger" onClick={(e) => { e.preventDefault(); setMenuOpen(!menuOpen) }}>
+            <div
+              ref={hamburgerRef}
+              className={menuOpen ? "open" : ""}
+              id="hamburger"
+              onClick={(e) => {
+                e.preventDefault();
+                setMenuOpen(!menuOpen);
+              }}
+            >
               <div className="bars">
                 <div className="bar" id="bar1"></div>
                 <div className="bar" id="bar2"></div>
                 <div className="bar" id="bar3"></div>
               </div>
             </div>
-
           </div>
         </div>
         <div>
           <div className="text-center">
-            <Link href="/" className="header__heading-link link link--text focus-inset">
+            <Link
+              href="/"
+              className="header__heading-link link link--text focus-inset"
+            >
               <Image
                 width={200}
                 className="object-contain h-auto max-w-full"
@@ -90,14 +103,9 @@ const Header = () => {
               </div> */}
             <div
               className="d-inline-block cursor-pointer position-relative"
-              onClick={
-                cartItems?.[0]?.qty
-                  ? (e) => {
-                    e.preventDefault();
-                    setIsDrawerOpen(true);
-                  }
-                  : undefined
-              }
+              onClick={() => {
+                setIsDrawerOpen(true);
+              }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -159,34 +167,33 @@ const Header = () => {
       {/* Animated Menu */}
       <nav ref={wrapperRef} className={`main-menu ${menuOpen ? "open" : ""}`}>
         <ul className="menu-items">
-          <li className="cursor-pointer" onClick={() => handleNavigation("/")}>
-            HOME
+          <li className="cursor-pointer" onClick={handleNavigation}>
+            <Link href="/">Home</Link>
+            <div className="link-underline" />
           </li>
-          <li
-            className="cursor-pointer"
-            onClick={() => handleNavigation("/faq")}
-          >
-            FAQ
+          <li className="cursor-pointer" onClick={handleNavigation}>
+            <Link href="/faq">FAQ</Link>
+            <div className="link-underline" />
           </li>
-          <li
-            className="cursor-pointer"
-            onClick={() => handleNavigation("/about")}
-          >
-            ABOUT
+          <li className="cursor-pointer" onClick={handleNavigation}>
+            <Link href="/about">About</Link>
+            <div className="link-underline" />
           </li>
-          <li
-            className="cursor-pointer"
-            onClick={() => handleNavigation("/contact")}
-          >
-            CONTACT
+          <li className="cursor-pointer" onClick={handleNavigation}>
+            <Link href="/contact">Contact</Link>
+            <div className="link-underline" />
           </li>
         </ul>
       </nav>
-      <div ref={dropRef} id="drop-in-menu" className={`${menuOpen ? "open" : ""}`}></div>
+      <div
+        ref={dropRef}
+        id="drop-in-menu"
+        className={`${menuOpen ? "open" : ""}`}
+      ></div>
       {/* Background Overlay */}
       <div
         id="background-overlay"
-        className={`${menuOpen ? "background-overlay" : ""}`}
+        className={`${menuOpen || isDrawerOpen ? "background-overlay" : ""}`}
       ></div>
     </div>
   );

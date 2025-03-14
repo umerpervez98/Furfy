@@ -1,11 +1,11 @@
 "use client";
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "@/styles/common/drawer.css";
 import { useCart } from "@/contexts/CartContext";
 import FurfyAustralia from "../../../public/images/furfy_australia.webp";
-import { CartItem, PriceContainer } from "../shared/index.shared";
+import { CartItem, GreyOverlay, PriceContainer } from "../shared/index.shared";
 import CloseIcon from "../../../public/icons/icon-close.svg";
 import styles from "./Drawer.module.scss";
 interface DrawerProps {
@@ -38,6 +38,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
   const { cartItems } = useCart();
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [overlay, setOverlay] = useState(false);
   useOutsideAlerter(wrapperRef, onClose);
 
   return (
@@ -61,18 +62,29 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
                 cartItems?.map((product) => {
                   return (
                     <Fragment key={`cart-item-${product?.id}`}>
-                      <CartItem {...product} imgUrl={FurfyAustralia} />
+                      <CartItem {...product} setOverlay={setOverlay} imgUrl={FurfyAustralia} />
                     </Fragment>
                   );
                 })
               ) : (
-                <li key="cart-item-empty">your cart is empty</li>
+                <li className="cart-empty" key="cart-item-empty">
+                  your cart is empty
+                </li>
               )}
 
               <PriceContainer />
+              {overlay && (
+                <GreyOverlay
+                  style={{
+                    position: 'absolute',
+                    zIndex: '1',
+                  }}
+                />
+              )}
             </ul>
             <div className="pt-5">
               <button
+                disabled={!cartItems?.[0]?.qty}
                 onClick={() => router.push("/checkout")}
                 className="primary-button w-full checkout-button"
               >

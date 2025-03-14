@@ -3,9 +3,9 @@
 .div {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 48%;
   transform: translate(-50%, -60%);
-  width: 97%;
+  width: 100%;
   z-index: 2;
   background-color: #fff;
   padding: 1.8rem;
@@ -13,15 +13,15 @@
   border: 2px solid $color-black;
   border-radius: $radius;
 
-  p.confirmation {
-    font-size: 1.6rem;
-    font-weight: 500;
-  }
-
   div {
     margin-top: 1rem;
     display: flex;
     justify-content: flex-end;
     gap: 1.5rem;
   }
+}
+
+.confirmation {
+  font-size: 1.6rem;
+  font-weight: 500;
 }

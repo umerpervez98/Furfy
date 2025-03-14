@@ -1,15 +1,16 @@
-"use client"
+"use client";
 
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 import {
   getCartDetails,
   addToCart as apiAddToCart,
   updateCartQuantity,
-  getProduct
+  getProduct,
+  resetCart as apiResetCart,
 } from "@/services/cart-functions";
-import { usePathname } from 'next/navigation';
-import { cartContextReducer, CART_CONTEXT_ACTIONS } from './CartContextReducer';
-import { Dropin } from 'braintree-web-drop-in';
+import { usePathname } from "next/navigation";
+import { cartContextReducer, CART_CONTEXT_ACTIONS } from "./CartContextReducer";
+import { Dropin } from "braintree-web-drop-in";
 import type {
   CurrentCart,
   User,
@@ -19,16 +20,16 @@ import type {
   Method,
   CurrentTab,
   LocalAddressProps,
-} from '@/types/index.types';
+} from "@/types/index.types";
 import { actionCreator } from "@/utils/action-creator";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { StaticImageData } from "next/image";
 import { getUserProfile } from "@/services/checkout-functions";
 
 export interface CartItem extends Product {
-
   qty: number;
   productId: string;
+  setOverlay: (overlay: boolean) => void;
 }
 
 export interface Product {
@@ -87,7 +88,7 @@ const initialState: CartState = {
   shippingFee: 0,
   total: 0,
   price: 0,
-  accessToken: '',
+  accessToken: "",
   product: null,
   user: null,
   userId: null,
@@ -96,8 +97,8 @@ const initialState: CartState = {
   currentCart: null,
   promoApplied: null,
   orderPlaced: false,
-  localAddressObj: { localAddress: '', isAddressValidated: false },
-  showPhoneError: '',
+  localAddressObj: { localAddress: "", isAddressValidated: false },
+  showPhoneError: "",
   method: null,
   sendingCodeToNewUser: false,
   customer: null,
@@ -105,13 +106,13 @@ const initialState: CartState = {
   showVerification: false,
   isScrollActivated: false,
   currentExtra: 1,
-  currentPage: '1',
-  currentTab: 'dashboard',
+  currentPage: "1",
+  currentTab: "dashboard",
   showScatulator: false,
   paymentToken: null,
   braintreeInstance: undefined,
   globalError: null,
-  globalMessage: { show: false, message: '' },
+  globalMessage: { show: false, message: "" },
   showCart: false,
   showPayNow: false,
   showPopOver: false,
@@ -119,7 +120,6 @@ const initialState: CartState = {
   emailChecked: false,
   phoneChecked: false,
 };
-
 
 type CartContextValue = CartState & {
   fetchCart: () => Promise<void>;
@@ -130,7 +130,7 @@ type CartContextValue = CartState & {
   updateSendingCodeToNewUser: (bool: boolean) => void;
   updateCustomer: (customer: UpdateCustomerProps | null) => void;
   updateShowPhoneLogin: (bool: boolean) => void;
-  updateMethod: (method: 'phone' | 'email' | null) => void;
+  updateMethod: (method: "phone" | "email" | null) => void;
   updateShowVerification: (bool: boolean) => void;
   updateShowPhoneError: (message: string) => void;
   updateOrderPlaced: (bool: boolean) => void;
@@ -153,7 +153,7 @@ type CartContextValue = CartState & {
   setIsScrollActivated: (bool: boolean) => void;
   updateCurrentPage: (page: string) => void;
   updateCurrentExtra: (extra: number) => void;
-  resetItems: () => void;
+  resetCart: () => void;
   addItemToCart: (newProduct: object) => void;
   addOrderItems: (newProps: object) => void;
   setShowScatulator: (bool: boolean) => void;
@@ -181,7 +181,9 @@ type LocalStorageEvent = CustomEvent<StorageEventDetail>;
 
 const CartContext = createContext<CartContextValue>({} as CartContextValue);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cartState, dispatch] = useReducer(cartContextReducer, initialState);
 
   const {
@@ -207,13 +209,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [globalMessage]);
 
   useEffect(() => {
-    const anonymousIdFromLocal = localStorage.getItem('scAnonymousId');
+    const anonymousIdFromLocal = localStorage.getItem("scAnonymousId");
 
     if (anonymousIdFromLocal) {
       updateAnonymousId(anonymousIdFromLocal);
     } else {
       const newAnonymousId = uuidv4();
-      localStorage.setItem('scAnonymousId', newAnonymousId);
+      localStorage.setItem("scAnonymousId", newAnonymousId);
       updateAnonymousId(newAnonymousId);
     }
 
@@ -223,8 +225,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (order.orderConfirmation) {
       updateOrderPlaced(true);
     }
-
-
   }, []);
 
   useEffect(() => {
@@ -259,10 +259,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [currentTab, path]);
 
   useEffect(() => {
-    localStorage.setItem('scUserId', userId ? userId : 'null');
+    localStorage.setItem("scUserId", userId ? userId : "null");
 
     if (!!userId) {
-      localStorage.setItem('scLoggedIn', 'true');
+      localStorage.setItem("scLoggedIn", "true");
     }
 
     const handleExpiredToken = (event: Event) => {
@@ -272,24 +272,24 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      if (customEvent.detail.value === '' && userId) {
+      if (customEvent.detail.value === "" && userId) {
         logoutUser();
         setGlobalError(
-          'Your session has expired due to inactivity. For your security, please log in again to continue.'
+          "Your session has expired due to inactivity. For your security, please log in again to continue."
         );
       }
     };
 
     if (userId) {
       setUserProfile(userId, false);
-      window.addEventListener('local-storage', handleExpiredToken);
+      window.addEventListener("local-storage", handleExpiredToken);
     } else {
-      window.removeEventListener('local-storage', handleExpiredToken);
+      window.removeEventListener("local-storage", handleExpiredToken);
       updateUser(null);
     }
 
     return () => {
-      window.removeEventListener('local-storage', handleExpiredToken);
+      window.removeEventListener("local-storage", handleExpiredToken);
     };
   }, [userId]);
 
@@ -330,8 +330,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     updateCustomer(null);
     updateUserAuthToken(null);
     updateUser(null);
-    updateLocalAddress({ localAddress: '', isAddressValidated: false });
-    localStorage.setItem('scUserId', '');
+    updateLocalAddress({ localAddress: "", isAddressValidated: false });
+    localStorage.setItem("scUserId", "");
   };
 
   const updateAnonymousId = (id: string) => {
@@ -339,16 +339,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const getUserAuthToken = () => {
-    const userId = localStorage.getItem('scUserId');
+    const userId = localStorage.getItem("scUserId");
 
-    if (userId === 'null' || !userId) {
+    if (userId === "null" || !userId) {
       return null;
     }
     return userId;
   };
 
   const getOrder = (): UpdateOrderProps => {
-    const data = localStorage.getItem('scOrder');
+    const data = localStorage.getItem("scOrder");
     const order =
       data === null
         ? { orderConfirmation: null, submitState: null }
@@ -371,17 +371,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const addItemToCart = (newProduct: object) => {
     dispatch(actionCreator(CART_CONTEXT_ACTIONS.UPDATE_PRODUCT, newProduct));
   };
-
-  const resetItems = () => {
-    updateCurrentPage('1');
-    updateCurrentExtra(1);
-
-    addItemToCart({});
-    dispatch(
-      actionCreator(CART_CONTEXT_ACTIONS.UPDATE_ITEMS, initialState.cartItems)
-    );
-  };
-
 
   const addOrderItems = (newProps: object) => {
     const newItems = { ...(currentCart?.orderItems as CartItem), ...newProps };
@@ -406,7 +395,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateOrder = (orderToUpdate: UpdateOrderProps) => {
-    localStorage.setItem('scOrder', JSON.stringify(orderToUpdate));
+    localStorage.setItem("scOrder", JSON.stringify(orderToUpdate));
     dispatch(actionCreator(CART_CONTEXT_ACTIONS.UPDATE_ORDER, orderToUpdate));
   };
 
@@ -415,7 +404,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateShowVerification = (bool: boolean) => {
-    dispatch(actionCreator(CART_CONTEXT_ACTIONS.UPDATE_SHOW_VERIFICATION, bool));
+    dispatch(
+      actionCreator(CART_CONTEXT_ACTIONS.UPDATE_SHOW_VERIFICATION, bool)
+    );
   };
 
   const updateAddress = (fullAddress: object | string) => {
@@ -444,7 +435,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const setGlobalMessage = (messageObj: { show: boolean; message: string }) => {
-    dispatch(actionCreator(CART_CONTEXT_ACTIONS.SET_GLOBAL_MESSAGE, messageObj));
+    dispatch(
+      actionCreator(CART_CONTEXT_ACTIONS.SET_GLOBAL_MESSAGE, messageObj)
+    );
   };
 
   const updateCustomerDetailsAtOnce = (
@@ -473,13 +466,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }) => {
     const optionList = [
       {
-        value: 'Deliver to the front of my property',
-        text: 'Deliver to the front of my property',
+        value: "Deliver to the front of my property",
+        text: "Deliver to the front of my property",
       },
-      { value: 'Deliver to concierge', text: 'Deliver to concierge' },
-      { value: 'Deliver to mail room', text: 'Deliver to mail room' },
-      { value: 'Deliver to foyer/lobby', text: 'Deliver to foyer/lobby' },
-      { value: 'Special delivery request', text: 'Special delivery request' },
+      { value: "Deliver to concierge", text: "Deliver to concierge" },
+      { value: "Deliver to mail room", text: "Deliver to mail room" },
+      { value: "Deliver to foyer/lobby", text: "Deliver to foyer/lobby" },
+      { value: "Special delivery request", text: "Special delivery request" },
     ];
 
     const initialDeliveryNote = userId
@@ -488,9 +481,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
           (option) => option.value === user?.defaultAddress?.deliveryNote
         )
           ? user?.defaultAddress.deliveryNote
-          : user?.defaultAddress?.deliveryNote === ''
-            ? 'Deliver to the front of my property'
-            : 'Special delivery request',
+          : user?.defaultAddress?.deliveryNote === ""
+            ? "Deliver to the front of my property"
+            : "Special delivery request",
         request: optionList.find(
           (option) => option.value === user?.defaultAddress?.deliveryNote
         )
@@ -503,7 +496,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         show: false,
       }
       : {
-        value: 'Deliver to the front of my property',
+        value: "Deliver to the front of my property",
         request: null,
         show: false,
       };
@@ -536,7 +529,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
   };
 
-  const updateMethod = (method: 'phone' | 'email' | null) => {
+  const updateMethod = (method: "phone" | "email" | null) => {
     dispatch(actionCreator(CART_CONTEXT_ACTIONS.UPDATE_METHOD, method));
   };
 
@@ -580,7 +573,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setGlobalError(user.data.message!);
     }
 
-    if (newAddress && typeof newAddress === 'object') {
+    if (newAddress && typeof newAddress === "object") {
       updateAddress(newAddress);
     }
   };
@@ -606,10 +599,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const addToCart = async (quantity: number) => {
     if (!cartState.product) return;
 
-    const response = await apiAddToCart(quantity, cartState.product.accessToken);
+    const response = await apiAddToCart(
+      quantity,
+      cartState.product.accessToken
+    );
     if (response.success) {
       await fetchCart(); // Refresh cart after adding product
     }
+  };
+
+  const resetCart = async () => {
+    await apiResetCart();
+    await fetchCart(); // Refresh cart after adding product
   };
 
   const updateItem = async (productId: string, qty: number) => {
@@ -627,6 +628,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchCart,
     fetchProduct,
     addToCart,
+    resetCart,
     updateItem,
     setShowPopOver,
     setShowCart,
@@ -635,7 +637,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCurrentTab,
     setShowScatulator,
     addOrderItems,
-    resetItems,
     updateCurrentExtra,
     setIsScrollActivated,
     setUserProfile,

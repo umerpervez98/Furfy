@@ -1,5 +1,5 @@
 import React from "react";
-import {Container,Row,Col} from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
         <Row>
           <Col className="text-center">
             <img className=" w-full object-contain" src="/icons/footer-logo.svg" alt="Footer Logo" height={70} />
-            <p className="text-white-50 text-md mt-3">© 2025 Furfy</p>
+            <p className="text-white-50 text-lg mt-3">© 2025 Furfy</p>
           </Col>
         </Row>
       </Container>

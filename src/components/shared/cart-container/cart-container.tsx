@@ -39,7 +39,6 @@ const CartContainer = ({
   const [promo, setPromo] = useState(INITIAL_PROMO_STATE);
   const [autoApplied, setAutoApplied] = useState(false);
   const { cartItems, togglePromoCode, currentCart, promoApplied } = useCart();
-
   const onClickHandler = () => {
     // VALIDATE EMAIL WITH COUPON HERE
     if (promo.code) {

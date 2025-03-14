@@ -82,6 +82,31 @@ export const addToCart = async (quantity: number, productId: string) => {
   }
 };
 
+export const resetCart = async () => {
+  const URL = `${BASE_URL}api/cart`;
+
+  try {
+    const response = await fetch(URL, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      await response.json();
+    } else {
+      throw new Error('There was an error');
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "An unexpected error occurred"
+    };
+  }
+};
+
 export const updateCartQuantity = async (quantity: number, productId: string) => {
   const res = await fetch(`${BASE_URL}api/cart/update/quantity/${productId}`, {
     method: "PATCH",
@@ -116,7 +141,6 @@ export const submitOrder = async (orderData: object) => {
   });
   return res.json();
 };
-
 
 export const getPaymentToken = async (): Promise<{ data: string }> => {
   const URL = `${BASE_URL}api/payment-gateway/generate-token`;
@@ -198,3 +222,5 @@ export const submitCartWithPayment = async (
 
   return await response.json();
 };
+
+
