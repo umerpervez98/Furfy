@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Script from 'next/script';
 import { Container } from 'react-bootstrap'
 
 const HeroSection = () => {
@@ -32,7 +31,6 @@ const HeroSection = () => {
       fetch('https://ipinfo.io/json')
         .then((res) => res.json())
         .then((response) => {
-          console.log(response.city, response.country);
           if (response.timezone.includes('Asia')) {
             setCustomText('TEST');
           } else if (response.country === 'US') {
@@ -46,7 +44,12 @@ const HeroSection = () => {
         .catch((error) => console.log('Error fetching IP info:', error));
     }, 3000);
 
-    return () => window.removeEventListener('resize', fixBannerHeight);
+    return () => {
+      console.log('script', document.body.contains(script));
+      window.removeEventListener('resize', fixBannerHeight);
+      document.body.removeChild(script);
+      console.log('script', document.body.contains(script));
+    }
   }, []);
 
   return (
@@ -54,15 +57,13 @@ const HeroSection = () => {
       <Container className='py-1 page-width'>
         <h2 className='text-center font-bold hero-title'>THE WORLD&apos;S BEST PET HAIR REMOVER</h2>
         <div id="furfy-banner-container" className="furfybanner" style={{ zIndex: 1, height: '690.75px' }}>
-          <div id="furfybanner6_hype_container" className="HYPE_document">
-            <Script src="/furfybanner.js" strategy="afterInteractive" />
-          </div>
+          <div id="furfybanner6_hype_container" className="HYPE_document" />
 
           {/* Hidden SEO Content */}
           <div style={{ display: 'none' }} aria-hidden="true">
             <div>ORIGINAL PATENTED JAPANESE DESIGN</div>
-            <div>FREE DELIVERY IN AUSTRALIA</div>
-            <div>SYDNEY WAREHOUSE FAST DELIVERY</div>
+            <div>{customText}</div>
+            <div>{customLocation}</div>
             <div>NO HAIR ANYWHERE</div>
             <div>BE FUR-FREE WITH FURFY</div>
           </div>
