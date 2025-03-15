@@ -37,8 +37,8 @@ const PriceContainer = () => {
 
   return (
     <li className={styles["price-container"]}>
-      <p>
-        <span>SUBTOTAL</span>
+      <p className="my-0">
+        <span >SUBTOTAL</span>
         <span>{formatPrice(price)}</span>
       </p>
 
@@ -62,12 +62,12 @@ const PriceContainer = () => {
         </p>
       )}
 
-      <p className={styles.shipping}>
+      <p className={`${styles.shipping} my-0`}>
         <span>shipping</span>
         <span>{validateCart(formatPrice(shippingFee))}</span>
       </p>
 
-      <p className={styles["total-price"]}>
+      <p className={`${styles["total-price"]} my-0`}>
         <span>total</span>
         <span>{validateCart(formatPrice(total))}</span>
       </p>

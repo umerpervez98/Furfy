@@ -42,7 +42,7 @@ const CartItem = ({ accessToken, qty, price, name, imgUrl, setOverlay }: CartIte
       <div className="item-details">
         <Image className="furfy-image" src={imgUrl} alt={name} />
         <div className="item-info">
-          <h3>{name}</h3>
+          <h3 className="uppercase">{name}</h3>
           <article className={styles.article}>
             <p>The world&apos;s best pet hair remover</p>
           </article>
