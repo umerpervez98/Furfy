@@ -29,7 +29,7 @@ const HeroSection = () => {
 
     // Fetch IP Info
     setTimeout(() => {
-      fetch('https://ipinfo.io')
+      fetch('https://ipinfo.io/json')
         .then((res) => res.json())
         .then((response) => {
           console.log(response.city, response.country);

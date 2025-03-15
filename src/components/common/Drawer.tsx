@@ -48,7 +48,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
           <div className="drawer-content">
             {/* Cart Header */}
             <div className="d-flex justify-content-between align-items-center">
-              <h3 className="font-bold">Your Items</h3>
+              <h3 className={`font-bold uppercase ${styles.drawerTitle}`}>Your Items</h3>
               <Image
                 src={CloseIcon}
                 className="cursor-pointer"
@@ -57,7 +57,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
                 onClick={onClose}
               />
             </div>
-            <ul>
+            <ul className="px-0 my-0">
               {cartItems && cartItems?.length > 0 ? (
                 cartItems?.map((product) => {
                   return (
@@ -82,7 +82,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
                 />
               )}
             </ul>
-            <div className="pt-5">
+            <div className="pt-4">
               <button
                 disabled={!cartItems?.[0]?.qty}
                 onClick={() => router.push("/checkout")}

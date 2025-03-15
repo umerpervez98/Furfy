@@ -60,7 +60,7 @@ export const addToCart = async (quantity: number, productId: string) => {
       const addToCartResponse = await fetch(`${BASE_URL}api/cart/add`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productToken: productId, quantity }),
+        body: JSON.stringify({ productToken: productId, productID: productId, qty: quantity }),
         credentials: "include",
       });
 
