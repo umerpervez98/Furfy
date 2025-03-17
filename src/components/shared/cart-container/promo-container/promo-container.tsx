@@ -2,13 +2,13 @@ import {
   ButtonSecondary,
   PromoInput,
 } from '@/components/Checkout/index.checkout';
-import type { PromoApplied } from '@/types/index.types';
+import type { TOrderReceiptCouponRedemption } from '@/types/index.types';
 import { INITIAL_PROMO_STATE } from '@/components/shared/cart-container/cart-container';
 import styles from './promo-container.module.scss';
 
 type PromoContainerProps = {
   loading: boolean;
-  promoApplied: PromoApplied;
+  promoApplied: TOrderReceiptCouponRedemption;
   promo: typeof INITIAL_PROMO_STATE;
   setPromo: (promo: typeof INITIAL_PROMO_STATE) => void;
   onClickHandler: () => void;

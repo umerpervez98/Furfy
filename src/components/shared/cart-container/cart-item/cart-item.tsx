@@ -8,8 +8,8 @@ import PlusIcon from "../../../../../public/icons/icon-plus.svg";
 import MinusIcon from "../../../../../public/icons/icon-minus.svg";
 import ConfirmationPopup from "../../confirmation-popup/confirmation-popup";
 
-const CartItem = ({ accessToken, qty, price, name, imgUrl, setOverlay }: CartItemType) => {
-  const { updateItem, resetCart } = useCart();
+const CartItem = ({ accessToken, qty, name, imgUrl, setOverlay }: CartItemType) => {
+  const { updateItem, resetCart, product } = useCart();
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -72,7 +72,7 @@ const CartItem = ({ accessToken, qty, price, name, imgUrl, setOverlay }: CartIte
             </div>
             <div>
               <span className="item-price ms-2">
-                ${(price / 100).toFixed(2) || 0}
+                ${((product?.price || 0) / 100).toFixed(2) || 0}
               </span>
             </div>
           </div>

@@ -26,6 +26,11 @@ export type CurrentCart = {
   priceBeforeCoupon: number;
   cartItems: CartItem[];
   couponCode: string;
+  couponRedemption: TOrderReceiptCouponRedemption;
+  price: number;
+  shippingFee: number;
+  total: number;
+  subtotal: number;
   [key: string]: unknown;
 };
 
@@ -122,12 +127,7 @@ export type TCouponRedemption = {
   [key: string]: unknown;
 };
 
-export type TOrderReceiptCouponRedemption = {
-  coupon: {
-    valueType: 'AMOUNT' | 'PERCENTAGE';
-    valueFixed: number;
-  };
-};
+
 
 export type TOrderConfirmation = {
   id: number;
@@ -167,9 +167,44 @@ export type PaymentInfoBoxProps = {
   paymentMethodType: string;
 };
 
-export type PromoApplied = {
+export type Coupon = {
+  acceptAnyType: boolean;
+  accessToken: string;
+  archived: boolean;
+  code: string;
+  couponTypes: string[];
+  currency: string;
+  customCoupon: null | string;
+  customCouponType: null | string;
+  dateCreated: Date;
+  dateExpires: Date;
+  dateValid: Date;
+  deletedAt: Date | null;
+  description: string;
+  discountType: string;
+  enabled: boolean;
+  expires: boolean;
+  isActive: boolean;
+  isCustomCoupon: boolean;
+  isExpired: boolean;
+  limitUses: number;
+  name: string;
+  redemptionsCount: number;
+  useCount: number;
+  valueFixed: number;
+  valueType: 'AMOUNT' | 'PERCENTAGE';
+}
+
+export type TOrderReceiptCouponRedemption = {
   code: string;
   rate?: number;
+  accessToken?: string;
+  coupon?: Coupon;
+  couponCode?: string;
+  dateCreated?: Date;
+  dateUpdated?: Date;
+  deletedAt?: Date,
+
 } | null;
 
 export type LocalAddressProps = {

@@ -36,7 +36,7 @@ const useOutsideAlerter = (
 };
 
 const Header = () => {
-  const { cartItems } = useCart();
+  const { currentCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -142,8 +142,8 @@ const Header = () => {
               </svg>
 
               {/* Show badge only if cart quantity exists */}
-              {cartItems?.[0]?.qty ? (
-                <div className="circle-badge">{cartItems?.[0].qty}</div>
+              {currentCart?.cartItems?.[0]?.qty ? (
+                <div className="circle-badge">{currentCart?.cartItems?.[0].qty}</div>
               ) : null}
             </div>
           </div>

@@ -36,7 +36,7 @@ const useOutsideAlerter = (
 
 const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
-  const { cartItems } = useCart();
+  const { currentCart } = useCart();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [overlay, setOverlay] = useState(false);
   useOutsideAlerter(wrapperRef, onClose);
@@ -58,8 +58,8 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
               />
             </div>
             <ul className="px-0 my-0">
-              {cartItems && cartItems?.length > 0 ? (
-                cartItems?.map((product) => {
+              {currentCart?.cartItems && currentCart?.cartItems?.length > 0 ? (
+                currentCart?.cartItems?.map((product) => {
                   return (
                     <Fragment key={`cart-item-${product?.id}`}>
                       <CartItem {...product} setOverlay={setOverlay} imgUrl={FurfyAustralia} />
@@ -84,7 +84,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
             </ul>
             <div className="pt-4">
               <button
-                disabled={!cartItems?.[0]?.qty}
+                disabled={!currentCart?.cartItems?.[0]?.qty}
                 onClick={() => router.push("/checkout")}
                 className="primary-button w-full checkout-button"
               >

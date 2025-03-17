@@ -49,7 +49,7 @@ const cartContextReducer = (state: CartState, action: CartAction): CartState => 
 
     switch (type) {
         case CART_CONTEXT_ACTIONS.SET_CART:
-            return { ...state, ...action.payload };
+            return { ...state, currentCart: action.payload };
 
         case CART_CONTEXT_ACTIONS.UPDATE_ITEM:
             return { ...state, ...action.payload };

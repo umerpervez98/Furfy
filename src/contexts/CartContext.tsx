@@ -15,7 +15,7 @@ import type {
   CurrentCart,
   User,
   UpdateOrderProps,
-  PromoApplied,
+  TOrderReceiptCouponRedemption,
   UpdateCustomerProps,
   Method,
   CurrentTab,
@@ -41,7 +41,6 @@ export interface Product {
 }
 
 export interface CartState {
-  cartItems: CartItem[];
   subtotal: number;
   shippingFee: number;
   total: number;
@@ -51,7 +50,7 @@ export interface CartState {
   userId: null | string;
   anonymousId: string | null;
   order: UpdateOrderProps;
-  promoApplied: PromoApplied;
+  promoApplied: TOrderReceiptCouponRedemption;
   orderPlaced: boolean;
   currentCart: null | CurrentCart;
   localAddressObj: {
@@ -83,7 +82,6 @@ export interface CartState {
 }
 
 const initialState: CartState = {
-  cartItems: [],
   subtotal: 0,
   shippingFee: 0,
   total: 0,
@@ -142,7 +140,7 @@ type CartContextValue = CartState & {
   }) => void;
   updateCustomerDetails: (name: string, value?: string | object) => void;
   updateUserAuthToken: (id: null | string) => void;
-  togglePromoCode: (promoObj: null | { code: string; rate?: number }) => void;
+  togglePromoCode: (promoObj: TOrderReceiptCouponRedemption) => void;
   updateCustomerDetailsAtOnce: (
     customerDetails: object,
     localCurrentCart?: object
@@ -364,7 +362,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     dispatch(actionCreator(CART_CONTEXT_ACTIONS.UPDATE_USER_TOKEN, id));
   };
 
-  const togglePromoCode = (promoObj: PromoApplied) => {
+  const togglePromoCode = (promoObj: TOrderReceiptCouponRedemption) => {
     dispatch(actionCreator(CART_CONTEXT_ACTIONS.TOGGLE_PROMO, promoObj));
   };
 
@@ -500,8 +498,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         request: null,
         show: false,
       };
-    alert();
-    await dispatch(
+    dispatch(
       actionCreator(CART_CONTEXT_ACTIONS.UPDATE_CART, {
         ...cart,
         cartItems:
