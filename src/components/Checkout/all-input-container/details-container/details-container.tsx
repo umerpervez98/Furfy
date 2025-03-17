@@ -109,6 +109,7 @@ const DetailsContainer = ({
     setCountry(newCountry);
   };
 
+
   const handlePhoneChange = (newPhone: string) => {
     const phoneNumber = parsePhoneNumber(phone, {
       defaultCountry: country as CountryCode,
@@ -237,7 +238,7 @@ const DetailsContainer = ({
             setPhoneChecked?.(false);
             updateCustomerDetailsAtOnce?.({ email: '', phone: '' });
           }}
-          showBtn={!!userId}
+          showBtn={!!userId ? false : true}
         />
       ) : (
         <FormRow>
@@ -337,6 +338,7 @@ const DetailsContainer = ({
           <div className={styles['inner-phone-container']}>
             <ValidatedAddressContainer
               input={phone}
+              country={country}
               label="mobile phone"
               buttonLabel="change phone"
               resetInput={() => {

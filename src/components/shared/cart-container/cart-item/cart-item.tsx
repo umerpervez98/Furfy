@@ -72,7 +72,7 @@ const CartItem = ({ accessToken, qty, name, imgUrl, setOverlay }: CartItemType) 
             </div>
             <div>
               <span className="item-price ms-2">
-                ${((product?.price || 0) / 100).toFixed(2) || 0}
+                ${((product?.price || 0) * qty / 100).toFixed(2) || 0}
               </span>
             </div>
           </div>
