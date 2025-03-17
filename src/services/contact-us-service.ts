@@ -16,7 +16,7 @@ export const submitContactForm = async (
 
     const URL = `https://api.helpdesk.com/v1/tickets`;
     const authHeader = `Basic ${Buffer.from(
-        `bac2852a-58ae-4a7e-8ac1-03e3bcc9d61d:dal:ZVYSYO_miMChjp5k5NI_gHkJfhI`
+        `bac2852a-58ae-4a7e-8ac1-03e3bcc9d61d:dal:dal:ZVYSYO_miMChjp5k5NI_gHkJfhI`
     ).toString('base64')}`;
 
     if (message.length <= 0)
@@ -35,22 +35,22 @@ export const submitContactForm = async (
       `;
 
     const payload: ContactFormPayload = {
-        subject: 'Furfy Contact Us Request',
+        subject: "Furfy Contact Us Request",
         message: {
-            text,
+            text
         },
         priority: 0,
-        status: 'open',
+        status: "open",
         requester: {
             name,
-            email,
+            email
         },
-        teamIDs: ['89e307b5-012d-4dc1-8cc2-b77336dddd6d'],
+        teamIDs: ["89e307b5-012d-4dc1-8cc2-b77336dddd6d"],
         assignment: {
             team: {
-                ID: '89e307b5-012d-4dc1-8cc2-b77336dddd6d',
+                ID: "89e307b5-012d-4dc1-8cc2-b77336dddd6d"
             },
-            agent: null,
+            agent: null
         },
     };
 
@@ -58,7 +58,7 @@ export const submitContactForm = async (
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json',
-            Authorization: authHeader,
+            "Authorization": authHeader,
         }),
         body: JSON.stringify(payload),
     };

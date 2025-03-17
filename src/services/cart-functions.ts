@@ -128,7 +128,17 @@ export const applyCoupon = async (coupon: string) => {
   const res = await fetch(`${BASE_URL}api/cart/apply-coupon`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: 'include',
     body: JSON.stringify({ coupon }),
+  });
+  return res.json();
+};
+
+export const removeCoupon = async () => {
+  const res = await fetch(`${BASE_URL}api/cart/remove-coupon`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: 'include',
   });
   return res.json();
 };

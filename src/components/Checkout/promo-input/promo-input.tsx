@@ -60,8 +60,10 @@ const PromoInput = ({
               right: '9rem',
               height: '4.2rem',
               width: '4rem',
-              top: '50%',
+              top: '25%',
               transform: 'translate(0, -50%)',
+              backgroundColor: 'transparent',
+              border: 'none',
             }}
           />
         )}

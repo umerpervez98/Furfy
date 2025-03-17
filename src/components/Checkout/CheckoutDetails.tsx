@@ -48,7 +48,6 @@ const Checkout = () => {
   const [currentEmail, setCurrentEmail] = useState("");
 
   const {
-    cartItems,
     fetchCart,
     updateSendingCodeToNewUser,
     updateCustomer,
@@ -425,7 +424,7 @@ const Checkout = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("currentCart", currentCart);
-    if (currentCart && cartItems && cartItems?.length > 0) {
+    if (currentCart && currentCart?.cartItems && currentCart?.cartItems?.length > 0) {
       await handlePayment();
     } else {
       alert("Please add products to the cart first");
@@ -461,7 +460,7 @@ const Checkout = () => {
       emailChecked &&
       isAddressValidated) ||
       user) &&
-    cartItems?.[0]
+    currentCart?.cartItems?.[0]
   );
 
   useEffect(() => {

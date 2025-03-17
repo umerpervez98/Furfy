@@ -11,7 +11,10 @@ import {
 } from "../index.shared";
 import styles from "./cart-container.module.scss";
 import FurfyAustralia from "../../../../public/images/furfy_australia.webp";
-
+import {
+  applyCoupon as applyCouponApi,
+  removeCoupon as removeCouponApi,
+} from "@/services/cart-functions";
 type CartContainerProps = {
   isGreyedOut?: boolean;
   visible?: boolean;
@@ -38,11 +41,34 @@ const CartContainer = ({
   const [scCode, setScCode] = useState("");
   const [promo, setPromo] = useState(INITIAL_PROMO_STATE);
   const [autoApplied, setAutoApplied] = useState(false);
-  const { cartItems, togglePromoCode, currentCart, promoApplied } = useCart();
+  const { togglePromoCode, currentCart, promoApplied, fetchCart } = useCart();
+  const [loading, setLoading] = useState(false);
+
+  const applyCoupon = async (code: string) => {
+    setLoading(true);
+
+    try {
+      const data = await applyCouponApi(code);
+
+      if (data.success) {
+        setPromo({ ...promo, error: false });
+        togglePromoCode({ code: code, rate: 0.15 });
+        fetchCart();
+      } else {
+        setPromo({ ...promo, error: true, code: "" });
+        togglePromoCode(null);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    setLoading(false);
+  };
+
   const onClickHandler = () => {
     // VALIDATE EMAIL WITH COUPON HERE
     if (promo.code) {
-      // applyCoupon(promo.code);
+      applyCoupon(promo.code);
     }
   };
 
@@ -66,7 +92,7 @@ const CartContainer = ({
 
   useEffect(() => {
     if (autoApplied && promo.code.length > 0 && promo.code === scCode) {
-      // applyCoupon(promo.code);
+      applyCoupon(promo.code);
     }
   }, [autoApplied]);
 
@@ -102,6 +128,19 @@ const CartContainer = ({
     }
   }, []);
 
+  const clearPromo = async () => {
+    setPromo({ ...promo, error: false, code: "" });
+    await removeCouponApi();
+    fetchCart();
+    togglePromoCode(null);
+  };
+
+  useEffect(() => {
+    if (currentCart?.cartItems && currentCart?.cartItems?.length < 1) {
+      clearPromo();
+    }
+  }, [currentCart?.cartItems?.length]);
+
   return (
     <div
       className={
@@ -116,8 +155,9 @@ const CartContainer = ({
         </HeadingSecondary>
       )}
       <ul>
-        {(cartItems && cartItems?.length > 0) || confirmation ? (
-          cartItems?.map((product) => {
+        {(currentCart?.cartItems && currentCart?.cartItems?.length > 0) ||
+          confirmation ? (
+          currentCart?.cartItems?.map((product) => {
             return (
               <Fragment key={`cart-item-${product.id}`}>
                 <CartItem {...product} imgUrl={FurfyAustralia} />
@@ -136,12 +176,12 @@ const CartContainer = ({
       {visible && (
         <PromoContainer
           promoApplied={promoApplied || null}
-          loading={false}
+          loading={loading}
           promo={promo}
           setPromo={setPromo}
           onClickHandler={onClickHandler}
           onChangeHandler={onChangeHandler}
-          clearPromo={() => { }}
+          clearPromo={clearPromo}
         />
       )}
 
