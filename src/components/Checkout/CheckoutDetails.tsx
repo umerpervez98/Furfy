@@ -2,7 +2,7 @@
 
 import { useState, useEffect, type ChangeEvent, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import {
   AllInputContainer,
   PhoneVerificationContainer,
@@ -74,7 +74,7 @@ const Checkout = () => {
     emailChecked,
     setPhoneChecked,
     setEmailChecked,
-  } = useCart();
+  } = useApp();
 
   const { orderConfirmation, submitState } = order ?? {};
 
@@ -293,7 +293,7 @@ const Checkout = () => {
           return serverAddress.addressLine1 === address?.addressLine1;
         }
       })?.accessToken;
-
+      console.log("selectedPaymentMethod", selectedPaymentMethod);
       orderObject = { addressToken, paymentMethodToken: selectedPaymentMethod };
     } else {
       if (braintreeInstance) {
@@ -423,7 +423,6 @@ const Checkout = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("currentCart", currentCart);
     if (currentCart && currentCart?.cartItems && currentCart?.cartItems?.length > 0) {
       await handlePayment();
     } else {

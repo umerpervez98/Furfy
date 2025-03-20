@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import {
   Button,
   GreyOverlay,
@@ -17,7 +17,7 @@ const Scatulator = () => {
   const [selectedDogs, setSelectedDogs] = useState(0);
   const [selectedPoos, setSelectedPoos] = useState(0);
   const [calculatedQuantity, setCalculatedQuantity] = useState(0);
-  const { updateQuantity, setShowScatulator } = useCart();
+  const { updateQuantity, setShowScatulator } = useApp();
 
   const path = usePathname();
   const router = useRouter();

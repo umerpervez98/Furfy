@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react';
 import Drawer from '@/components/common/Drawer';
-import { useCart } from '@/contexts/CartContext';
+import { useApp } from '@/contexts/AppContext';
 import Minus from '../../../public/icons/icon-minus.svg';
 import Plus from '../../../public/icons/icon-plus.svg';
 import Image from 'next/image';
 
 const Pricing = () => {
-  const { product, addToCart } = useCart();
+  const { product, addToCart } = useApp();
   const [quantity, setQuantity] = useState(1);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 

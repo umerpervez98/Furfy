@@ -1,5 +1,5 @@
 import { useEffect, type ReactNode } from 'react';
-import { useCart } from '@/contexts/CartContext';
+import { useApp } from '@/contexts/AppContext';
 import {
   GreenTick,
   RedCross,
@@ -51,7 +51,7 @@ const OrderReceiptContainer = ({
     orderPaymentStatus,
   } = orderConfirmation;
 
-  const { orderPlaced, updateOrderPlaced } = useCart();
+  const { orderPlaced, updateOrderPlaced } = useApp();
 
   const statusArr: { name: string;[key: string]: unknown }[] = [
     orderPaymentStatus,

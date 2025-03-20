@@ -1,6 +1,4 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import Header from '@/components/common/Header';
-import Footer from '@/components/common/Footer';
 import FAQComponent from '@/components/Faq/FAQComponent';
 import { faqs } from '../../utils/faqsData';
 import { Metadata } from 'next';
@@ -13,7 +11,6 @@ export const metadata: Metadata = {
 const Faq = () => {
   return (
     <>
-      <Header />
       <Container className="page-width mb-5">
         <Row>
           <Col lg={2}></Col>
@@ -30,9 +27,7 @@ const Faq = () => {
           </Col>
           <Col lg={2}></Col>
         </Row>
-
       </Container>
-      <Footer />
     </>
   );
 }

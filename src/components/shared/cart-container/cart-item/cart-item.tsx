@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { useCart, CartItem as CartItemType } from "@/contexts/CartContext";
+import { useApp, CartItem as CartItemType } from "@/contexts/AppContext";
 import styles from "./cart-item.module.scss";
 import DeleteIcon from "../../../../../public/icons/icon-delete.svg";
 import PlusIcon from "../../../../../public/icons/icon-plus.svg";
@@ -9,7 +9,7 @@ import MinusIcon from "../../../../../public/icons/icon-minus.svg";
 import ConfirmationPopup from "../../confirmation-popup/confirmation-popup";
 
 const CartItem = ({ accessToken, qty, name, imgUrl, setOverlay }: CartItemType) => {
-  const { updateItem, resetCart, product } = useCart();
+  const { updateItem, resetCart, product } = useApp();
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 

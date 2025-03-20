@@ -1,4 +1,4 @@
-import { CartItem } from "@/contexts/CartContext";
+import { CartItem } from "@/contexts/AppContext";
 
 export type PaymentMethod = {
   accessToken: string;

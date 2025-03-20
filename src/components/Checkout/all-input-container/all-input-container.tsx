@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useCart } from '@/contexts/CartContext';
+import { useApp } from '@/contexts/AppContext';
 import { DetailsContainer, DeliveryContainer } from '../index.checkout';
 import type {
   AddressObject,
@@ -37,7 +37,7 @@ const AllInputContainer = ({
   currentEmail,
 }: AllInputContainerProps) => {
   const { updateLocalAddress, updateAddress, currentCart, user, userId } =
-    useCart();
+    useApp();
 
   let deliveryNote: DeliveryNote = {
     value: '',

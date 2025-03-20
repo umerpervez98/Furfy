@@ -1,0 +1,15 @@
+@import "../../../../styles/variables.scss";
+.recaptcha-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $color-white;
+  z-index: 100;
+  width: 300px;
+  height: 300px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid $color-black;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}

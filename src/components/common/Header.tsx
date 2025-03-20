@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Drawer from "@/components/common/Drawer";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import "@/styles/common/header.scss";
 import Image from "next/image";
 import Logo from "../../../public/icons/logo.svg";
@@ -36,7 +36,7 @@ const useOutsideAlerter = (
 };
 
 const Header = () => {
-  const { currentCart } = useCart();
+  const { currentCart } = useApp();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 

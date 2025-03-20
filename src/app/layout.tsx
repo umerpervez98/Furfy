@@ -3,9 +3,11 @@ import Script from 'next/script';
 import { Work_Sans } from 'next/font/google';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@/styles/globals.css';
-import { CartProvider } from "@/contexts/CartContext";
+import { AppProvider } from "@/contexts/AppContext";
 import ReactQueryProvider from '@/contexts/react-query-context/react-query-context';
 import type { Metadata } from 'next';
+import Header from '@/components/common/Header';
+import Footer from '@/components/common/Footer';
 
 // Load Work Sans using Next.js font optimization
 const workSans = Work_Sans({
@@ -49,9 +51,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         />
         {/* Wrap children with CartProvider */}
         <ReactQueryProvider>
-          <CartProvider>
+          <AppProvider>
+            <Header />
             {children}
-          </CartProvider>
+            <Footer />
+          </AppProvider>
         </ReactQueryProvider>
       </body>
     </html>
