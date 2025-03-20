@@ -1,6 +1,6 @@
-import { CART_CONTEXT_ACTIONS } from "@/contexts/AppContextReducer";
+import { APP_CONTEXT_ACTIONS } from "@/contexts/AppContextReducer";
 
-const actionCreator = (type: CART_CONTEXT_ACTIONS, payload: unknown) => {
+const actionCreator = (type: APP_CONTEXT_ACTIONS, payload: unknown) => {
   if (payload) {
     return { type, payload };
   }
