@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 'use client';
 
 
@@ -483,6 +484,7 @@ export class ExcedePixel {
       ' body: \n' +
       ExcedePixel.excedeStringify(dataWithIds)
     );
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     var that = this;
     fetch(`${this.BEAddress}/track`, {
       method: 'POST',
@@ -534,23 +536,4 @@ export class ExcedePixel {
     var expires = 'expires=' + d.toUTCString();
     document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
   }
-}
-
-function excedeDecorateProductWithProductVariantDetails(
-  excedeProduct,
-  excedeProductVariant
-) {
-  if (excedeProduct != null && excedeProduct != 'undefined') {
-    if (
-      excedeProductVariant != null &&
-      typeof excedeProductVariant != 'undefined'
-    ) {
-      excedeProduct.variant_id = excedeProductVariant.id;
-      excedeProduct.sku = excedeProductVariant.sku;
-      excedeProduct.variant_featured_image =
-        excedeProductVariant.featured_image;
-      excedeProduct.price = excedeProductVariant.price;
-    }
-  }
-  return excedeProduct;
 }
