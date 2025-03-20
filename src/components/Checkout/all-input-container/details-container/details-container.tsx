@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useCart } from '@/contexts/CartContext';
+import { useApp } from '@/contexts/AppContext';
 import {
   Input,
   Label,
@@ -78,7 +78,7 @@ const DetailsContainer = ({
     phoneChecked,
     setEmailChecked,
     setPhoneChecked,
-  } = useCart();
+  } = useApp();
 
   let emailVerified, phoneVerified;
 

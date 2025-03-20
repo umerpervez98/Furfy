@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { ButtonClose } from "../index.checkout";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import styles from "./modal-input-container.module.scss";
 
 type ModalInputContainerProps = {
@@ -25,7 +25,7 @@ const ModalInputContainer = ({
   className,
   showInfo,
 }: ModalInputContainerProps) => {
-  const { setIsScrollActivated } = useCart();
+  const { setIsScrollActivated } = useApp();
   const containerRef = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {

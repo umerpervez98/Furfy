@@ -1,28 +1,22 @@
 "use client";
 
 import { useEffect } from "react";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import dropin from "braintree-web-drop-in";
 import { Spinner } from "../index.checkout";
 import "./braintree-payment.scss";
 
 type BraintreePaymentProps = {
   paymentToken: string | null;
-  shouldInitiate: boolean;
   visible?: boolean;
 };
 
 const BraintreePayment = ({
   paymentToken,
   visible = true,
-  shouldInitiate = false,
 }: BraintreePaymentProps) => {
-  const { setShowPayNow, braintreeInstance, setBraintreeInstance } = useCart();
+  const { setShowPayNow, braintreeInstance, setBraintreeInstance } = useApp();
 
-  // I setup this hook and used paymenttoken and shouldInitiate 
-  // to initialize functionality of braintree
-  // also if we already have an instance, then first tear down and then initialize.
-  // We can improve this later, but for now, it is just a quick fix.
   useEffect(() => {
     const initializeBraintree = async () => {
       const instance = await dropin.create({
@@ -33,17 +27,13 @@ const BraintreePayment = ({
       setShowPayNow?.(true);
       setBraintreeInstance?.(instance);
     };
-
-    if (paymentToken && shouldInitiate) {
+    initializeBraintree();
+    return () => {
       if (braintreeInstance) {
-        braintreeInstance.teardown().then(() => {
-          initializeBraintree();
-        });
-      } else {
-        initializeBraintree();
+        braintreeInstance.teardown();
       }
-    }
-  }, [paymentToken, shouldInitiate]);
+    };
+  }, []);
 
   return (
     <div style={visible ? {} : { display: "none" }}>

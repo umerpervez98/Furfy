@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ChangeEvent } from "react";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import {
   ValidatedAddressContainer,
   FormRow,
@@ -50,7 +50,7 @@ const DeliveryContainer = ({
     setUserProfile,
     updateUser,
     phoneChecked,
-  } = useCart();
+  } = useApp();
 
   useEffect(() => {
     if (user) {
@@ -77,7 +77,7 @@ const DeliveryContainer = ({
                 resetAddress(true);
                 updateDeliveryNote({
                   value:
-                    (currentCart && currentCart?.deliveryNote.value) ||
+                    (currentCart && currentCart?.deliveryNote?.value) ||
                     "Deliver to the front of my property",
                   request: null,
                   show: false,
@@ -150,7 +150,7 @@ const DeliveryContainer = ({
                     };
                   };
 
-                  await updateUser(res.data);
+                  updateUser(res.data);
 
                   let fullAddress: Partial<AddressObject> = {};
 
@@ -191,10 +191,9 @@ const DeliveryContainer = ({
               style={{ width: "100%" }}
             >
               {user?.addresses?.map(
-                (address: Partial<AddressObject> & { accessToken: string }) => {
+                (address: Partial<AddressObject> & { accessToken: string }, index: number) => {
                   const {
                     accessToken,
-                    id,
                     addressLine1,
                     addressLine2,
                     city,
@@ -206,7 +205,7 @@ const DeliveryContainer = ({
                   const text = `${addressLine1} ${addressLine2} ${city} ${state} ${postcode} ${country}`;
 
                   return (
-                    <option key={id} value={accessToken}>
+                    <option key={index} value={accessToken}>
                       {text}
                     </option>
                   );

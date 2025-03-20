@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "@/styles/common/drawer.css";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import FurfyAustralia from "../../../public/images/furfy_australia.webp";
 import { CartItem, GreyOverlay, PriceContainer } from "../shared/index.shared";
 import CloseIcon from "../../../public/icons/icon-close.svg";
@@ -36,7 +36,7 @@ const useOutsideAlerter = (
 
 const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
-  const { currentCart } = useCart();
+  const { currentCart } = useApp();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [overlay, setOverlay] = useState(false);
   useOutsideAlerter(wrapperRef, onClose);

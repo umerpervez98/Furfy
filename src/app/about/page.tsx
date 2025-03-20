@@ -1,6 +1,4 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import Header from '@/components/common/Header';
-import Footer from '@/components/common/Footer';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import AboutImage from '../../../public/images/about.webp';
@@ -13,7 +11,6 @@ export const metadata: Metadata = {
 const About = () => {
   return (
     <>
-      <Header />
       <Container className="page-width mb-4">
         <Row>
           <Col lg={2}></Col>
@@ -65,7 +62,6 @@ const About = () => {
           <Col lg={2}></Col>
         </Row>
       </Container>
-      <Footer />
     </>
   );
 };

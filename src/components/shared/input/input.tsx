@@ -1,4 +1,4 @@
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import type { ChangeEvent } from "react";
 import styles from "./input.module.scss";
 
@@ -30,7 +30,7 @@ const Input = ({
   promoApplied,
   disabled,
 }: InputProps) => {
-  const { userId } = useCart();
+  const { userId } = useApp();
 
   if (type === "textarea") {
     return (

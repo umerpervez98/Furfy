@@ -1,6 +1,4 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import Header from '@/components/common/Header';
-import Footer from '@/components/common/Footer';
 import ContactForm from '@/components/Contact/ContactForm';
 import { Metadata } from 'next';
 
@@ -12,7 +10,6 @@ export const metadata: Metadata = {
 const Contact = () => {
   return (
     <>
-      <Header />
       <Container className="page-width my-3">
         <h5 className="font-bold text-center uppercase mb-5">Contact Us</h5>
         <Row>
@@ -34,7 +31,6 @@ const Contact = () => {
           </Col>
         </Row>
       </Container>
-      <Footer />
     </>
   );
 };

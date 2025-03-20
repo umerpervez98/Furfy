@@ -1,17 +1,17 @@
-import { useEffect, type Dispatch, type SetStateAction } from 'react';
-import { useCart } from '@/contexts/CartContext';
+import { useEffect, type Dispatch, type SetStateAction } from "react";
+import { useApp } from "@/contexts/AppContext";
 import {
   Input,
   Label,
   ButtonSecondary,
   BraintreePayment,
   FormRow,
-} from '@/components/Checkout/index.checkout';
-import { HeadingSecondary } from '@/components/shared/index.shared';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { getPaymentToken } from '@/services/cart-functions';
-import { type PaymentMethod } from '@/types/index.types';
-import styles from './payment-container.module.scss';
+} from "@/components/Checkout/index.checkout";
+import { HeadingSecondary } from "@/components/shared/index.shared";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { getPaymentToken } from "@/services/cart-functions";
+import { type PaymentMethod } from "@/types/index.types";
+import styles from "./payment-container.module.scss";
 
 type PaymentContainerProps = {
   selectedPaymentMethod: string;
@@ -30,7 +30,7 @@ const PaymentContainer = ({
   paymentMethods,
   visible,
 }: PaymentContainerProps) => {
-  const { userId, paymentToken, setPaymentToken } = useCart();
+  const { userId, paymentToken, setPaymentToken } = useApp();
 
   const initPaymentToken = async () => {
     const token = await getPaymentToken();
@@ -39,8 +39,8 @@ const PaymentContainer = ({
 
   useEffect(() => {
     if (!paymentToken && visible) {
-      initPaymentToken()
-    };
+      initPaymentToken();
+    }
   }, [visible]);
 
   const showDropDown =
@@ -48,7 +48,7 @@ const PaymentContainer = ({
 
   return (
     <div
-      className={`payment-container ${visible ? styles.div : `${styles['div--hidden']} ${styles.div}`
+      className={`payment-container ${visible ? styles.div : `${styles["div--hidden"]} ${styles.div}`
         }`}
     >
       <HeadingSecondary style={{ fontWeight: 700 }}>
@@ -59,18 +59,18 @@ const PaymentContainer = ({
           <Label
             htmlFor="payment-methods"
             extraStyles={{
-              paddingLeft: '1rem',
-              marginBottom: '0.24rem',
-              fontSize: '1.3rem',
-              position: 'static',
-              color: 'inherit',
+              paddingLeft: "1rem",
+              marginBottom: "0.24rem",
+              fontSize: "1.3rem",
+              position: "static",
+              color: "inherit",
             }}
           >
             your payment methods
           </Label>
           <FormRow
             style={{
-              marginTop: '0',
+              marginTop: "0",
             }}
           >
             <Input
@@ -80,15 +80,15 @@ const PaymentContainer = ({
               value={selectedPaymentMethod}
               required={true}
               onChange={(e) => {
-                if ('value' in e.target && e.target.value === 'new') {
+                if ("value" in e.target && e.target.value === "new") {
                   setNewPayment(true);
                 } else {
                   setSelectedPaymentMethod(
-                    ('value' in e.target && e.target.value) as string
+                    ("value" in e.target && e.target.value) as string
                   );
                 }
               }}
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
             >
               {paymentMethods?.map((method) => {
                 const {
@@ -119,15 +119,13 @@ const PaymentContainer = ({
           </FormRow>
         </div>
       )}
-      <BraintreePayment
-        paymentToken={paymentToken ?? null}
-        visible={!showDropDown}
-        shouldInitiate={visible}
-      />
+      {paymentToken && (
+        <BraintreePayment paymentToken={paymentToken} visible={!showDropDown} />
+      )}
       {!showDropDown && userId && paymentMethods.length > 0 && (
         <ButtonSecondary
           onClickHandler={() => setNewPayment(false)}
-          extraStyles={{ marginLeft: 'auto', marginTop: '0.8rem' }}
+          extraStyles={{ marginLeft: "auto", marginTop: "0.8rem" }}
         >
           back to existing payment methods
         </ButtonSecondary>

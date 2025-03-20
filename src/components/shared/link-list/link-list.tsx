@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import type { Dispatch, SetStateAction } from "react";
 import styles from "./link-list.module.scss";
 
@@ -22,7 +22,7 @@ type LinkListProps = {
 };
 
 const LinkList = ({ onClick, onButtonClick }: LinkListProps) => {
-  const { setCurrentTab } = useCart();
+  const { setCurrentTab } = useApp();
   const path = usePathname();
 
   return (

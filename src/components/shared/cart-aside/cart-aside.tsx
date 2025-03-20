@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import {
   Button,
   ButtonClose,
@@ -13,7 +13,7 @@ type CartAsideProps = {
 };
 
 const CartAside = ({ showCart, setShowCart }: CartAsideProps) => {
-  const { currentCart } = useCart();
+  const { currentCart } = useApp();
 
   return (
     <aside

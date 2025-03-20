@@ -2,7 +2,7 @@
 
 import { useEffect, type Dispatch, type SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCart } from '@/contexts/CartContext';
+import { useApp } from '@/contexts/AppContext';
 import { Button, HeadingSecondary } from '@/components/shared/index.shared';
 import {
   GreenTick,
@@ -69,7 +69,7 @@ const ProcessingStepsContainer = ({
   stepList,
 }: ProcessingStepsContainerProps) => {
   const router = useRouter();
-  const { logoutUser } = useCart();
+  const { logoutUser } = useApp();
 
   useEffect(() => {
     let intervalId: number;

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { formatPrice } from "@/utils/format-price";
 import styles from "./price-container.module.scss";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import DiscountIcon from "../../../../../public/images/checkout/icon-discount.png";
 import { TManualDiscount, TOrderReceiptCouponRedemption } from "@/types/index.types";
 
 const PriceContainer = () => {
-  const { currentCart } = useCart();
+  const { currentCart } = useApp();
 
   const totalManualDiscount =
     currentCart?.manualDiscounts && (currentCart?.manualDiscounts as TManualDiscount[])?.length > 0
@@ -30,9 +30,6 @@ const PriceContainer = () => {
     : !currentCart?.isNewOrder
       ? (currentCart?.discountAmount as number) - totalManualDiscount
       : currentCart?.discountAmount;
-  console.log('currentCart', currentCart);
-  console.log('currentCart?.couponRedemption', currentCart?.couponRedemption);
-  console.log('totalCouponDiscount', totalCouponDiscount);
 
   const validateCart = (cost: string): string => {
     const validatedCost = currentCart?.price && currentCart?.price > 0 ? cost : formatPrice(0);

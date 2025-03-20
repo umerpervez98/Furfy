@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useState, type CSSProperties } from "react";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import {
   HeadingSecondary,
   CartItem,
@@ -41,7 +41,7 @@ const CartContainer = ({
   const [scCode, setScCode] = useState("");
   const [promo, setPromo] = useState(INITIAL_PROMO_STATE);
   const [autoApplied, setAutoApplied] = useState(false);
-  const { togglePromoCode, currentCart, promoApplied, fetchCart } = useCart();
+  const { togglePromoCode, currentCart, promoApplied, fetchCart } = useApp();
   const [loading, setLoading] = useState(false);
 
   const applyCoupon = async (code: string) => {
@@ -140,7 +140,7 @@ const CartContainer = ({
       clearPromo();
     }
   }, [currentCart?.cartItems?.length]);
-
+  console.log('currentCart', currentCart?.cartItems);
   return (
     <div
       className={

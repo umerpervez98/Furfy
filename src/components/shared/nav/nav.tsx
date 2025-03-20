@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image, { type StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
-import { useCart } from "@/contexts/CartContext";
+import { useApp } from "@/contexts/AppContext";
 import { GreyOverlay, CartAside, Scatulator } from "../index.shared";
 import { PhoneVerificationContainer } from "@/components/Checkout/index.checkout";
 import NavButton from "./nav-button/nav-button";
@@ -37,7 +37,7 @@ const Nav = ({ logoImg, altText }: NavProps) => {
     setShowCart,
     showPopOver,
     setShowPopOver,
-  } = useCart();
+  } = useApp();
 
   const path = usePathname();
 

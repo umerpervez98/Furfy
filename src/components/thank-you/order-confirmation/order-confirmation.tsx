@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { notFound, useRouter } from 'next/navigation';
-import { useCart } from '@/contexts/CartContext';
+import { useApp } from '@/contexts/AppContext';
 import { useGetOrdersQuery } from '@/utils/react-query-custom-hooks';
 import ProcessingStepsContainer from './processing-steps-container/processing-steps-container';
 import OrderReceiptContainer from './order-receipt-container/order-receipt-container';
@@ -32,7 +32,7 @@ const OrderConfirmation = ({ pastOrderId }: OrderConfirmationProps) => {
   ]);
   const [currentStep, setCurrentStep] = useState(0);
   const router = useRouter();
-  const { order, orderPlaced, userId } = useCart();
+  const { order, orderPlaced, userId } = useApp();
   const { orderConfirmation, submitState, error } = order ?? {};
   const { orders, isPending } = useGetOrdersQuery(userId ?? '');
 
