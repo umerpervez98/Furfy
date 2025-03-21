@@ -24,7 +24,7 @@ export const newsletterSubmission = async ({
   });
   const json = JSON.stringify(object);
 
-  fetch(`${process.env.NEXT_PUBLIC_HOST_SERVER_URL}/api/public/newsletter`, {
+  fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/public/newsletter`, {
     headers: {
       'Content-Type': 'application/json',
     },

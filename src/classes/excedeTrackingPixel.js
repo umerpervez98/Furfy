@@ -399,8 +399,8 @@ export class ExcedePixel {
         var pageInfo = await this.GetPageInfo();
         properties.pageInfo = pageInfo;
         if (data instanceof Error) {
-          properties.error = data.message;
-          properties.stack = data.stack;
+          properties.error = data?.message;
+          properties.stack = data?.stack;
         } else {
           properties.error = data;
         }

@@ -17,7 +17,7 @@ export const submitContactForm = async (
 
     const URL = `https://api.helpdesk.com/v1/tickets`;
     const authHeader = `Basic ${Buffer.from(
-        `bac2852a-58ae-4a7e-8ac1-03e3bcc9d61d:dal:ZVYSYO_miMChjp5k5NI_gHkJfhI`
+        `${process.env.NEXT_PUBLIC_HELPDISK_CLIENTID}:${process.env.NEXT_PUBLIC_HELPDISK_PRIVATEKEY}`
     ).toString('base64')}`;
 
     if (message.length <= 0)

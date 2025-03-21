@@ -57,6 +57,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <Footer />
           </AppProvider>
         </ReactQueryProvider>
+
+        <Script
+          type="text/javascript"
+          src={`${process.env.NEXT_PUBLIC_RECAPTCHA_URL}?render=${process.env.NEXT_PUBLIC_RECAPTCHA_KEY}`}
+          async={true}
+          defer
+        ></Script>
       </body>
     </html>
   );
