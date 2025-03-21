@@ -86,7 +86,7 @@ const OpenPopup = ({
     const ExcedeFormUrl = window.location.href;
     const ipAddress = await ExcedeTrackingPixel.GetUserIpAddress();
     const ExcedeSubmitterIP = ipAddress;
-    const ExcedeProductSku = "SCATBAGS";
+    const ExcedeProductSku = "FURFY";
 
 
     grecaptcha.ready(function () {
