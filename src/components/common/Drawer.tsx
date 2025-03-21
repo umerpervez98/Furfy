@@ -85,7 +85,7 @@ const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose }) => {
             <div className="pt-4">
               <button
                 disabled={!currentCart?.cartItems?.[0]?.qty}
-                onClick={() => router.push("/checkout")}
+                onClick={() => { router.push("/checkout"); onClose(); }}
                 className="primary-button w-full checkout-button"
               >
                 CHECKOUT NOW
