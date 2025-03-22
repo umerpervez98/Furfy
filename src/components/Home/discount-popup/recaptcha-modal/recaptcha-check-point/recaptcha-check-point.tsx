@@ -1,10 +1,10 @@
 'use client';
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import styles from './recaptcha-check-point.module.scss';
-import ScatbagsPooLogo from 'public/images/shared/scatbags-poo';
+import FurfyAustralia from '../../../../../../public/images/shared/furfy_australia.png';
 import { HeadingSecondary } from '@/components/shared/index.shared';
 import RotateIcon from 'public/images/shared/rotate-icon';
-
+import Image from 'next/image';
 type RecaptchaCheckPointProps = {
   handleSuccess: () => void;
   handleError: () => void;
@@ -52,13 +52,19 @@ const RecaptchaCheckPoint = ({
 
   return (
     <div className={styles.container}>
-      <HeadingSecondary size="small">Point to the poo</HeadingSecondary>
+      <HeadingSecondary size="small">Point to the Furfy</HeadingSecondary>
       <section
         className={`${styles.target} ${styles.swivel}`}
         style={{ transform: `rotate(${targetDeg}deg)` }}
       >
         <span style={{ transform: `rotate(-${targetDeg}deg)` }}>
-          <ScatbagsPooLogo />
+          <Image
+            width={70}
+            height={70}
+            objectFit="contain"
+            src={FurfyAustralia}
+            alt="Furfy Australia"
+          />
         </span>
       </section>
       <section

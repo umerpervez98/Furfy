@@ -64,7 +64,7 @@ const ContactForm = () => {
   }, [showSuccessMessage]);
 
   return (
-    <Form onSubmit={handleSubmit} className="relative">
+    <Form onSubmit={handleSubmit} className="relative position-relative">
       <FormRow >
         <Input
           value={formData.name}
